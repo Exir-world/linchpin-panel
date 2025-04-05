@@ -19,11 +19,12 @@ import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
-
+  const t = useTranslations();
   return (
     <aside className="h-screen z-[20] sticky top-0">
       {collapsed ? (
@@ -47,25 +48,27 @@ export const SidebarWrapper = () => {
             />
             <SidebarMenu title="Main Menu">
               <SidebarItem
-                isActive={pathname === "/accounts"}
-                title="Accounts"
+                isActive={pathname === "/reports"}
+                title={t("global.main-menu.reports")}
                 icon={<AccountsIcon />}
-                href="accounts"
+                href="reports"
               />
               <SidebarItem
-                isActive={pathname === "/payments"}
-                title="Payments"
+                isActive={pathname === "/Requests"}
+                title={t("global.main-menu.requests")}
+                href="requests"
                 icon={<PaymentsIcon />}
+              />
+              <SidebarItem
+                isActive={pathname === "/salarySlip"}
+                title={t("global.main-menu.salary-slip")}
+                href="salarySlip"
+                icon={<CustomersIcon />}
               />
               <CollapseItems
                 icon={<BalanceIcon />}
                 items={["Banks Accounts", "Credit Cards", "Loans"]}
                 title="Balances"
-              />
-              <SidebarItem
-                isActive={pathname === "/customers"}
-                title="Customers"
-                icon={<CustomersIcon />}
               />
               <SidebarItem
                 isActive={pathname === "/products"}

@@ -1,5 +1,15 @@
 {
   "global": {
-    "title": "سلام"
+    "home": "خانه",
+    "title": "سلام",
+    "main-menu": {
+      "reports": "گزارش‌ها",
+      "requests": "درخواست‌ها",
+      "salary-slip": "فیش حقوقی"
+    },
+    "reports": {
+      "reports": "گزارش‌ها",
+      "list": "لیست"
+    }
   }
 }

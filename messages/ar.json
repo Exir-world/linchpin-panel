@@ -1,5 +1,15 @@
 {
   "global": {
-    "title": "سلام"
+    "home": "الصفحة الرئيسية",
+    "title": "مرحباً",
+    "main-menu": {
+      "reports": "التقارير",
+      "requests": "الطلبات",
+      "salary-slip": "قسيمة الراتب"
+    },
+    "reports": {
+      "reports": "التقارير",
+      "list": "قائمة"
+    }
   }
 }

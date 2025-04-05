@@ -1,5 +1,15 @@
 {
   "global": {
-    "title": "Hello"
+    "home": "Home",
+    "title": "Hello",
+    "main-menu": {
+      "reports": "Reports",
+      "requests": "Requests",
+      "salary-slip": "Salary slip"
+    },
+    "reports": {
+      "reports": "Reports",
+      "list": "List"
+    }
   }
 }
