@@ -1,3 +1,5 @@
 {
-  "global": "hello"
+  "global": {
+    "title": "Hello"
+  }
 }

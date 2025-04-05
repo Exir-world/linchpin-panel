@@ -7,6 +7,7 @@ import { SearchIcon } from "../icons/searchicon";
 import { BurguerButton } from "./burguer-button";
 import { NotificationsDropdown } from "./notifications-dropdown";
 import { UserDropdown } from "./user-dropdown";
+import LangSwitcher from "../langSwitcher";
 
 interface Props {
   children: React.ReactNode;
@@ -45,6 +46,7 @@ export const NavbarWrapper = ({ children }: Props) => {
             <FeedbackIcon />
             <span>Feedback?</span>
           </div>
+          <LangSwitcher></LangSwitcher>
 
           <NotificationsDropdown />
 
