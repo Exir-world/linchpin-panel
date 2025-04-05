@@ -10,6 +10,14 @@
     "reports": {
       "reports": "التقارير",
       "list": "قائمة"
+    },
+    "requests": {
+      "status": "الحالة",
+      "filter": {
+        "confirmed": "مؤكد",
+        "rejected": "مرفوض",
+        "not-registered": "غير مسجل"
+      }
     }
   }
 }

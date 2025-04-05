@@ -10,6 +10,14 @@
     "reports": {
       "reports": "گزارش‌ها",
       "list": "لیست"
+    },
+    "requests": {
+      "status": "وضعیت",
+      "filter": {
+        "confirmed": "تایید شده",
+        "rejected": "رد شده",
+        "not-registered": "ثبت‌ نشده"
+      }
     }
   }
 }

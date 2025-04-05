@@ -10,6 +10,14 @@
     "reports": {
       "reports": "Reports",
       "list": "List"
+    },
+    "requests": {
+      "status":"Status",
+      "filter": {
+        "confirmed": "Confirmed",
+        "rejected": "Rejected",
+        "not-registered": "Not registered"
+      }
     }
   }
 }
