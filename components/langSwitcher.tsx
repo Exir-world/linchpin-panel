@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CustomDropdown from "./dropdown/dropdown";
 import { usePathname } from "@/src/i18n/navigation";
 import { useRouter } from "next/navigation";
-import { getCookies } from "cookies-next";
 import {
   Button,
   Dropdown,
@@ -14,6 +12,8 @@ import {
 import { useLocale } from "next-intl";
 
 const LangSwitcher = () => {
+  const locale = useLocale();
+  const [selectedLang, setSelectedLang] = useState(locale);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -23,34 +23,27 @@ const LangSwitcher = () => {
     { label: "فارسی", key: "fa" },
   ];
 
-  const changeLanguage = (locale: string) => {
+  const changeLanguage = (newLocale: any) => {
     const segments = pathname.split("/").filter(Boolean);
-    
-    if (segments.length > 0) {
-      // Replace the locale (first segment) with the new locale
-      segments[0] = locale;
-      const newPath = "/" + segments.join("/");
-      
-      router.push(newPath);
+    let newPath = "";
+
+    // چک کن که آیا زبان توی مسیر هست یا نه
+    if (segments.length > 0 && langs.some((lang) => lang.key === segments[0])) {
+      segments[0] = newLocale; 
+      newPath = "/" + segments.join("/");
     } else {
-      router.push(`/${locale}`);
+      newPath = `/${newLocale}${pathname === "/" ? "" : pathname}`; // اضافه کردن زبان
     }
+
+    router.push(newPath, { scroll: false });
+    setSelectedLang(newLocale);
   };
-
-  // const cookieLocale = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("NEXT_LOCALE="))
-  //   ?.split("=");
-
-  const locale = useLocale();
-
+  useEffect(() => {
+    setSelectedLang(locale); // همگام‌سازی زبان با locale فعلی
+  }, [locale]);
+  
   return (
     <div>
-      {/* <CustomDropdown
-        onChange={(locale) => changeLanguage(locale)}
-        dropdownItems={langs}
-        selectedValue={selectedLang}
-      ></CustomDropdown> */}
       <Dropdown>
         <DropdownTrigger>
           <Button variant="bordered">
