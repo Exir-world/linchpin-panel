@@ -1,5 +1,5 @@
 import React from "react";
-import { Reports } from "@/components/accounts";
+import { Reports } from "@/components/reports";
 
 const accounts = () => {
   return <Reports />;
