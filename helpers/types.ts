@@ -1,7 +1,7 @@
 // FORMS
 
-export type LoginFormType = {
-  email: string;
+export type LoginFormData = {
+  phoneNumber: string;
   password: string;
 };
 

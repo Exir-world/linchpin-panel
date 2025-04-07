@@ -3,13 +3,15 @@
     "home": "الصفحة الرئيسية",
     "title": "مرحباً",
     "main-menu": {
+      "organizations": "المنظمات",
       "reports": "التقارير",
       "requests": "الطلبات",
-      "salary-slip": "قسيمة الراتب"
+      "salary-slip": "قائمة الرواتب"
     },
     "reports": {
+      "selectDate": "حدد التاريخ",
       "reports": "التقارير",
-      "list": "قائمة"
+      "list": "القائمة"
     },
     "requests": {
       "status": "الحالة",
@@ -17,6 +19,34 @@
         "confirmed": "مؤكد",
         "rejected": "مرفوض",
         "not-registered": "غير مسجل"
+      }
+    },
+    "organizations": {
+      "create": "إنشاء",
+      "update": "تحديث",
+      "create-org": "إنشاء منظمة",
+      "edit-org": "تعديل المنظمة",
+
+      "name": "الاسم",
+      "address": "العنوان",
+      "description": "الوصف",
+      "edit": "تعديل",
+      "columns": {
+        "id": "الهوية",
+        "name": "الاسم",
+        "creatorId": "هوية المنشئ",
+        "address": "العنوان",
+        "description": "الوصف",
+        "actions": "الإجراءات"
+      }
+    },
+    "auth": {
+      "phoneNumber": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "login": "تسجيل الدخول",
+      "formError": {
+        "required": "هذا الحقل مطلوب",
+        "invalid": "قيمة الحقل غير صالحة"
       }
     }
   }

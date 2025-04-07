@@ -3,6 +3,7 @@
     "home": "Home",
     "title": "Hello",
     "main-menu": {
+      "organizations": "Organizations",
       "reports": "Reports",
       "requests": "Requests",
       "salary-slip": "Salary slip"
@@ -18,6 +19,35 @@
         "confirmed": "Confirmed",
         "rejected": "Rejected",
         "not-registered": "Not registered"
+      }
+    },
+    "organizations": {
+      "create": "Create",
+      "update": "Update",
+      "create-org": "Create organization",
+      "edit-org": "Edit organization",
+
+      "name": "Name",
+      "address": "Address",
+      "description": "Description",
+      "edit": "Edit",
+      "columns": {
+        "id": "Id",
+        "name": "Name",
+
+        "creatorId": "CreatorId",
+        "address": "Address",
+        "description": "Description",
+        "actions": "Actions"
+      }
+    },
+    "auth": {
+      "phoneNumber": "Phone number",
+      "password": "Password",
+      "login": "Login",
+      "formError": {
+        "required": "This field is required",
+        "invalid": "Invalid field value"
       }
     }
   }

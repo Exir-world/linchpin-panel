@@ -54,6 +54,12 @@ export const SidebarWrapper = () => {
                 href="/reports"
               />
               <SidebarItem
+                isActive={pathname === "/organizations"}
+                title={t("global.main-menu.organizations")}
+                icon={<CustomersIcon />}
+                href="/organizations"
+              />
+              <SidebarItem
                 isActive={pathname === "/Requests"}
                 title={t("global.main-menu.requests")}
                 href="/requests"

@@ -23,7 +23,7 @@ export default async function RootLayout({
         className={clsx(
           "font-sans antialiased",
           iranSans.variable,
-          locale === "fa" || locale === "ar" ? "font-iransans" : "font-sans"
+          locale === "fa" || locale === "ar" ? "font-iransans" : fontSans.variable
         )}
       >
         <Providers>{children}</Providers>

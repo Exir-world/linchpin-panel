@@ -3,12 +3,13 @@
     "home": "خانه",
     "title": "سلام",
     "main-menu": {
+      "organizations": "سازمان‌ها",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
       "salary-slip": "فیش حقوقی"
     },
     "reports": {
-      "selectDate": " انتخاب تاریخ",
+      "selectDate": "تاریخ را انتخاب کنید",
       "reports": "گزارش‌ها",
       "list": "لیست"
     },
@@ -17,7 +18,35 @@
       "filter": {
         "confirmed": "تایید شده",
         "rejected": "رد شده",
-        "not-registered": "ثبت‌ نشده"
+        "not-registered": "ثبت‌نام نشده"
+      }
+    },
+    "organizations": {
+      "create": "ایجاد",
+      "update": "بروزرسانی",
+      "create-org": "ایجاد سازمان",
+      "edit-org": "ویرایش سازمان",
+
+      "name": "نام",
+      "address": "آدرس",
+      "description": "توضیحات",
+      "edit": "ویرایش",
+      "columns": {
+        "id": "شناسه",
+        "name": "نام",
+        "creatorId": "شناسه ایجاد کننده",
+        "address": "آدرس",
+        "description": "توضیحات",
+        "actions": "عملیات"
+      }
+    },
+    "auth": {
+      "phoneNumber": "شماره تلفن",
+      "password": "کلمه عبور",
+      "login": "ورود",
+      "formError": {
+        "required": "این فیلد ضروری است",
+        "invalid": "مقدار فیلد نادرست است"
       }
     }
   }
