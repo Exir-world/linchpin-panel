@@ -13,7 +13,7 @@ import { TableWrapper } from "@/components/table/table";
 import { AddUser } from "./add-user";
 import { useTranslations } from "next-intl";
 import ReusableTable from "../reusabelTable/table";
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
@@ -78,7 +78,21 @@ export const Reports = () => {
     { name: "CreatedAt", uid: "createdAt" },
   ];
   const [value, setValue] = useState<any>();
+  const handleRangeDate = (data: DateObject | any) => {
+    if (data) {
+      const persianDate = data.format("YYYY/MM/DD"); // e.g., "1404/01/19"
 
+      const gregorianDate = data.convert().toDate(); 
+
+      console.log("Persian Date:", persianDate);
+      console.log("Gregorian Date:", gregorianDate);
+
+      // Update state
+      setValue(data);
+    } else {
+      console.log("No date selected");
+    }
+  };
   return (
     <div className="my-10 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
       <ul className="flex">
@@ -117,13 +131,13 @@ export const Reports = () => {
         <div className="flex items-center gap-3">
           <DatePicker
             value={value}
-            onChange={setValue}
+            onChange={(val) => handleRangeDate(val)}
             calendar={persian}
             locale={persian_fa}
             onOpenPickNewDate={false}
             placeholder={t("global.reports.selectDate")}
             style={{
-              width: "100%",
+              width: "90%",
               padding: "18px 10px",
               textAlign: "center",
               borderRadius: "15px",

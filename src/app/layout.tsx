@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import { fontSans } from "@/config/fonts";
+import { fontSans, iranSans } from "@/config/fonts";
 import clsx from "clsx";
 import { getLocale } from "next-intl/server";
 
@@ -19,7 +19,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={clsx("font-sans antialiased", fontSans.className)}>
+      <body
+        className={clsx(
+          "font-sans antialiased",
+          iranSans.variable,
+          locale === "fa" || locale === "ar" ? "font-iransans" : "font-sans"
+        )}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
