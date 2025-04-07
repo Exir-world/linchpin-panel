@@ -1,7 +1,7 @@
 "use client";
 import { Button, Input } from "@nextui-org/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { DotsIcon } from "@/components/icons/accounts/dots-icon";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { InfoIcon } from "@/components/icons/accounts/info-icon";
@@ -13,6 +13,9 @@ import { TableWrapper } from "@/components/table/table";
 import { AddUser } from "./add-user";
 import { useTranslations } from "next-intl";
 import ReusableTable from "../reusabelTable/table";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 export const Reports = () => {
   const t = useTranslations();
@@ -74,6 +77,8 @@ export const Reports = () => {
     { name: "DestinationWalletAddress", uid: "destinationWalletAddress" },
     { name: "CreatedAt", uid: "createdAt" },
   ];
+  const [value, setValue] = useState<any>();
+
   return (
     <div className="my-10 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
       <ul className="flex">
@@ -109,11 +114,28 @@ export const Reports = () => {
           <InfoIcon />
           <DotsIcon />
         </div>
-        <div className="flex flex-row gap-3.5 flex-wrap">
-          {/* <AddUser /> */}
-          <Button color="primary" startContent={<ExportIcon />}>
-            Export to Exell
-          </Button>
+        <div className="flex items-center gap-3">
+          <DatePicker
+            value={value}
+            onChange={setValue}
+            calendar={persian}
+            locale={persian_fa}
+            onOpenPickNewDate={false}
+            placeholder={t("global.reports.selectDate")}
+            style={{
+              width: "100%",
+              padding: "18px 10px",
+              textAlign: "center",
+              borderRadius: "15px",
+              border: "1px solid #ccc",
+            }}
+          />
+          <div className="flex flex-row gap-3.5 flex-wrap">
+            {/* <AddUser /> */}
+            <Button color="primary" startContent={<ExportIcon />}>
+              Export to Exell
+            </Button>
+          </div>
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">

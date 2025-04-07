@@ -8,11 +8,12 @@
       "salary-slip": "Salary slip"
     },
     "reports": {
+      "selectDate": "Select date",
       "reports": "Reports",
       "list": "List"
     },
     "requests": {
-      "status":"Status",
+      "status": "Status",
       "filter": {
         "confirmed": "Confirmed",
         "rejected": "Rejected",
