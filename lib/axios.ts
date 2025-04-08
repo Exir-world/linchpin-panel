@@ -37,6 +37,7 @@ api.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
+          window.location.href = "/login";
           console.error("Unauthorized - Redirecting to login...");
           break;
         case 403:

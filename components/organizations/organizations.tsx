@@ -129,7 +129,7 @@ const OrganizationsList = () => {
         return (
           <Button
             color="secondary"
-            className="rounded-full !p-0.5"
+            className="rounded-full"
             onPress={() => handleEdit(record)}
           >
             {t("global.organizations.edit")}
@@ -209,49 +209,6 @@ const OrganizationsList = () => {
           </ModalContent>
         </form>
       </Modal>
-
-      {/* Modal for editing organization */}
-      {/* <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <form onSubmit={handleSubmit(createOrg)}>
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  {t("global.organizations.edit-org")}
-                </ModalHeader>
-                <ModalBody>
-                  <div className="flex flex-col items-center">
-                    <Input
-                      label={t("global.organizations.name")}
-                      {...register("name")}
-                    ></Input>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <Input
-                      label={t("global.organizations.address")}
-                      {...register("address")}
-                    ></Input>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <Input
-                      label={t("global.organizations.description")}
-                      {...register("description")}
-                    ></Input>
-                  </div>
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" onPress={onClose} type="submit">
-                    {t("global.organizations.create")}
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </form>
-      </Modal> */}
     </div>
   );
 };
