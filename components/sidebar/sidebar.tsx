@@ -20,6 +20,7 @@ import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Icon from "../icon";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname();
@@ -48,10 +49,10 @@ export const SidebarWrapper = () => {
             />
             <SidebarMenu title="Main Menu">
               <SidebarItem
-                isActive={pathname === "/reports"}
-                title={t("global.main-menu.reports")}
-                icon={<AccountsIcon />}
-                href="/reports"
+                isActive={pathname === "/employees"}
+                title={t("global.main-menu.employees")}
+                icon={<Icon name="users" classname='mx-1'/>}
+                href="/employees"
               />
               <SidebarItem
                 isActive={pathname === "/organizations"}

@@ -6,7 +6,8 @@
       "organizations": "Organizations",
       "reports": "Reports",
       "requests": "Requests",
-      "salary-slip": "Salary slip"
+      "salary-slip": "Salary slip",
+      "employees": "Employees"
     },
     "reports": {
       "selectDate": "Select date",
@@ -26,7 +27,7 @@
       "update": "Update",
       "create-org": "Create organization",
       "edit-org": "Edit organization",
-
+      "close": "Close",
       "name": "Name",
       "address": "Address",
       "description": "Description",
@@ -39,6 +40,39 @@
         "address": "Address",
         "description": "Description",
         "actions": "Actions"
+      }
+    },
+    "employee": {
+      "personnelCode": "Personnel Code",
+      "fullName": "Full name",
+      "firstname": "First Name",
+      "phoneNumber": "Phone Number",
+      "password": "Password",
+      "nationalCode": "National Code",
+      "isDeleted": "Is Deleted",
+      "details": "Details",
+      "createUser": "Create user",
+      "cancel":"Cancel",
+      "update": "Update",
+      "create": {
+        "organizationId": "Organization",
+        "name": "Name",
+        "profileImage": "Profile Image",
+        "lastname": "Last Name",
+        "phoneNumber": "Phone Number",
+        "password": "Password",
+        "role": "Role",
+        "settings": {
+          "teamId": "Team ID",
+          "shiftId": "Shift ID",
+          "salary": "Salary",
+          "needToLocation": "Need to Location"
+        },
+        "firstname": "First Name",
+        "nationalCode": "National Code",
+        "personnelCode": "Personnel Code",
+        "isDelete": "Is Deleted",
+        "active": "Active"
       }
     },
     "auth": {

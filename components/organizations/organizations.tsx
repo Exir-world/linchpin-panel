@@ -196,7 +196,7 @@ const OrganizationsList = () => {
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
-                    Close
+                    {t("global.organizations.close")}
                   </Button>
                   <Button color="primary" onPress={onClose} type="submit">
                     {isEditing

@@ -11,3 +11,24 @@ export type RegisterFormType = {
   password: string;
   confirmPassword: string;
 };
+
+export type AddUserFormData = {
+  organizationId: number;
+  name: string;
+  profileImage: string;
+  lastname: string;
+  phoneNumber: string;
+  password: string;
+  role: number;
+  settings: {
+    teamId: number;
+    shiftId: number;
+    salary: number;
+    needToLocation: boolean;
+  };
+  firstname: string;
+  nationalCode: string;
+  personnelCode: string;
+  isDelete: boolean;
+};
+
