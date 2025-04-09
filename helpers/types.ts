@@ -32,3 +32,23 @@ export type AddUserFormData = {
   isDelete: boolean;
 };
 
+type Role = {
+  name: string;
+  permissions: string[]; // Assuming the permissions array will contain strings
+  id: number;
+};
+
+export type User = {
+  organizationId: number;
+  firstname: string;
+  name: string;
+  profileImage: string | null;
+  lastname: string;
+  phoneNumber: string;
+  password: string;
+  role: Role;
+  nationalCode: string | null;
+  personnelCode: string | null;
+  isDeleted: boolean;
+  id: number;
+};

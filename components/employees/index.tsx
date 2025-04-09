@@ -191,7 +191,7 @@ const EmployeesList = () => {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
-                    {t("global.organizations.create-org")}
+                  {t("global.employee.createUser")}
                   </ModalHeader>
                   <ModalBody>
                     <div className="grid grid-cols-3 justify-between items-center gap-2 flex-col md:flex-row">
