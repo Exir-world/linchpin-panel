@@ -6,7 +6,8 @@
       "organizations": "سازمان‌ها",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
-      "salary-slip": "فیش حقوقی"
+      "salary-slip": "فیش حقوقی",
+      "employees": "کارمندان"
     },
     "reports": {
       "selectDate": "تاریخ را انتخاب کنید",
@@ -18,15 +19,15 @@
       "filter": {
         "confirmed": "تایید شده",
         "rejected": "رد شده",
-        "not-registered": "ثبت‌نام نشده"
+        "not-registered": "ثبت نشده"
       }
     },
     "organizations": {
       "create": "ایجاد",
-      "update": "بروزرسانی",
+      "update": "به‌روزرسانی",
       "create-org": "ایجاد سازمان",
       "edit-org": "ویرایش سازمان",
-
+      "close": "بستن",
       "name": "نام",
       "address": "آدرس",
       "description": "توضیحات",
@@ -40,13 +41,46 @@
         "actions": "عملیات"
       }
     },
+    "employee": {
+      "personnelCode": "کد پرسنلی",
+      "fullName": "نام کامل",
+      "firstname": "نام",
+      "phoneNumber": "شماره تلفن",
+      "password": "گذرواژه",
+      "nationalCode": "کد ملی",
+      "isDeleted": "حذف شده",
+      "details": "جزئیات",
+      "createUser": "ایجاد کاربر",
+      "cancel": "لغو",
+      "update": "به‌روزرسانی",
+      "create": {
+        "organizationId": "سازمان",
+        "name": "نام",
+        "profileImage": "تصویر پروفایل",
+        "lastname": "نام خانوادگی",
+        "phoneNumber": "شماره تلفن",
+        "password": "گذرواژه",
+        "role": "نقش",
+        "settings": {
+          "teamId": "شناسه تیم",
+          "shiftId": "شناسه شیفت",
+          "salary": "حقوق",
+          "needToLocation": "نیاز به مکان"
+        },
+        "firstname": "نام",
+        "nationalCode": "کد ملی",
+        "personnelCode": "کد پرسنلی",
+        "isDelete": "حذف شده",
+        "active": "فعال"
+      }
+    },
     "auth": {
       "phoneNumber": "شماره تلفن",
-      "password": "کلمه عبور",
+      "password": "گذرواژه",
       "login": "ورود",
       "formError": {
-        "required": "این فیلد ضروری است",
-        "invalid": "مقدار فیلد نادرست است"
+        "required": "این فیلد الزامی است",
+        "invalid": "مقدار فیلد نامعتبر است"
       }
     }
   }

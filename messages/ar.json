@@ -1,15 +1,16 @@
 {
   "global": {
-    "home": "الصفحة الرئيسية",
+    "home": "الرئيسية",
     "title": "مرحباً",
     "main-menu": {
       "organizations": "المنظمات",
       "reports": "التقارير",
       "requests": "الطلبات",
-      "salary-slip": "قائمة الرواتب"
+      "salary-slip": "قسيمة الراتب",
+      "employees": "الموظفون"
     },
     "reports": {
-      "selectDate": "حدد التاريخ",
+      "selectDate": "اختر التاريخ",
       "reports": "التقارير",
       "list": "القائمة"
     },
@@ -26,18 +27,51 @@
       "update": "تحديث",
       "create-org": "إنشاء منظمة",
       "edit-org": "تعديل المنظمة",
-
+      "close": "إغلاق",
       "name": "الاسم",
       "address": "العنوان",
       "description": "الوصف",
       "edit": "تعديل",
       "columns": {
-        "id": "الهوية",
+        "id": "الرقم التعريفي",
         "name": "الاسم",
-        "creatorId": "هوية المنشئ",
+        "creatorId": "معرف المنشئ",
         "address": "العنوان",
         "description": "الوصف",
         "actions": "الإجراءات"
+      }
+    },
+    "employee": {
+      "personnelCode": "رمز الموظف",
+      "fullName": "الاسم الكامل",
+      "firstname": "الاسم الأول",
+      "phoneNumber": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "nationalCode": "الرمز الوطني",
+      "isDeleted": "تم الحذف",
+      "details": "التفاصيل",
+      "createUser": "إنشاء مستخدم",
+      "cancel": "إلغاء",
+      "update": "تحديث",
+      "create": {
+        "organizationId": "المنظمة",
+        "name": "الاسم",
+        "profileImage": "صورة الملف الشخصي",
+        "lastname": "اسم العائلة",
+        "phoneNumber": "رقم الهاتف",
+        "password": "كلمة المرور",
+        "role": "الدور",
+        "settings": {
+          "teamId": "معرف الفريق",
+          "shiftId": "معرف التحول",
+          "salary": "الراتب",
+          "needToLocation": "الحاجة إلى الموقع"
+        },
+        "firstname": "الاسم الأول",
+        "nationalCode": "الرمز الوطني",
+        "personnelCode": "رمز الموظف",
+        "isDelete": "تم الحذف",
+        "active": "نشط"
       }
     },
     "auth": {
@@ -46,7 +80,7 @@
       "login": "تسجيل الدخول",
       "formError": {
         "required": "هذا الحقل مطلوب",
-        "invalid": "قيمة الحقل غير صالحة"
+        "invalid": "قيمة الحقل غير صحيحة"
       }
     }
   }
