@@ -1,13 +1,14 @@
 "use client";
 import { User } from "@/helpers/types";
 import { Get, Patch } from "@/lib/axios";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Switch } from "@nextui-org/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
 import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
+import path from "path";
 
 // const user: User = {
 //   organizationId: 0,
@@ -61,6 +62,7 @@ const EmployeeDetails = () => {
       shiftId: 0,
       teamId: 0,
       salary: 0,
+      needToLocation: false,
     },
   });
 
@@ -238,7 +240,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="First Name"
+                    label={t("global.employee.firstname")}
                     disabled={!isEditing}
                     // helperText={errors.firstname ? errors.firstname.message : ""}
                     // helperColor={errors.firstname ? "error" : undefined}
@@ -255,7 +257,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="Name"
+                    label={t("global.employee.nickname")}
                     disabled={!isEditing}
                     // helperText={errors.name ? errors.name.message : ""}
                     // helperColor={errors.name ? "error" : undefined}
@@ -272,7 +274,7 @@ const EmployeeDetails = () => {
                   <Input
                     color={isEditing ? "primary" : "default"}
                     {...field}
-                    label="Last Name"
+                    label={t("global.employee.create.lastname")}
                     disabled={!isEditing}
                     // helperText={errors.lastname ? errors.lastname.message : ""}
                     // helperColor={errors.lastname ? "error" : undefined}
@@ -291,7 +293,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="Phone Number"
+                    label={t("global.employee.phoneNumber")}
                     disabled={!isEditing}
                     // helperText={
                     //   errors.phoneNumber ? errors.phoneNumber.message : ""
@@ -316,7 +318,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="Password"
+                    label={t("global.employee.password")}
                     type="password"
                     disabled={!isEditing}
                     // helperText={errors.password ? errors.password.message : ""}
@@ -340,7 +342,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="National Code"
+                    label={t("global.employee.nationalCode")}
                     disabled={!isEditing}
                     // helperText={
                     //   errors.nationalCode ? errors.nationalCode.message : ""
@@ -366,7 +368,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="Personnel Code"
+                    label={t("global.employee.personnelCode")}
                     disabled={!isEditing}
                     // helperText={
                     //   errors.personnelCode ? errors.personnelCode.message : ""
@@ -390,7 +392,7 @@ const EmployeeDetails = () => {
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}
-                    label="Salary"
+                    label={t("global.employee.create.settings.salary")}
                     disabled={!isEditing}
                     // helperText={
                     //   errors.phoneNumber ? errors.phoneNumber.message : ""
@@ -459,7 +461,7 @@ const EmployeeDetails = () => {
             <div className="flex items-center flex-col gap-0.5">
               <span className="text-sm text-gray-700">
                 {/* {t("global.employee.create.organizationId")} */}
-                Shifts
+                {t("global.employee.create.settings.shiftId")}
               </span>
               <Controller
                 control={control}
@@ -481,7 +483,7 @@ const EmployeeDetails = () => {
             <div className="flex items-center flex-col gap-0.5">
               <span className="text-sm text-gray-700">
                 {/* {t("global.employee.create.organizationId")} */}
-                Teams
+                {t("global.employee.create.settings.teamId")}
               </span>
               <Controller
                 control={control}
@@ -501,15 +503,33 @@ const EmployeeDetails = () => {
               )}
             </div>
           </div>
+          <div>
+            <div className="flex  items-center gap-1">
+              <span>{t("global.employee.create.settings.needToLocation")}</span>
+              <Controller
+                control={control}
+                name="needToLocation"
+                render={({ field }) => (
+                  <Switch
+                    {...field}
+                    // isSelected={false}
+                    onChange={(checked) => field.onChange(checked)}
+                  />
+                )}
+              />
+            </div>
+          </div>
           <div className="p-4 flex gap-4 w-full items-center justify-center">
             <Button
               type="button"
               color="danger"
               onPress={() => setIsEditing(false)}
             >
-              Cancel
+              {t("global.employee.cancel")}
             </Button>
-            <Button type="submit" color="primary" >Update</Button>
+            <Button type="submit" color="primary">
+              {t("global.employee.update")}
+            </Button>
           </div>
         </div>
       </form>

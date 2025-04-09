@@ -52,8 +52,12 @@
       "isDeleted": "Is Deleted",
       "details": "Details",
       "createUser": "Create user",
-      "cancel":"Cancel",
+      "cancel": "Cancel",
       "update": "Update",
+      "nickname": "Nickname",
+      "needToLocation": "Need to Location",
+      "teamId": "Team ID",
+      "shift":"Shift",
       "create": {
         "organizationId": "Organization",
         "name": "Name",
@@ -63,8 +67,8 @@
         "password": "Password",
         "role": "Role",
         "settings": {
-          "teamId": "Team ID",
-          "shiftId": "Shift ID",
+          "teamId": "Team ",
+          "shiftId": "Shift ",
           "salary": "Salary",
           "needToLocation": "Need to Location"
         },
@@ -73,7 +77,8 @@
         "personnelCode": "Personnel Code",
         "isDelete": "Is Deleted",
         "active": "Active"
-      }
+      },
+      "organizationId": "Organization Id"
     },
     "auth": {
       "phoneNumber": "Phone number",

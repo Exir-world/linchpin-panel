@@ -13,10 +13,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        iransans: ['var(--font-iransans)', 'sans-serif'],
-        sans: ['var(--font-sans)', 'Arial', 'sans-serif'],
-      }, 
+     
     },
   },
   darkMode: "class",

@@ -10,14 +10,14 @@
       "employees": "کارمندان"
     },
     "reports": {
-      "selectDate": "تاریخ را انتخاب کنید",
+      "selectDate": "انتخاب تاریخ",
       "reports": "گزارش‌ها",
       "list": "لیست"
     },
     "requests": {
       "status": "وضعیت",
       "filter": {
-        "confirmed": "تایید شده",
+        "confirmed": "تأیید شده",
         "rejected": "رد شده",
         "not-registered": "ثبت نشده"
       }
@@ -35,10 +35,10 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه ایجاد کننده",
+        "creatorId": "شناسه سازنده",
         "address": "آدرس",
         "description": "توضیحات",
-        "actions": "عملیات"
+        "actions": "عملیات‌ها"
       }
     },
     "employee": {
@@ -46,24 +46,27 @@
       "fullName": "نام کامل",
       "firstname": "نام",
       "phoneNumber": "شماره تلفن",
-      "password": "گذرواژه",
+      "password": "کلمه عبور",
       "nationalCode": "کد ملی",
       "isDeleted": "حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
       "cancel": "لغو",
       "update": "به‌روزرسانی",
+      "nickname": "نام مستعار",
+      "needToLocation": "نیاز به مکان",
+      "teamId": "شناسه تیم",
       "create": {
         "organizationId": "سازمان",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
         "lastname": "نام خانوادگی",
         "phoneNumber": "شماره تلفن",
-        "password": "گذرواژه",
+        "password": "کلمه عبور",
         "role": "نقش",
         "settings": {
-          "teamId": "شناسه تیم",
-          "shiftId": "شناسه شیفت",
+          "teamId": " تیم",
+          "shiftId": " شیفت",
           "salary": "حقوق",
           "needToLocation": "نیاز به مکان"
         },
@@ -72,11 +75,12 @@
         "personnelCode": "کد پرسنلی",
         "isDelete": "حذف شده",
         "active": "فعال"
-      }
+      },
+      "organizationId": "شناسه سازمان"
     },
     "auth": {
       "phoneNumber": "شماره تلفن",
-      "password": "گذرواژه",
+      "password": "کلمه عبور",
       "login": "ورود",
       "formError": {
         "required": "این فیلد الزامی است",
