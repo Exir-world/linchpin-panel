@@ -13,7 +13,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-     
+     colors :{
+      cancelled:"#6C757D",
+      pending:"#FFC107",
+      approved:"#28A745",
+      rejected:"#DC3545",
+      
+     }
     },
   },
   darkMode: "class",

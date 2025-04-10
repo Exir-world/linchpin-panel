@@ -52,3 +52,28 @@ export type User = {
   isDeleted: boolean;
   id: number;
 };
+
+interface Person {
+  id: number;
+  firstname: string;
+  lastname: string;
+  name: string;
+  personnelCode: string | null;
+  phoneNumber: string;
+}
+
+export type RequestItem = {
+  id: number;
+  type: string; // type is a string with a specific value or a generic string
+  status: string;
+  description: string | null; // description can be a string or null
+  adminComment: string | null; // adminComment can be a string or null
+  userId: number; // userId is a number
+  startTime: string; // startTime is a string, assuming it's a date string in ISO format
+  endTime: string | null; // endTime is a string or null
+  reviewedById: number | null; // reviewedById is a number or null
+  reviewedAt: string | null; // reviewedAt is a string (ISO date) or null
+  createdAt: string; // createdAt is a string (ISO date)
+  updatedAt: string; // updatedAt is a string (ISO date)
+  user: Person; // user is an object of type Person
+};

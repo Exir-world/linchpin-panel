@@ -12,19 +12,34 @@
     "reports": {
       "selectDate": "انتخاب تاریخ",
       "reports": "گزارش‌ها",
-      "list": "لیست"
+      "list": "فهرست"
     },
     "requests": {
-      "status": "وضعیت",
       "filter": {
-        "confirmed": "تأیید شده",
-        "rejected": "رد شده",
-        "not-registered": "ثبت نشده"
-      }
+        "pending": "در انتظار",
+        "approved": "تأییدشده",
+        "rejected": "ردشده",
+        "Cancelled": "لغوشده",
+        "all": "همه"
+      },
+      "id": "شناسه",
+      "status": "وضعیت",
+      "type": "نوع",
+      "description": "توضیحات",
+      "adminComment": "نظر مدیر",
+      "userId": "شناسه کاربر",
+      "startTime": "زمان شروع",
+      "endTime": "زمان پایان",
+      "reviewedById": "شناسه بررسی‌کننده",
+      "reviewedAt": "زمان بررسی",
+      "createdAt": "تاریخ ایجاد",
+      "updatedAt": "تاریخ بروزرسانی",
+      "actions": "عملیات",
+      "details": "جزئیات"
     },
     "organizations": {
       "create": "ایجاد",
-      "update": "به‌روزرسانی",
+      "update": "ویرایش",
       "create-org": "ایجاد سازمان",
       "edit-org": "ویرایش سازمان",
       "close": "بستن",
@@ -38,7 +53,7 @@
         "creatorId": "شناسه سازنده",
         "address": "آدرس",
         "description": "توضیحات",
-        "actions": "عملیات‌ها"
+        "actions": "عملیات"
       }
     },
     "employee": {
@@ -46,29 +61,30 @@
       "fullName": "نام کامل",
       "firstname": "نام",
       "phoneNumber": "شماره تلفن",
-      "password": "کلمه عبور",
+      "password": "رمز عبور",
       "nationalCode": "کد ملی",
       "isDeleted": "حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
       "cancel": "لغو",
-      "update": "به‌روزرسانی",
+      "update": "ویرایش",
       "nickname": "نام مستعار",
-      "needToLocation": "نیاز به مکان",
+      "needToLocation": "نیاز به مکان دارد",
       "teamId": "شناسه تیم",
+      "shift": "شیفت",
       "create": {
         "organizationId": "سازمان",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
         "lastname": "نام خانوادگی",
         "phoneNumber": "شماره تلفن",
-        "password": "کلمه عبور",
+        "password": "رمز عبور",
         "role": "نقش",
         "settings": {
-          "teamId": " تیم",
-          "shiftId": " شیفت",
+          "teamId": "تیم",
+          "shiftId": "شیفت",
           "salary": "حقوق",
-          "needToLocation": "نیاز به مکان"
+          "needToLocation": "نیاز به مکان دارد"
         },
         "firstname": "نام",
         "nationalCode": "کد ملی",
@@ -80,11 +96,11 @@
     },
     "auth": {
       "phoneNumber": "شماره تلفن",
-      "password": "کلمه عبور",
+      "password": "رمز عبور",
       "login": "ورود",
       "formError": {
-        "required": "این فیلد الزامی است",
-        "invalid": "مقدار فیلد نامعتبر است"
+        "required": "تکمیل این فیلد الزامی است",
+        "invalid": "مقدار وارد شده نامعتبر است"
       }
     }
   }

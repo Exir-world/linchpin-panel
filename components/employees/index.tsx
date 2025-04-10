@@ -151,23 +151,34 @@ const EmployeesList = () => {
 
   const onSubmit = async (data: any) => {
     const phoneNumber = `+98${data.phoneNumber}`;
-    try {
-      const res = await Post(`users`, {
-        ...data,
-        phoneNumber,
-        role: Number(data.role),
-        organizationId: Number(data.organizationId),
-      });
-      if (res.status === 201) {
-        onClose();
-        getUsersList();
-      }
-    } catch (error) {
-      const messages = error?.response?.data.message;
-      messages.forEach((message: string) => {
-        addToast({ title: message });
-      });
-    }
+    const settings = {};
+
+    const params = {
+      ...data,
+      settings,
+      phoneNumber,
+      role: Number(data.role),
+      organizationId: Number(data.organizationId),
+    }; //  ********  this item must be send  !!!!!!
+
+    // try {
+    //   const res = await Post(`users`, {
+    //     ...data,
+    //     phoneNumber,
+    //     role: Number(data.role),
+    //     organizationId: Number(data.organizationId),
+    //   });
+    //   if (res.status === 201) {
+    //     onClose();
+    //     getUsersList();
+    //   }
+    // } catch (error) {
+    //   const messages = error?.response?.data.message;
+    //   messages.forEach((message: string) => {
+    //     addToast({ title: message });
+    //   });
+    // }
+    console.log(data);
   };
 
   return (

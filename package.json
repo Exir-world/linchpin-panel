@@ -17,6 +17,8 @@
     "axios": "^1.8.4",
     "clsx": "^2.0.0",
     "cookies-next": "^4.2.1",
+    "date-fns": "^4.1.0",
+    "date-fns-jalali": "^4.1.0-0",
     "formik": "^2.4.6",
     "framer-motion": "^12.6.3",
     "lucide-react": "^0.487.0",
