@@ -93,7 +93,7 @@ const ReqDetails = () => {
           <div className="flex flex-col gap-2">
             <p>{t("name")}</p>
             <p>
-              {requestItem.user.firstname} {requestItem.user.lastname}
+              {requestItem?.user?.firstname} {requestItem?.user?.lastname}
             </p>
           </div>
         </div>
@@ -129,7 +129,7 @@ const ReqDetails = () => {
         <div className="grid md:grid-cols-3 justify-center items-center w-full gap-4 p-3 border rounded-md shadow-sm">
           <div className="flex flex-col gap-2">
             <p>{t("personnelCode")}</p>
-            <p>{requestItem.user.personnelCode}</p>
+            <p>{requestItem?.user?.personnelCode}</p>
           </div>
         </div>
       </div>

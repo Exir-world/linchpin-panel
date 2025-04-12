@@ -78,8 +78,11 @@
       "needToLocation": "Need to Location",
       "teamId": "Team ID",
       "shift": "Shift",
+      "reports": "Reports",
       "create": {
+        "team": "Team",
         "organizationId": "Organization",
+        "shift": "Shift",
         "name": "Name",
         "profileImage": "Profile Image",
         "lastname": "Last Name",

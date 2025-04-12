@@ -51,7 +51,7 @@ export const SidebarWrapper = () => {
               <SidebarItem
                 isActive={pathname === "/employees"}
                 title={t("global.main-menu.employees")}
-                icon={<Icon name="users" classname='mx-1'/>}
+                icon={<Icon name="users" classname="mx-1" />}
                 href="/employees"
               />
               <SidebarItem
@@ -65,6 +65,12 @@ export const SidebarWrapper = () => {
                 title={t("global.main-menu.requests")}
                 href="/requests"
                 icon={<PaymentsIcon />}
+              />
+              <SidebarItem
+                isActive={pathname === "/reports"}
+                title={t("global.main-menu.reports")}
+                href="/reports"
+                icon={<ReportsIcon />}
               />
               <SidebarItem
                 isActive={pathname === "/salarySlip"}
@@ -81,11 +87,6 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/products"}
                 title="Products"
                 icon={<ProductsIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/reports"}
-                title="Reports"
-                icon={<ReportsIcon />}
               />
             </SidebarMenu>
 

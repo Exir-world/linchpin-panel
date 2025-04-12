@@ -19,11 +19,12 @@ import { Get } from "@/lib/axios";
 import { User } from "@/helpers/types";
 import { useRouter } from "next/navigation";
 
-export const Reports = () => {
+const ReportDetails = () => {
   const [value, setValue] = useState<any>();
   const [userList, setUserList] = useState([]);
   const t = useTranslations();
   const router = useRouter();
+  
   const getUsersList = async () => {
     try {
       const res = await Get(`/users`);
@@ -165,3 +166,5 @@ export const Reports = () => {
     </div>
   );
 };
+
+export default ReportDetails;
