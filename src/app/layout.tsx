@@ -17,15 +17,12 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
 
+  const localeBasedFont =
+    locale === "en" ? fontSans.className : iranSans.className;
+
   return (
     <html lang={locale}>
-      <body
-        className={clsx(
-          "font-sans antialiased",
-          iranSans.variable,
-          locale === "fa" || locale === "ar" ? "font-iransans" : fontSans.variable
-        )}
-      >
+      <body className={clsx(localeBasedFont)}>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -397,7 +397,7 @@ const EmployeeDetails = () => {
               <Controller
                 name="salary"
                 control={control}
-                render={({ field }) => (
+                render={({ field }) => ( 
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}

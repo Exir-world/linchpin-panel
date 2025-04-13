@@ -24,7 +24,7 @@ const ReportDetails = () => {
   const [userList, setUserList] = useState([]);
   const t = useTranslations();
   const router = useRouter();
-  
+
   const getUsersList = async () => {
     try {
       const res = await Get(`/users`);
@@ -119,14 +119,9 @@ const ReportDetails = () => {
       </ul> */}
 
       <div className="flex justify-between flex-wrap gap-4 items-center">
-        <div className="flex items-center gap-3 flex-wrap md:flex-nowrap">
-          <Input
-            classNames={{
-              input: "w-full",
-              mainWrapper: "w-full",
-            }}
-            placeholder="Search users"
-          />
+        <div className="flex items-center gap-3 flex-wrap md:flex-nowrap grow">
+          
+          <Input placeholder="Search users" />
           <SettingsIcon />
           <TrashIcon />
           <InfoIcon />
