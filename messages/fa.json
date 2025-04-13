@@ -10,32 +10,37 @@
       "employees": "کارمندان"
     },
     "reports": {
-      "selectDate": "انتخاب تاریخ",
+      "selectDate": "تاریخ را انتخاب کنید",
       "reports": "گزارش‌ها",
-      "list": "فهرست"
+      "list": "لیست"
     },
     "requests": {
       "filter": {
         "pending": "در انتظار",
-        "approved": "تأییدشده",
-        "rejected": "ردشده",
-        "Cancelled": "لغوشده",
+        "approved": "تایید شده",
+        "rejected": "رد شده",
+        "Cancelled": "لغو شده",
         "all": "همه"
       },
       "id": "شناسه",
       "status": "وضعیت",
       "type": "نوع",
       "description": "توضیحات",
-      "adminComment": "نظر مدیر",
+      "adminComment": "نظر ادمین",
       "userId": "شناسه کاربر",
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
-      "reviewedById": "شناسه بررسی‌کننده",
-      "reviewedAt": "زمان بررسی",
-      "createdAt": "تاریخ ایجاد",
-      "updatedAt": "تاریخ بروزرسانی",
+      "reviewedById": "بازبینی‌شده توسط",
+      "reviewedAt": "تاریخ بازبینی",
+      "createdAt": "ایجاد شده در",
+      "updatedAt": "به‌روزرسانی شده در",
       "actions": "عملیات",
-      "details": "جزئیات"
+      "details": "جزئیات",
+      "firstname": "نام",
+      "lastname": "نام خانوادگی",
+      "name": "نام نمایشی",
+      "personnelCode": "کد پرسنلی",
+      "phoneNumber": "شماره تلفن"
     },
     "organizations": {
       "create": "ایجاد",
@@ -50,7 +55,7 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه سازنده",
+        "creatorId": "شناسه ایجادکننده",
         "address": "آدرس",
         "description": "توضیحات",
         "actions": "عملیات"
@@ -66,14 +71,17 @@
       "isDeleted": "حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "لغو",
+      "cancel": "انصراف",
       "update": "ویرایش",
       "nickname": "نام مستعار",
-      "needToLocation": "نیاز به مکان دارد",
+      "needToLocation": "نیاز به موقعیت",
       "teamId": "شناسه تیم",
       "shift": "شیفت",
+      "reports": "گزارش‌ها",
       "create": {
+        "team": "تیم",
         "organizationId": "سازمان",
+        "shift": "شیفت",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
         "lastname": "نام خانوادگی",
@@ -81,10 +89,10 @@
         "password": "رمز عبور",
         "role": "نقش",
         "settings": {
-          "teamId": "تیم",
-          "shiftId": "شیفت",
+          "teamId": "شناسه تیم",
+          "shiftId": "شناسه شیفت",
           "salary": "حقوق",
-          "needToLocation": "نیاز به مکان دارد"
+          "needToLocation": "نیاز به موقعیت"
         },
         "firstname": "نام",
         "nationalCode": "کد ملی",
@@ -99,9 +107,14 @@
       "password": "رمز عبور",
       "login": "ورود",
       "formError": {
-        "required": "تکمیل این فیلد الزامی است",
-        "invalid": "مقدار وارد شده نامعتبر است"
+        "required": "پر کردن این فیلد اجباری است",
+        "invalid": "مقدار وارد شده معتبر نیست"
       }
+    },
+    "alert": {
+      "success": "تغییرات شما با موفقیت ذخیره شد!",
+      "error": "مشکلی رخ داد. لطفاً دوباره تلاش کنید.",
+      "Warning": "در انجام این عمل احتیاط نمایید."
     }
   }
 }

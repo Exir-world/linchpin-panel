@@ -217,7 +217,7 @@ const EmployeesList = () => {
         onClose();
         getUsersList();
       }
-    } catch (error) {
+    } catch (error: any) {
       const messages = error?.response?.data.message;
       messages.forEach((message: string) => {
         addToast({ title: message });

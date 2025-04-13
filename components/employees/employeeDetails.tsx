@@ -483,7 +483,7 @@ const EmployeeDetails = () => {
                       const numericVal = Number(val);
                       field.onChange(numericVal);
                     }}
-                    selectedValue={field.value}
+                    selectedValue={field.value as any}
                   />
                 )}
               />
