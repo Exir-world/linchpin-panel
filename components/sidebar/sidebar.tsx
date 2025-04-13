@@ -66,12 +66,12 @@ export const SidebarWrapper = () => {
                 href="/requests"
                 icon={<PaymentsIcon />}
               />
-              <SidebarItem
+              {/* <SidebarItem
                 isActive={pathname === "/reports"}
                 title={t("global.main-menu.reports")}
                 href="/reports"
                 icon={<ReportsIcon />}
-              />
+              /> */}
               <SidebarItem
                 isActive={pathname === "/salarySlip"}
                 title={t("global.main-menu.salary-slip")}

@@ -130,7 +130,6 @@ const EmployeesList = () => {
           label: el.title,
         }));
         setShiftList(allShifts);
-        console.log(allShifts);
       }
     } catch (error) {
       console.log(error);

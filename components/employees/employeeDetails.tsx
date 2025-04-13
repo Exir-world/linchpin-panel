@@ -9,6 +9,7 @@ import CustomDropdown from "../dropdown/dropdown";
 import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
 import path from "path";
+import { addToast } from "@heroui/toast";
 
 // const user: User = {
 //   organizationId: 0,
@@ -173,7 +174,12 @@ const EmployeeDetails = () => {
           },
         }
       );
-      console.log(res);
+      if (res.status === 200) {
+        addToast({
+          title: t("global.alert.success"),
+          color: "success",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -193,7 +199,7 @@ const EmployeeDetails = () => {
       const res = await Get(`shifts/organization/${orgId}`);
       if (res.status === 200) {
         const allShifts = res.data.map((el: any) => ({
-          Key: Number(el.id),
+          key: el.id,
           label: el.title,
         }));
 
@@ -205,10 +211,8 @@ const EmployeeDetails = () => {
   };
 
   useEffect(() => {
-    if (orgId) {
-      getShifts();
-      getTeamLists();
-    }
+    getShifts();
+    getTeamLists();
   }, [orgId]);
 
   const handleOrgId = (val: any) => {
@@ -219,10 +223,10 @@ const EmployeeDetails = () => {
       <div className="p-4">
         Edit user{" "}
         <Button
+          type="button"
           variant="bordered"
           color="primary"
           onPress={() => {
-            if (isEditing) handleSubmit(onSubmit)();
             setIsEditing(!isEditing);
           }}
         >
@@ -364,18 +368,23 @@ const EmployeeDetails = () => {
               <Controller
                 name="personnelCode"
                 control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    color={isEditing ? "primary" : "default"}
-                    label={t("global.employee.personnelCode")}
-                    disabled={!isEditing}
-                    // helperText={
-                    //   errors.personnelCode ? errors.personnelCode.message : ""
-                    // }
-                    // helperColor={errors.personnelCode ? "error" : undefined}
-                  />
-                )}
+                rules={{
+                  required: "Personnel code is required",
+                }}
+                render={({ field, formState }) => {
+                  return (
+                    <Input
+                      {...field}
+                      color={isEditing ? "primary" : "default"}
+                      label={t("global.employee.personnelCode")}
+                      disabled={!isEditing}
+                      // helperText={
+                      //   errors.personnelCode ? errors.personnelCode.message : ""
+                      // }
+                      // helperColor={errors.personnelCode ? "error" : undefined}
+                    />
+                  );
+                }}
                 // rules={{
                 //   pattern: {
                 //     value: /^\d{6}$/,
@@ -463,14 +472,18 @@ const EmployeeDetails = () => {
                 {/* {t("global.employee.create.organizationId")} */}
                 {t("global.employee.create.settings.shiftId")}
               </span>
+
               <Controller
                 control={control}
                 name="shiftId"
                 render={({ field }) => (
                   <CustomDropdown
                     dropdownItems={shiftList}
-                    onChange={field.onChange}
-                    // selectedValue={field.value}
+                    onChange={(val) => {
+                      const numericVal = Number(val);
+                      field.onChange(numericVal);
+                    }}
+                    selectedValue={field.value}
                   />
                 )}
               />
