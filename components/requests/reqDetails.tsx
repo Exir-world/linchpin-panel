@@ -25,6 +25,7 @@ const ReqDetails = () => {
   const { handleSubmit, register, setValue } = useForm();
   const [requestItem, setRequestItem] = useState({} as RequestItem);
   const locale = useLocale();
+  const [reqTypes, setReqTypes] = useState<any>([]);
   const cal = locale === "fa" ? "jalali" : "gregorian";
   const t = useTranslations("global.requests");
 
@@ -46,8 +47,21 @@ const ReqDetails = () => {
     }
   };
 
+  const getRequestTypes = async () => {
+    try {
+      const res = await Get(`requests/request-types`, {
+        headers: {
+          "Accept-Language": locale,
+        },
+      });
+      setReqTypes(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getRequestById();
+    getRequestTypes();
   }, [params]);
 
   const handleRequest = async (data: any) => {
@@ -115,7 +129,12 @@ const ReqDetails = () => {
         <div className="grid md:grid-cols-3 justify-center items-center w-full gap-4 p-3 border rounded-md shadow-sm">
           <div className="flex flex-col gap-2">
             <p>{t("type")}</p>
-            <p>{requestItem.type}</p>
+            <p>
+              {
+                reqTypes.find((el: any) => el.requestId === requestItem.type)
+                  ?.title
+              }
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <p>{t("status")}</p>

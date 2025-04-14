@@ -7,7 +7,9 @@
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
       "salary-slip": "فیش حقوقی",
-      "employees": "کارمندان"
+      "employees": "کارمندان",
+      "properties": "اموال"
+
     },
     "reports": {
       "selectDate": "تاریخ را انتخاب کنید",
