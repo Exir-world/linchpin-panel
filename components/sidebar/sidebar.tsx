@@ -18,14 +18,15 @@ import { SidebarMenu } from "./sidebar-menu";
 import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
-import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import Icon from "../icon";
 
 export const SidebarWrapper = () => {
-  const pathname = usePathname();
+  const pathname = usePathname().split("/")[2];
   const { collapsed, setCollapsed } = useSidebarContext();
   const t = useTranslations();
+  const locale = useLocale();
   return (
     <aside className="h-screen z-[20] sticky top-0">
       {collapsed ? (
@@ -41,27 +42,22 @@ export const SidebarWrapper = () => {
         </div>
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
-            <SidebarItem
-              title="Home"
-              icon={<HomeIcon />}
-              isActive={pathname === "/"}
-              href="/"
-            />
+            <SidebarItem title="Home" icon={<HomeIcon />} href="/" />
             <SidebarMenu title="Main Menu">
               <SidebarItem
-                isActive={pathname === "/employees"}
+                isActive={pathname === "employees"}
                 title={t("global.main-menu.employees")}
                 icon={<Icon name="users" classname="mx-1" />}
                 href="/employees"
               />
               <SidebarItem
-                isActive={pathname === "/organizations"}
+                isActive={pathname === "organizations"}
                 title={t("global.main-menu.organizations")}
                 icon={<CustomersIcon />}
                 href="/organizations"
               />
               <SidebarItem
-                isActive={pathname === "/Requests"}
+                isActive={pathname === "requests"}
                 title={t("global.main-menu.requests")}
                 href="/requests"
                 icon={<PaymentsIcon />}
@@ -73,10 +69,16 @@ export const SidebarWrapper = () => {
                 icon={<ReportsIcon />}
               /> */}
               <SidebarItem
-                isActive={pathname === "/salarySlip"}
+                isActive={pathname === "salarySlip"}
                 title={t("global.main-menu.salary-slip")}
                 href="/salarySlip"
                 icon={<CustomersIcon />}
+              />
+              <SidebarItem
+                isActive={pathname === "properties"}
+                title={t("global.main-menu.properties")}
+                href="/properties"
+                icon={<Icon name="file-sliders" classname="mx-1" />}
               />
               <CollapseItems
                 icon={<BalanceIcon />}
@@ -84,7 +86,7 @@ export const SidebarWrapper = () => {
                 title="Balances"
               />
               <SidebarItem
-                isActive={pathname === "/products"}
+                isActive={pathname === "products"}
                 title="Products"
                 icon={<ProductsIcon />}
               />

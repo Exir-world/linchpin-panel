@@ -62,8 +62,8 @@ const EmployeeDetails = () => {
       organizationId: "",
       shiftId: 0,
       teamId: 0,
-      salary: 0,
-      needToLocation: false,
+      salary: '',
+      needToLocation: undefined,
     },
   });
 
@@ -397,7 +397,7 @@ const EmployeeDetails = () => {
               <Controller
                 name="salary"
                 control={control}
-                render={({ field }) => ( 
+                render={({ field }) => (
                   <Input
                     {...field}
                     color={isEditing ? "primary" : "default"}

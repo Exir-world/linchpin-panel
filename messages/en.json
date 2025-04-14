@@ -7,7 +7,8 @@
       "reports": "Reports",
       "requests": "Requests",
       "salary-slip": "Salary slip",
-      "employees": "Employees"
+      "employees": "Employees",
+      "properties": "Properties"
     },
     "reports": {
       "selectDate": "Select date",
@@ -117,7 +118,6 @@
       "success": "Your changes have been saved!",
       "error": " Something went wrong. Please try again.",
       "Warning": " Please be cautious with this action"
-
     }
   }
 }
