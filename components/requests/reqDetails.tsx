@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 
 const ReqDetails = () => {
   const params = useSearchParams();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { handleSubmit, register, setValue } = useForm();
   const [requestItem, setRequestItem] = useState({} as RequestItem);
   const locale = useLocale();
@@ -80,7 +80,9 @@ const ReqDetails = () => {
           },
         }
       );
-      console.log(res);
+      if (res.status === 201) {
+        onClose();
+      }
     } catch (error) {
       console.log(error);
     }

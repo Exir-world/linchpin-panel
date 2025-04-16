@@ -77,3 +77,42 @@ export type RequestItem = {
   updatedAt: string; // updatedAt is a string (ISO date)
   user: Person; // user is an object of type Person
 };
+
+interface Organization {
+  id: number;
+  creatorId: number;
+  name: string;
+  address: string;
+  description: string | null;
+}
+
+interface Team {
+  id: number;
+  departmentId: number;
+  supervisorId: number | null;
+  title: string;
+  color: string;
+  description: string | null;
+}
+
+export interface PropertyItem {
+  id: number;
+  organizationId: number;
+  supervisorId: number | null;
+  title: string;
+  description: string | null;
+  organization: Organization;
+  teams: Team[];
+}
+
+export interface PropertyDetail {
+  id: number;
+  title: string;
+  code: string;
+  status: string; // You could change this to a union type if the possible statuses are known, e.g., 'good' | 'bad'
+  createdAt: string; // ISO date string (or use Date if you plan to convert it)
+  organizationId: number;
+  departmentId: number | null;
+}
+
+

@@ -104,6 +104,23 @@
       },
       "organizationId": "Organization Id"
     },
+    "properties": {
+      "organization": "Organization",
+      "department": "Department",
+      "id": "Id",
+      "title": "Title",
+      "code": "Code",
+      "status": "Status",
+      "createdAt": "CreatedAt",
+      "organizationId": "OrganizationId",
+      "departmentId": "DepartmentId",
+      "details": "details",
+      "edit": "Edit",
+      "show": "Show",
+      "success": "Your changes have been saved!",
+      "update": "Update",
+      "delete": "Delete"
+    },
 
     "auth": {
       "phoneNumber": "Phone number",
@@ -117,7 +134,7 @@
     "alert": {
       "success": "Your changes have been saved!",
       "error": " Something went wrong. Please try again.",
-      "Warning": " Please be cautious with this action"
+      "Warning": "Please be cautious with this action."
     }
   }
 }
