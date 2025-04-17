@@ -8,11 +8,12 @@ import formatDate from "@/helpers/dateConverter";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Icon from "../icon";
+import AddProperty from "./addProperty";
 
 const PropertiesList = () => {
   const [orgList, setOrgList] = useState([]);
-  const [orgId, setOrgId] = useState<null | string>(null);
   const [departmentId, setDepartmentId] = useState<null | string>(null);
+  const [orgId, setOrgId] = useState<null | string>(null);
   const [departmentList, setDepartmentList] = useState([]);
   const [propertyList, setPropertyList] = useState([]);
   const locale = useLocale();
@@ -132,27 +133,36 @@ const PropertiesList = () => {
   ];
   return (
     <div>
-      <div className="grid p-3 grid-cols-5 ">
-        <div className="flex flex-col items-center gap-2">
-          <span>{t("organization")}</span>
-          <CustomDropdown
-            dropdownItems={orgList}
-            onChange={(val) => {
-              setOrgId(val);
-            }}
-          />
+      <div className="p-3 flex flex-col md:flex-row  items-center justify-between">
+        <div className="flex items-center p-2 gap-x-8 ">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-sm">{t("organization")}</span>
+            <CustomDropdown
+              dropdownItems={orgList}
+              onChange={(val) => {
+                setOrgId(val);
+              }}
+            />
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-sm">{t("department")}</span>
+            <CustomDropdown
+              dropdownItems={departmentList}
+              // selectedValue={departmentList.find(
+              //   (item: any) => item.key === departmentId
+              // )}
+              onChange={(val) => {
+                setDepartmentId(val);
+              }}
+            />
+          </div>
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <span>{t("department")}</span>
-          <CustomDropdown
-            dropdownItems={departmentList}
-            // selectedValue={departmentList.find(
-            //   (item: any) => item.key === departmentId
-            // )}
-            onChange={(val) => {
-              setDepartmentId(val);
-            }}
-          />
+        <div className="p-2">
+          {/* <Button color="secondary">
+            {t("addnewPropery")}
+            <Icon name="file-plus-2"></Icon>
+          </Button> */}
+          <AddProperty></AddProperty>
         </div>
       </div>
       <div>

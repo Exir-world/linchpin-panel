@@ -118,8 +118,10 @@
       "edit": "Edit",
       "show": "Show",
       "success": "Your changes have been saved!",
+      "error": " Something went wrong. Please try again.",
       "update": "Update",
-      "delete": "Delete"
+      "delete": "Delete",
+      "addnewPropery": "Add new propery"
     },
 
     "auth": {
