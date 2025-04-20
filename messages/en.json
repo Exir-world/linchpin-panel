@@ -138,7 +138,12 @@
       "deliveredAt": "Delivered at",
       "property": "Property",
       "imageUrl": "Image url",
-      "assignProperty": "Assign property"
+      "assignProperty": "Assign property",
+      "noPropertytoAssign": "There are no Properties to Assign",
+      "close": "Close",
+      "assign": "Assign",
+      "actions": "Actions",
+      "unAssign":"Unassign"
     },
 
     "auth": {
