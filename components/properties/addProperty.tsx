@@ -22,12 +22,17 @@ enum PropertyStatusEnum {
   GOOD = "good",
   BROKEN = "broken",
 }
-
+type OrgListTypes = {
+  key: string;
+  label: string;
+};
 const AddProperty = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [departmentList, setDepartmentList] = useState([]);
-  const [orgList, setOrgList] = useState([]);
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const [departmentList, setDepartmentList] = useState<any[]>([]);
+  const [orgList, setOrgList] = useState<OrgListTypes[]>([]);
   const [orgId, setOrgId] = useState<number | null>(null);
+  const [departemantId, setDepartemantId] = useState<number | null>(null);
+
   const t = useTranslations("global.properties");
   const locale = useLocale();
   const { handleSubmit, register, control, setValue } = useForm();
@@ -100,6 +105,7 @@ const AddProperty = () => {
         title: t("success"),
         color: "success",
       });
+      onClose();
     } else {
       addToast({
         title: t("error"),
@@ -129,8 +135,8 @@ const AddProperty = () => {
                       onSubmit={handleSubmit(onsubmit)}
                       className="flex flex-col items-center gap-2"
                     >
-                      <Input label="Title" {...register("title")}></Input>
-                      <Input label="Code" {...register("code")}></Input>
+                      <Input label={t("title")} {...register("title")}></Input>
+                      <Input label={t("code")} {...register("code")}></Input>
                       <div className="grid grid-cols-3 gap-5 w-full py-4">
                         <div className="flex flex-col gap-1">
                           <p className="text-sm">{t("status")}</p>
@@ -162,7 +168,10 @@ const AddProperty = () => {
                                   const numericVal = Number(val);
                                   setOrgId(numericVal);
                                 }}
-                                selectedValue={field.value}
+                                selectedValue={
+                                  orgList.find((el: any) => el.key === orgId)
+                                    ?.label
+                                }
                               />
                             )}
                           />
@@ -177,8 +186,13 @@ const AddProperty = () => {
                                 dropdownItems={departmentList}
                                 onChange={(val) => {
                                   field.onChange(val);
+                                  setDepartemantId(parseInt(val));
                                 }}
-                                selectedValue={field.value}
+                                selectedValue={
+                                  departmentList.find(
+                                    (el: any) => el.key === departemantId
+                                  )?.label
+                                }
                               />
                             )}
                           />
