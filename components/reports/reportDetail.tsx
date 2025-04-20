@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { Get } from "@/lib/axios";
 import { User } from "@/helpers/types";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import EmployeeDetails from "../employees/employeeDetails";
 import UserProperties from "./userProperties";
 import UserAttendace from "./userAttendace";
@@ -18,7 +18,6 @@ const ReportDetails = () => {
   const t = useTranslations();
   const router = useRouter();
   const [selected, setSelected] = useState("");
-
   const getUsersList = async () => {
     try {
       const res = await Get(`/users`);
@@ -96,6 +95,7 @@ const ReportDetails = () => {
       <Tabs
         aria-label="Options"
         selectedKey={selected}
+        className="justify-center"
         onSelectionChange={setSelected as any}
       >
         <Tab key="details" title={t("global.reports.details")}>

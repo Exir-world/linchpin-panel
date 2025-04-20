@@ -52,7 +52,11 @@
       "lastname": "Last Name",
       "name": "Display Name",
       "personnelCode": "Personnel Code",
-      "phoneNumber": "Phone Number"
+      "phoneNumber": "Phone Number",
+      "selectDate": "Select date",
+      "checkRequest": "Check Request",
+      "reject": "Reject",
+      "approve":"Approve"
     },
     "organizations": {
       "create": "Create",
@@ -143,7 +147,7 @@
       "close": "Close",
       "assign": "Assign",
       "actions": "Actions",
-      "unAssign":"Unassign"
+      "unAssign": "Unassign"
     },
 
     "auth": {
