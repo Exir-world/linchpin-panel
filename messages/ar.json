@@ -1,58 +1,62 @@
 {
   "global": {
-    "home": "الصفحة الرئيسية",
-    "title": "مرحبًا",
+    "home": "الرئيسية",
+    "title": "مرحباً",
     "main-menu": {
       "organizations": "المنظمات",
       "reports": "التقارير",
       "requests": "الطلبات",
-      "salary-slip": "كشف الراتب",
-      "employees": "الموظفون",
+      "salary-slip": "قسيمة الراتب",
+      "employees": "الموظفين",
       "properties": "الممتلكات"
     },
     "reports": {
-      "selectDate": "اختيار التاريخ",
+      "selectDate": "اختر التاريخ",
       "reports": "التقارير",
       "requests": "الطلبات",
-      "list": "القائمة",
-      "details": "التفاصيل",
+      "list": "قائمة",
+      "details": "تفاصيل",
       "properties": "الممتلكات",
-      "attendance": "الحضور والغياب",
+      "attendance": "الحضور",
       "startDate": "تاريخ البدء",
       "endDate": "تاريخ الانتهاء"
     },
     "attendance": {
       "date": "التاريخ",
       "duration": "المدة",
-      "attendance": "الحضور والغياب"
+      "attendance": "الحضور"
     },
     "requests": {
       "filter": {
         "pending": "قيد الانتظار",
         "approved": "موافق عليه",
         "rejected": "مرفوض",
-        "Cancelled": "ملغى",
+        "Cancelled": "ملغاة",
         "all": "الكل"
       },
-      "id": "الرقم التعريفي",
+      "id": "المعرف",
       "status": "الحالة",
       "type": "النوع",
       "description": "الوصف",
       "adminComment": "تعليق المسؤول",
-      "userId": "رقم تعريف المستخدم",
+      "userId": "معرف المستخدم",
       "startTime": "وقت البدء",
       "endTime": "وقت الانتهاء",
-      "reviewedById": "تم المراجعة من قبل",
+      "reviewedById": "معرف المراجع",
       "reviewedAt": "تمت المراجعة في",
-      "createdAt": "تم الإنشاء في",
-      "updatedAt": "تم التحديث في",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
       "actions": "الإجراءات",
-      "details": "التفاصيل",
+      "details": "تفاصيل",
       "firstname": "الاسم الأول",
-      "lastname": "الاسم الأخير",
+      "lastname": "اسم العائلة",
       "name": "الاسم المعروض",
       "personnelCode": "رمز الموظف",
-      "phoneNumber": "رقم الهاتف"
+      "phoneNumber": "رقم الهاتف",
+      "selectDate": "اختر التاريخ",
+      "checkRequest": "تفقد الطلب",
+      "reject": "رفض",
+      "approve": "موافقة"
     },
     "organizations": {
       "create": "إنشاء",
@@ -65,9 +69,9 @@
       "description": "الوصف",
       "edit": "تعديل",
       "columns": {
-        "id": "الرقم التعريفي",
+        "id": "المعرف",
         "name": "الاسم",
-        "creatorId": "رقم تعريف المنشئ",
+        "creatorId": "معرف المنشئ",
         "address": "العنوان",
         "description": "الوصف",
         "actions": "الإجراءات"
@@ -79,24 +83,24 @@
       "firstname": "الاسم الأول",
       "phoneNumber": "رقم الهاتف",
       "password": "كلمة المرور",
-      "nationalCode": "الكود الوطني",
-      "isDeleted": "هل تم الحذف",
-      "details": "التفاصيل",
+      "nationalCode": "الرقم الوطني",
+      "isDeleted": "محذوف",
+      "details": "تفاصيل",
       "createUser": "إنشاء مستخدم",
       "cancel": "إلغاء",
       "update": "تحديث",
-      "nickname": "الاسم المستعار",
-      "needToLocation": "يحتاج إلى موقع",
+      "nickname": "اللقب",
+      "needToLocation": "الحاجة إلى الموقع",
       "teamId": "معرف الفريق",
       "shift": "الوردية",
       "reports": "التقارير",
       "create": {
         "team": "الفريق",
-        "organizationId": "معرف المنظمة",
+        "organizationId": "المنظمة",
         "shift": "الوردية",
         "name": "الاسم",
         "profileImage": "صورة الملف الشخصي",
-        "lastname": "الاسم الأخير",
+        "lastname": "اسم العائلة",
         "phoneNumber": "رقم الهاتف",
         "password": "كلمة المرور",
         "role": "الدور",
@@ -104,12 +108,12 @@
           "teamId": "الفريق",
           "shiftId": "الوردية",
           "salary": "الراتب",
-          "needToLocation": "يحتاج إلى موقع"
+          "needToLocation": "الحاجة إلى الموقع"
         },
         "firstname": "الاسم الأول",
-        "nationalCode": "الكود الوطني",
+        "nationalCode": "الرقم الوطني",
         "personnelCode": "رمز الموظف",
-        "isDelete": "هل تم الحذف",
+        "isDelete": "محذوف",
         "active": "نشط"
       },
       "organizationId": "معرف المنظمة"
@@ -117,27 +121,33 @@
     "properties": {
       "organization": "المنظمة",
       "department": "القسم",
-      "id": "الرقم التعريفي",
+      "id": "المعرف",
       "title": "العنوان",
       "code": "الكود",
       "status": "الحالة",
-      "createdAt": "تم الإنشاء في",
+      "createdAt": "تاريخ الإنشاء",
       "organizationId": "معرف المنظمة",
       "departmentId": "معرف القسم",
-      "details": "التفاصيل",
+      "details": "تفاصيل",
       "edit": "تعديل",
       "show": "عرض",
-      "success": "تم حفظ التغييرات!",
-      "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "success": "تم حفظ التغييرات بنجاح!",
+      "error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
       "update": "تحديث",
       "delete": "حذف",
-      "addnewPropery": "إضافة ممتلك جديد",
-      "userId": "رقم تعريف المستخدم",
-      "propertyId": "رقم تعريف الممتلكات",
+      "addnewPropery": "إضافة أصل جديد",
+      "userId": "معرف المستخدم",
+      "propertyId": "معرف الأصل",
       "deliveredAt": "تم التسليم في",
-      "property": "الممتلكات",
+      "property": "الأصل",
       "imageUrl": "رابط الصورة",
-      "assignProperty": "تعيين الممتلكات"
+      "assignProperty": "تعيين الأصل",
+      "noPropertytoAssign": "لا توجد أصول للتعيين",
+      "close": "إغلاق",
+      "assign": "تعيين",
+      "actions": "الإجراءات",
+      "unAssign": "إلغاء التعيين",
+      "addPropety": "إضافة أصل"
     },
     "auth": {
       "phoneNumber": "رقم الهاتف",
@@ -145,13 +155,13 @@
       "login": "تسجيل الدخول",
       "formError": {
         "required": "هذا الحقل مطلوب",
-        "invalid": "قيمة الحقل غير صالحة"
+        "invalid": "قيمة غير صالحة"
       }
     },
     "alert": {
-      "success": "تم حفظ التغييرات!",
-      "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-      "Warning": "يرجى توخي الحذر عند اتخاذ هذا الإجراء.",
+      "success": "تم حفظ التغييرات بنجاح!",
+      "error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
+      "Warning": "يرجى توخي الحذر عند القيام بهذا الإجراء.",
       "noData": "لا توجد بيانات"
     }
   }

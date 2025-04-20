@@ -56,7 +56,7 @@
       "selectDate": "Select date",
       "checkRequest": "Check Request",
       "reject": "Reject",
-      "approve":"Approve"
+      "approve": "Approve"
     },
     "organizations": {
       "create": "Create",
@@ -147,7 +147,8 @@
       "close": "Close",
       "assign": "Assign",
       "actions": "Actions",
-      "unAssign": "Unassign"
+      "unAssign": "Unassign",
+      "addPropety": "Add property"
     },
 
     "auth": {

@@ -256,12 +256,20 @@ const UserProperties = () => {
                   </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    {t("close")}
-                  </Button>
-                  <Button color="primary" onPress={assignPropertyToUser}>
-                    {t("assign")}
-                  </Button>
+                  {propertyList.length > 0 ? (
+                    <>
+                      <Button color="danger" variant="light" onPress={onClose}>
+                        {t("close")}
+                      </Button>
+                      <Button color="primary" onPress={assignPropertyToUser}>
+                        {t("assign")}
+                      </Button>
+                    </>
+                  ) : (
+                    <Button onPress={onClose} color="danger">
+                      {t("close")}
+                    </Button>
+                  )}
                 </ModalFooter>
               </>
             )}

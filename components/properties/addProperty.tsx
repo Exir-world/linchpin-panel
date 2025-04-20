@@ -111,7 +111,7 @@ const AddProperty = () => {
   return (
     <div>
       <Button color="secondary" onPress={onOpen}>
-        Add new propery
+        {t("addnewPropery")}
         <Icon name="file-plus-2"></Icon>
       </Button>
 
@@ -120,7 +120,7 @@ const AddProperty = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add propery
+                {t("addPropety")}
               </ModalHeader>
               <ModalBody className="overflow-y-auto max-h-[60vh]  w-full">
                 <div className=" items-center w-full grid grid-cols-3 gap-2">
@@ -190,10 +190,10 @@ const AddProperty = () => {
                           variant="light"
                           onPress={onClose}
                         >
-                          Close
+                          {t("close")}
                         </Button>
                         <Button color="primary" type="submit">
-                          Add new property
+                          {t("addnewPropery")}
                         </Button>
                       </div>
                     </form>

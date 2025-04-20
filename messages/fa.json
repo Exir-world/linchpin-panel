@@ -11,7 +11,7 @@
       "properties": "اموال"
     },
     "reports": {
-      "selectDate": "تاریخ را انتخاب کنید",
+      "selectDate": "انتخاب تاریخ",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
       "list": "لیست",
@@ -28,8 +28,8 @@
     },
     "requests": {
       "filter": {
-        "pending": "منتظر",
-        "approved": "تأیید شده",
+        "pending": "در حال انتظار",
+        "approved": "تایید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
         "all": "همه"
@@ -38,21 +38,25 @@
       "status": "وضعیت",
       "type": "نوع",
       "description": "توضیحات",
-      "adminComment": "توضیحات مدیر",
+      "adminComment": "نظر مدیر",
       "userId": "شناسه کاربر",
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
-      "reviewedById": "بازبینی شده توسط",
-      "reviewedAt": "بازبینی شده در",
-      "createdAt": "ایجاد شده در",
-      "updatedAt": "به‌روزرسانی شده در",
-      "actions": "اقدامات",
+      "reviewedById": "شناسه بررسی‌کننده",
+      "reviewedAt": "زمان بررسی",
+      "createdAt": "زمان ایجاد",
+      "updatedAt": "زمان به‌روزرسانی",
+      "actions": "عملیات",
       "details": "جزئیات",
       "firstname": "نام",
       "lastname": "نام خانوادگی",
       "name": "نام نمایشی",
       "personnelCode": "کد پرسنلی",
-      "phoneNumber": "شماره تلفن"
+      "phoneNumber": "شماره تلفن",
+      "selectDate": "انتخاب تاریخ",
+      "checkRequest": "بررسی درخواست",
+      "reject": "رد",
+      "approve": "تایید"
     },
     "organizations": {
       "create": "ایجاد",
@@ -67,10 +71,10 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه ایجاد کننده",
+        "creatorId": "شناسه ایجادکننده",
         "address": "آدرس",
         "description": "توضیحات",
-        "actions": "اقدامات"
+        "actions": "عملیات"
       }
     },
     "employee": {
@@ -80,10 +84,10 @@
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "nationalCode": "کد ملی",
-      "isDeleted": "آیا حذف شده",
+      "isDeleted": "حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "لغو",
+      "cancel": "انصراف",
       "update": "به‌روزرسانی",
       "nickname": "نام مستعار",
       "needToLocation": "نیاز به موقعیت",
@@ -92,7 +96,7 @@
       "reports": "گزارش‌ها",
       "create": {
         "team": "تیم",
-        "organizationId": "شناسه سازمان",
+        "organizationId": "سازمان",
         "shift": "شیفت",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
@@ -109,35 +113,41 @@
         "firstname": "نام",
         "nationalCode": "کد ملی",
         "personnelCode": "کد پرسنلی",
-        "isDelete": "آیا حذف شده",
+        "isDelete": "حذف شده",
         "active": "فعال"
       },
       "organizationId": "شناسه سازمان"
     },
     "properties": {
       "organization": "سازمان",
-      "department": "دپارتمان",
+      "department": "بخش",
       "id": "شناسه",
       "title": "عنوان",
       "code": "کد",
       "status": "وضعیت",
-      "createdAt": "ایجاد شده در",
+      "createdAt": "زمان ایجاد",
       "organizationId": "شناسه سازمان",
-      "departmentId": "شناسه دپارتمان",
+      "departmentId": "شناسه بخش",
       "details": "جزئیات",
       "edit": "ویرایش",
       "show": "نمایش",
-      "success": "تغییرات شما ذخیره شد!",
-      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "success": "تغییرات شما با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
       "update": "به‌روزرسانی",
       "delete": "حذف",
-      "addnewPropery": "افزودن ملک جدید",
+      "addnewPropery": "افزودن دارایی جدید",
       "userId": "شناسه کاربر",
-      "propertyId": "شناسه ملک",
-      "deliveredAt": "تحویل داده شده در",
-      "property": "ملک",
+      "propertyId": "شناسه اموال",
+      "deliveredAt": "تحویل در",
+      "property": "اموال",
       "imageUrl": "آدرس تصویر",
-      "assignProperty": "انتساب ملک"
+      "assignProperty": "تخصیص اموال",
+      "noPropertytoAssign": "هیچ ملکی برای تخصیص وجود ندارد",
+      "close": "بستن",
+      "assign": "تخصیص",
+      "actions": "عملیات",
+      "unAssign": "لغو تخصیص",
+      "addPropety" :"افزودن اموال"
     },
     "auth": {
       "phoneNumber": "شماره تلفن",
@@ -145,14 +155,14 @@
       "login": "ورود",
       "formError": {
         "required": "این فیلد الزامی است",
-        "invalid": "مقدار وارد شده معتبر نیست"
+        "invalid": "مقدار نامعتبر"
       }
     },
     "alert": {
-      "success": "تغییرات شما ذخیره شد!",
-      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
-      "Warning": "لطفاً در انجام این اقدام احتیاط کنید.",
-      "noData": "داده‌ای موجود نیست"
+      "success": "تغییرات شما با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
+      "noData": "داده‌ای وجود ندارد"
     }
   }
 }
