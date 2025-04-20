@@ -9,17 +9,27 @@
       "salary-slip": "فیش حقوقی",
       "employees": "کارمندان",
       "properties": "اموال"
-
     },
     "reports": {
       "selectDate": "تاریخ را انتخاب کنید",
       "reports": "گزارش‌ها",
-      "list": "لیست"
+      "requests": "درخواست‌ها",
+      "list": "لیست",
+      "details": "جزئیات",
+      "properties": "اموال",
+      "attendance": "حضور و غیاب",
+      "startDate": "تاریخ شروع",
+      "endDate": "تاریخ پایان"
+    },
+    "attendance": {
+      "date": "تاریخ",
+      "duration": "مدت زمان",
+      "attendance": "حضور و غیاب"
     },
     "requests": {
       "filter": {
-        "pending": "در انتظار",
-        "approved": "تایید شده",
+        "pending": "منتظر",
+        "approved": "تأیید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
         "all": "همه"
@@ -28,15 +38,15 @@
       "status": "وضعیت",
       "type": "نوع",
       "description": "توضیحات",
-      "adminComment": "نظر ادمین",
+      "adminComment": "توضیحات مدیر",
       "userId": "شناسه کاربر",
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
-      "reviewedById": "بازبینی‌شده توسط",
-      "reviewedAt": "تاریخ بازبینی",
+      "reviewedById": "بازبینی شده توسط",
+      "reviewedAt": "بازبینی شده در",
       "createdAt": "ایجاد شده در",
       "updatedAt": "به‌روزرسانی شده در",
-      "actions": "عملیات",
+      "actions": "اقدامات",
       "details": "جزئیات",
       "firstname": "نام",
       "lastname": "نام خانوادگی",
@@ -46,7 +56,7 @@
     },
     "organizations": {
       "create": "ایجاد",
-      "update": "ویرایش",
+      "update": "به‌روزرسانی",
       "create-org": "ایجاد سازمان",
       "edit-org": "ویرایش سازمان",
       "close": "بستن",
@@ -57,10 +67,10 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه ایجادکننده",
+        "creatorId": "شناسه ایجاد کننده",
         "address": "آدرس",
         "description": "توضیحات",
-        "actions": "عملیات"
+        "actions": "اقدامات"
       }
     },
     "employee": {
@@ -70,11 +80,11 @@
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "nationalCode": "کد ملی",
-      "isDeleted": "حذف شده",
+      "isDeleted": "آیا حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "انصراف",
-      "update": "ویرایش",
+      "cancel": "لغو",
+      "update": "به‌روزرسانی",
       "nickname": "نام مستعار",
       "needToLocation": "نیاز به موقعیت",
       "teamId": "شناسه تیم",
@@ -82,7 +92,7 @@
       "reports": "گزارش‌ها",
       "create": {
         "team": "تیم",
-        "organizationId": "سازمان",
+        "organizationId": "شناسه سازمان",
         "shift": "شیفت",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
@@ -91,32 +101,58 @@
         "password": "رمز عبور",
         "role": "نقش",
         "settings": {
-          "teamId": "شناسه تیم",
-          "shiftId": "شناسه شیفت",
+          "teamId": "تیم",
+          "shiftId": "شیفت",
           "salary": "حقوق",
           "needToLocation": "نیاز به موقعیت"
         },
         "firstname": "نام",
         "nationalCode": "کد ملی",
         "personnelCode": "کد پرسنلی",
-        "isDelete": "حذف شده",
+        "isDelete": "آیا حذف شده",
         "active": "فعال"
       },
       "organizationId": "شناسه سازمان"
+    },
+    "properties": {
+      "organization": "سازمان",
+      "department": "دپارتمان",
+      "id": "شناسه",
+      "title": "عنوان",
+      "code": "کد",
+      "status": "وضعیت",
+      "createdAt": "ایجاد شده در",
+      "organizationId": "شناسه سازمان",
+      "departmentId": "شناسه دپارتمان",
+      "details": "جزئیات",
+      "edit": "ویرایش",
+      "show": "نمایش",
+      "success": "تغییرات شما ذخیره شد!",
+      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "update": "به‌روزرسانی",
+      "delete": "حذف",
+      "addnewPropery": "افزودن ملک جدید",
+      "userId": "شناسه کاربر",
+      "propertyId": "شناسه ملک",
+      "deliveredAt": "تحویل داده شده در",
+      "property": "ملک",
+      "imageUrl": "آدرس تصویر",
+      "assignProperty": "انتساب ملک"
     },
     "auth": {
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "login": "ورود",
       "formError": {
-        "required": "پر کردن این فیلد اجباری است",
+        "required": "این فیلد الزامی است",
         "invalid": "مقدار وارد شده معتبر نیست"
       }
     },
     "alert": {
-      "success": "تغییرات شما با موفقیت ذخیره شد!",
-      "error": "مشکلی رخ داد. لطفاً دوباره تلاش کنید.",
-      "Warning": "در انجام این عمل احتیاط نمایید."
+      "success": "تغییرات شما ذخیره شد!",
+      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "Warning": "لطفاً در انجام این اقدام احتیاط کنید.",
+      "noData": "داده‌ای موجود نیست"
     }
   }
 }

@@ -1,45 +1,57 @@
 {
   "global": {
-    "home": "الرئيسية",
-    "title": "مرحباً",
+    "home": "الصفحة الرئيسية",
+    "title": "مرحبًا",
     "main-menu": {
       "organizations": "المنظمات",
       "reports": "التقارير",
       "requests": "الطلبات",
       "salary-slip": "كشف الراتب",
-      "employees": "الموظفون"
+      "employees": "الموظفون",
+      "properties": "الممتلكات"
     },
     "reports": {
-      "selectDate": "اختر التاريخ",
+      "selectDate": "اختيار التاريخ",
       "reports": "التقارير",
-      "list": "القائمة"
+      "requests": "الطلبات",
+      "list": "القائمة",
+      "details": "التفاصيل",
+      "properties": "الممتلكات",
+      "attendance": "الحضور والغياب",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء"
+    },
+    "attendance": {
+      "date": "التاريخ",
+      "duration": "المدة",
+      "attendance": "الحضور والغياب"
     },
     "requests": {
       "filter": {
         "pending": "قيد الانتظار",
-        "approved": "موافَق عليه",
+        "approved": "موافق عليه",
         "rejected": "مرفوض",
         "Cancelled": "ملغى",
         "all": "الكل"
       },
-      "id": "المعرف",
+      "id": "الرقم التعريفي",
       "status": "الحالة",
       "type": "النوع",
       "description": "الوصف",
       "adminComment": "تعليق المسؤول",
-      "userId": "معرف المستخدم",
+      "userId": "رقم تعريف المستخدم",
       "startTime": "وقت البدء",
       "endTime": "وقت الانتهاء",
-      "reviewedById": "مُراجَع بواسطة المعرف",
-      "reviewedAt": "تاريخ المراجعة",
-      "createdAt": "تاريخ الإنشاء",
-      "updatedAt": "تاريخ التحديث",
+      "reviewedById": "تم المراجعة من قبل",
+      "reviewedAt": "تمت المراجعة في",
+      "createdAt": "تم الإنشاء في",
+      "updatedAt": "تم التحديث في",
       "actions": "الإجراءات",
       "details": "التفاصيل",
       "firstname": "الاسم الأول",
-      "lastname": "اسم العائلة",
-      "name": "اسم العرض",
-      "personnelCode": "الكود الوظيفي",
+      "lastname": "الاسم الأخير",
+      "name": "الاسم المعروض",
+      "personnelCode": "رمز الموظف",
       "phoneNumber": "رقم الهاتف"
     },
     "organizations": {
@@ -53,54 +65,79 @@
       "description": "الوصف",
       "edit": "تعديل",
       "columns": {
-        "id": "المعرف",
+        "id": "الرقم التعريفي",
         "name": "الاسم",
-        "creatorId": "معرف المنشئ",
+        "creatorId": "رقم تعريف المنشئ",
         "address": "العنوان",
         "description": "الوصف",
         "actions": "الإجراءات"
       }
     },
     "employee": {
-      "personnelCode": "الكود الوظيفي",
+      "personnelCode": "رمز الموظف",
       "fullName": "الاسم الكامل",
       "firstname": "الاسم الأول",
       "phoneNumber": "رقم الهاتف",
       "password": "كلمة المرور",
-      "nationalCode": "الرقم الوطني",
-      "isDeleted": "محذوف",
+      "nationalCode": "الكود الوطني",
+      "isDeleted": "هل تم الحذف",
       "details": "التفاصيل",
       "createUser": "إنشاء مستخدم",
       "cancel": "إلغاء",
       "update": "تحديث",
       "nickname": "الاسم المستعار",
-      "needToLocation": "يحتاج إلى الموقع",
+      "needToLocation": "يحتاج إلى موقع",
       "teamId": "معرف الفريق",
       "shift": "الوردية",
       "reports": "التقارير",
       "create": {
         "team": "الفريق",
-        "organizationId": "المنظمة",
+        "organizationId": "معرف المنظمة",
         "shift": "الوردية",
         "name": "الاسم",
         "profileImage": "صورة الملف الشخصي",
-        "lastname": "اسم العائلة",
+        "lastname": "الاسم الأخير",
         "phoneNumber": "رقم الهاتف",
         "password": "كلمة المرور",
         "role": "الدور",
         "settings": {
-          "teamId": "معرف الفريق",
-          "shiftId": "معرف الوردية",
+          "teamId": "الفريق",
+          "shiftId": "الوردية",
           "salary": "الراتب",
-          "needToLocation": "يحتاج إلى الموقع"
+          "needToLocation": "يحتاج إلى موقع"
         },
         "firstname": "الاسم الأول",
-        "nationalCode": "الرقم الوطني",
-        "personnelCode": "الكود الوظيفي",
-        "isDelete": "هل محذوف",
+        "nationalCode": "الكود الوطني",
+        "personnelCode": "رمز الموظف",
+        "isDelete": "هل تم الحذف",
         "active": "نشط"
       },
       "organizationId": "معرف المنظمة"
+    },
+    "properties": {
+      "organization": "المنظمة",
+      "department": "القسم",
+      "id": "الرقم التعريفي",
+      "title": "العنوان",
+      "code": "الكود",
+      "status": "الحالة",
+      "createdAt": "تم الإنشاء في",
+      "organizationId": "معرف المنظمة",
+      "departmentId": "معرف القسم",
+      "details": "التفاصيل",
+      "edit": "تعديل",
+      "show": "عرض",
+      "success": "تم حفظ التغييرات!",
+      "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "update": "تحديث",
+      "delete": "حذف",
+      "addnewPropery": "إضافة ممتلك جديد",
+      "userId": "رقم تعريف المستخدم",
+      "propertyId": "رقم تعريف الممتلكات",
+      "deliveredAt": "تم التسليم في",
+      "property": "الممتلكات",
+      "imageUrl": "رابط الصورة",
+      "assignProperty": "تعيين الممتلكات"
     },
     "auth": {
       "phoneNumber": "رقم الهاتف",
@@ -112,9 +149,10 @@
       }
     },
     "alert": {
-      "success": "تم حفظ التغييرات بنجاح!",
+      "success": "تم حفظ التغييرات!",
       "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-      "Warning": "يرجى توخي الحذر عند تنفيذ هذا الإجراء."
+      "Warning": "يرجى توخي الحذر عند اتخاذ هذا الإجراء.",
+      "noData": "لا توجد بيانات"
     }
   }
 }

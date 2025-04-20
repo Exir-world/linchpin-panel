@@ -35,14 +35,14 @@ export const CollapseItems = ({ icon, items, title }: Props) => {
           }
         >
           <div className="pl-12">
-            {items.map((item, index) => (
+            {/* {items.map((item, index) => (
               <span
                 key={index}
                 className="w-full flex  text-default-500 hover:text-default-900 transition-colors"
               >
                 {item}
               </span>
-            ))}
+            ))} */}sfdsfsdfsaf
           </div>
         </AccordionItem>
       </Accordion>

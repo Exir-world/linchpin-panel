@@ -71,7 +71,7 @@ const AddProperty = () => {
     }
   };
 
-  const statusDropdownItems = Object.keys(PropertyStatusEnum).map((el) => ({
+  const statusDropdownItems = Object.values(PropertyStatusEnum).map((el) => ({
     key: el,
     label: el,
   }));
@@ -95,7 +95,7 @@ const AddProperty = () => {
       imageUrl: "",
     });
     console.log(res);
-    if (res.status === 200) {
+    if (res.status === 201 || res.status === 200) {
       addToast({
         title: t("success"),
         color: "success",
@@ -106,7 +106,6 @@ const AddProperty = () => {
         color: "danger",
       });
     }
-
   };
 
   return (

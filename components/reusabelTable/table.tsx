@@ -7,6 +7,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 interface Column {
   name: string;
@@ -23,6 +24,10 @@ const ReusableTable: React.FC<ReusableTableProps> = ({
   columns,
   tableData,
 }) => {
+  const t = useTranslations();
+  if (tableData.length == 0) {
+    return <div className="text-center">{t("global.alert.noData")}</div>;
+  }
   return (
     <Table aria-label="Example static collection table">
       <TableHeader>

@@ -169,12 +169,12 @@ const EmployeesList = () => {
       render: (record: User) => {
         return (
           <div className="flex items-center gap-2">
-            <Button
+            {/* <Button
               className="bg-blue-500 text-white"
               onPress={() => router.push(`/employees/userId?id=${record.id}`)}
             >
               {t("global.employee.details")}
-            </Button>
+            </Button> */}
             <Button
               color="secondary"
               onPress={() => router.push(`/reports/userId?id=${record.id}`)}

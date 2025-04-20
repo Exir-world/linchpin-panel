@@ -1,17 +1,8 @@
 "use client";
 import { Button, Checkbox, Input } from "@nextui-org/react";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { DotsIcon } from "@/components/icons/accounts/dots-icon";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
-import { InfoIcon } from "@/components/icons/accounts/info-icon";
-import { TrashIcon } from "@/components/icons/accounts/trash-icon";
-import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
-import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
-import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
-import { TableWrapper } from "@/components/table/table";
 import { useTranslations } from "next-intl";
-import ReusableTable from "../reusabelTable/table";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
@@ -19,11 +10,12 @@ import { Get } from "@/lib/axios";
 import { User } from "@/helpers/types";
 import { useRouter } from "next/navigation";
 
-export const Reports = () => {
+export const UserRequests = () => {
   const [value, setValue] = useState<any>();
   const [userList, setUserList] = useState([]);
   const t = useTranslations();
   const router = useRouter();
+  
   const getUsersList = async () => {
     try {
       const res = await Get(`/users`);
@@ -34,7 +26,7 @@ export const Reports = () => {
   };
 
   useEffect(() => {
-    getUsersList();
+    // getUsersList();
   }, []);
 
   const tableColumns = [
@@ -97,41 +89,9 @@ export const Reports = () => {
   };
 
   return (
-    <div className="my-10 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
-      {/* <ul className="flex">
-        <li className="flex gap-2">
-          <HouseIcon />
-          <Link href={"/"}>
-            <span>{t("global.home")}</span>
-          </Link>
-          <span> / </span>{" "}
-        </li>
-
-        <li className="flex gap-2">
-          <UsersIcon />
-          <span>{t("global.reports.reports")}</span>
-          <span> / </span>{" "}
-        </li>
-        <li className="flex gap-2">
-          <span>{t("global.reports.list")}</span>
-        </li>
-      </ul> */}
-
+    <div className="w-full flex flex-col gap-4 ">
       <div className="flex justify-between flex-wrap gap-4 items-center">
-        <div className="flex items-center gap-3 flex-wrap md:flex-nowrap">
-          <Input
-            classNames={{
-              input: "w-full",
-              mainWrapper: "w-full",
-            }}
-            placeholder="Search users"
-          />
-          <SettingsIcon />
-          <TrashIcon />
-          <InfoIcon />
-          <DotsIcon />
-        </div>
-        <div className="flex items-center gap-3">
+        <div className="flex justify-between gap-3 w-full">
           <DatePicker
             value={value}
             onChange={(val) => handleRangeDate(val)}
@@ -148,16 +108,13 @@ export const Reports = () => {
             }}
           />
           <div className="flex flex-row gap-3.5 flex-wrap">
-            {/* <AddUser /> */}
             <Button color="primary" startContent={<ExportIcon />}>
               Export to Exell
             </Button>
           </div>
         </div>
       </div>
-      <div className="max-w-[95rem] mx-auto w-full">
-        {/* <TableWrapper /> */}
-      </div>
+
       {/* <ReusableTable
         columns={tableColumns}
         tableData={tableCols}
