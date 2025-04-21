@@ -1,5 +1,168 @@
 {
   "global": {
-    "title": "سلام"
+    "home": "الرئيسية",
+    "title": "مرحباً",
+    "main-menu": {
+      "organizations": "المنظمات",
+      "reports": "التقارير",
+      "requests": "الطلبات",
+      "salary-slip": "قسيمة الراتب",
+      "employees": "الموظفين",
+      "properties": "الممتلكات"
+    },
+    "reports": {
+      "selectDate": "اختر التاريخ",
+      "reports": "التقارير",
+      "requests": "الطلبات",
+      "list": "قائمة",
+      "details": "تفاصيل",
+      "properties": "الممتلكات",
+      "attendance": "الحضور",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء"
+    },
+    "attendance": {
+      "date": "التاريخ",
+      "duration": "المدة",
+      "attendance": "الحضور"
+    },
+    "requests": {
+      "filter": {
+        "pending": "قيد الانتظار",
+        "approved": "موافق عليه",
+        "rejected": "مرفوض",
+        "Cancelled": "ملغاة",
+        "all": "الكل"
+      },
+      "id": "المعرف",
+      "status": "الحالة",
+      "type": "النوع",
+      "description": "الوصف",
+      "adminComment": "تعليق المسؤول",
+      "userId": "معرف المستخدم",
+      "startTime": "وقت البدء",
+      "endTime": "وقت الانتهاء",
+      "reviewedById": "معرف المراجع",
+      "reviewedAt": "تمت المراجعة في",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "actions": "الإجراءات",
+      "details": "تفاصيل",
+      "firstname": "الاسم الأول",
+      "lastname": "اسم العائلة",
+      "name": "الاسم المعروض",
+      "personnelCode": "رمز الموظف",
+      "phoneNumber": "رقم الهاتف",
+      "selectDate": "اختر التاريخ",
+      "checkRequest": "تفقد الطلب",
+      "reject": "رفض",
+      "approve": "موافقة"
+    },
+    "organizations": {
+      "create": "إنشاء",
+      "update": "تحديث",
+      "create-org": "إنشاء منظمة",
+      "edit-org": "تعديل المنظمة",
+      "close": "إغلاق",
+      "name": "الاسم",
+      "address": "العنوان",
+      "description": "الوصف",
+      "edit": "تعديل",
+      "columns": {
+        "id": "المعرف",
+        "name": "الاسم",
+        "creatorId": "معرف المنشئ",
+        "address": "العنوان",
+        "description": "الوصف",
+        "actions": "الإجراءات"
+      }
+    },
+    "employee": {
+      "personnelCode": "رمز الموظف",
+      "fullName": "الاسم الكامل",
+      "firstname": "الاسم الأول",
+      "phoneNumber": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "nationalCode": "الرقم الوطني",
+      "isDeleted": "محذوف",
+      "details": "تفاصيل",
+      "createUser": "إنشاء مستخدم",
+      "cancel": "إلغاء",
+      "update": "تحديث",
+      "nickname": "اللقب",
+      "needToLocation": "الحاجة إلى الموقع",
+      "teamId": "معرف الفريق",
+      "shift": "الوردية",
+      "reports": "التقارير",
+      "create": {
+        "team": "الفريق",
+        "organizationId": "المنظمة",
+        "shift": "الوردية",
+        "name": "الاسم",
+        "profileImage": "صورة الملف الشخصي",
+        "lastname": "اسم العائلة",
+        "phoneNumber": "رقم الهاتف",
+        "password": "كلمة المرور",
+        "role": "الدور",
+        "settings": {
+          "teamId": "الفريق",
+          "shiftId": "الوردية",
+          "salary": "الراتب",
+          "needToLocation": "الحاجة إلى الموقع"
+        },
+        "firstname": "الاسم الأول",
+        "nationalCode": "الرقم الوطني",
+        "personnelCode": "رمز الموظف",
+        "isDelete": "محذوف",
+        "active": "نشط"
+      },
+      "organizationId": "معرف المنظمة"
+    },
+    "properties": {
+      "organization": "المنظمة",
+      "department": "القسم",
+      "id": "المعرف",
+      "title": "العنوان",
+      "code": "الكود",
+      "status": "الحالة",
+      "createdAt": "تاريخ الإنشاء",
+      "organizationId": "معرف المنظمة",
+      "departmentId": "معرف القسم",
+      "details": "تفاصيل",
+      "edit": "تعديل",
+      "show": "عرض",
+      "success": "تم حفظ التغييرات بنجاح!",
+      "error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
+      "update": "تحديث",
+      "delete": "حذف",
+      "addnewPropery": "إضافة أصل جديد",
+      "userId": "معرف المستخدم",
+      "propertyId": "معرف الأصل",
+      "deliveredAt": "تم التسليم في",
+      "property": "الأصل",
+      "imageUrl": "رابط الصورة",
+      "assignProperty": "تعيين الأصل",
+      "noPropertytoAssign": "لا توجد أصول للتعيين",
+      "close": "إغلاق",
+      "assign": "تعيين",
+      "actions": "الإجراءات",
+      "unAssign": "إلغاء التعيين",
+      "addPropety": "إضافة أصل"
+    },
+    "auth": {
+      "phoneNumber": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "login": "تسجيل الدخول",
+      "formError": {
+        "required": "هذا الحقل مطلوب",
+        "invalid": "قيمة غير صالحة"
+      }
+    },
+    "alert": {
+      "success": "تم حفظ التغييرات بنجاح!",
+      "error": "حدث خطأ ما. الرجاء المحاولة مرة أخرى.",
+      "Warning": "يرجى توخي الحذر عند القيام بهذا الإجراء.",
+      "noData": "لا توجد بيانات"
+    }
   }
 }

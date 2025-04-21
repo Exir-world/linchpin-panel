@@ -1,5 +1,170 @@
 {
   "global": {
-    "title": "Hello"
+    "home": "Home",
+    "title": "Hello",
+    "main-menu": {
+      "organizations": "Organizations",
+      "reports": "Reports",
+      "requests": "Requests",
+      "salary-slip": "Salary slip",
+      "employees": "Employees",
+      "properties": "Properties"
+    },
+    "reports": {
+      "selectDate": "Select date",
+      "reports": "Reports",
+      "requests": "Requests",
+      "list": "List",
+      "details": "Details",
+      "properties": "Properties",
+      "attendance": "Attendance",
+      "startDate": "Start date",
+      "endDate": "End date"
+    },
+    "attendance": {
+      "date": "Date",
+      "duration": "Duration",
+      "attendance": "Attendance"
+    },
+    "requests": {
+      "filter": {
+        "pending": "PENDING",
+        "approved": "APPROVED",
+        "rejected": "REJECTED",
+        "Cancelled": "CANCELLED",
+        "all": "All"
+      },
+      "id": " Id",
+      "status": "Status",
+      "type": "Type",
+      "description": "Description",
+      "adminComment": "Admin comment",
+      "userId": "User id",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "reviewedById": "Reviewed by id",
+      "reviewedAt": "Reviewed at",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "actions": "Actions",
+      "details": "Details",
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "name": "Display Name",
+      "personnelCode": "Personnel Code",
+      "phoneNumber": "Phone Number",
+      "selectDate": "Select date",
+      "checkRequest": "Check Request",
+      "reject": "Reject",
+      "approve": "Approve"
+    },
+    "organizations": {
+      "create": "Create",
+      "update": "Update",
+      "create-org": "Create organization",
+      "edit-org": "Edit organization",
+      "close": "Close",
+      "name": "Name",
+      "address": "Address",
+      "description": "Description",
+      "edit": "Edit",
+      "columns": {
+        "id": "Id",
+        "name": "Name",
+
+        "creatorId": "CreatorId",
+        "address": "Address",
+        "description": "Description",
+        "actions": "Actions"
+      }
+    },
+    "employee": {
+      "personnelCode": "Personnel Code",
+      "fullName": "Full name",
+      "firstname": "First Name",
+      "phoneNumber": "Phone Number",
+      "password": "Password",
+      "nationalCode": "National Code",
+      "isDeleted": "Is Deleted",
+      "details": "Details",
+      "createUser": "Create user",
+      "cancel": "Cancel",
+      "update": "Update",
+      "nickname": "Nickname",
+      "needToLocation": "Need to Location",
+      "teamId": "Team ID",
+      "shift": "Shift",
+      "reports": "Reports",
+      "create": {
+        "team": "Team",
+        "organizationId": "Organization",
+        "shift": "Shift",
+        "name": "Name",
+        "profileImage": "Profile Image",
+        "lastname": "Last Name",
+        "phoneNumber": "Phone Number",
+        "password": "Password",
+        "role": "Role",
+        "settings": {
+          "teamId": "Team ",
+          "shiftId": "Shift ",
+          "salary": "Salary",
+          "needToLocation": "Need to Location"
+        },
+        "firstname": "First Name",
+        "nationalCode": "National Code",
+        "personnelCode": "Personnel Code",
+        "isDelete": "Is Deleted",
+        "active": "Active"
+      },
+      "organizationId": "Organization Id"
+    },
+    "properties": {
+      "organization": "Organization",
+      "department": "Department",
+      "id": "Id",
+      "title": "Title",
+      "code": "Code",
+      "status": "Status",
+      "createdAt": "CreatedAt",
+      "organizationId": "OrganizationId",
+      "departmentId": "DepartmentId",
+      "details": "details",
+      "edit": "Edit",
+      "show": "Show",
+      "success": "Your changes have been saved!",
+      "error": " Something went wrong. Please try again.",
+      "update": "Update",
+      "delete": "Delete",
+      "addnewPropery": "Add new propery",
+      "userId": "User Id",
+      "propertyId": "Property Id",
+      "deliveredAt": "Delivered at",
+      "property": "Property",
+      "imageUrl": "Image url",
+      "assignProperty": "Assign property",
+      "noPropertytoAssign": "There are no Properties to Assign",
+      "close": "Close",
+      "assign": "Assign",
+      "actions": "Actions",
+      "unAssign": "Unassign",
+      "addPropety": "Add property"
+    },
+
+    "auth": {
+      "phoneNumber": "Phone number",
+      "password": "Password",
+      "login": "Login",
+      "formError": {
+        "required": "This field is required",
+        "invalid": "Invalid field value"
+      }
+    },
+    "alert": {
+      "success": "Your changes have been saved!",
+      "error": " Something went wrong. Please try again.",
+      "Warning": "Please be cautious with this action.",
+      "noData": "No data exists"
+    }
   }
 }

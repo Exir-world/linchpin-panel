@@ -1,5 +1,168 @@
 {
   "global": {
-    "title": "سلام"
+    "home": "خانه",
+    "title": "سلام",
+    "main-menu": {
+      "organizations": "سازمان‌ها",
+      "reports": "گزارش‌ها",
+      "requests": "درخواست‌ها",
+      "salary-slip": "فیش حقوقی",
+      "employees": "کارمندان",
+      "properties": "اموال"
+    },
+    "reports": {
+      "selectDate": "انتخاب تاریخ",
+      "reports": "گزارش‌ها",
+      "requests": "درخواست‌ها",
+      "list": "لیست",
+      "details": "جزئیات",
+      "properties": "اموال",
+      "attendance": "حضور و غیاب",
+      "startDate": "تاریخ شروع",
+      "endDate": "تاریخ پایان"
+    },
+    "attendance": {
+      "date": "تاریخ",
+      "duration": "مدت زمان",
+      "attendance": "حضور و غیاب"
+    },
+    "requests": {
+      "filter": {
+        "pending": "در حال انتظار",
+        "approved": "تایید شده",
+        "rejected": "رد شده",
+        "Cancelled": "لغو شده",
+        "all": "همه"
+      },
+      "id": "شناسه",
+      "status": "وضعیت",
+      "type": "نوع",
+      "description": "توضیحات",
+      "adminComment": "نظر مدیر",
+      "userId": "شناسه کاربر",
+      "startTime": "زمان شروع",
+      "endTime": "زمان پایان",
+      "reviewedById": "شناسه بررسی‌کننده",
+      "reviewedAt": "زمان بررسی",
+      "createdAt": "زمان ایجاد",
+      "updatedAt": "زمان به‌روزرسانی",
+      "actions": "عملیات",
+      "details": "جزئیات",
+      "firstname": "نام",
+      "lastname": "نام خانوادگی",
+      "name": "نام نمایشی",
+      "personnelCode": "کد پرسنلی",
+      "phoneNumber": "شماره تلفن",
+      "selectDate": "انتخاب تاریخ",
+      "checkRequest": "بررسی درخواست",
+      "reject": "رد",
+      "approve": "تایید"
+    },
+    "organizations": {
+      "create": "ایجاد",
+      "update": "به‌روزرسانی",
+      "create-org": "ایجاد سازمان",
+      "edit-org": "ویرایش سازمان",
+      "close": "بستن",
+      "name": "نام",
+      "address": "آدرس",
+      "description": "توضیحات",
+      "edit": "ویرایش",
+      "columns": {
+        "id": "شناسه",
+        "name": "نام",
+        "creatorId": "شناسه ایجادکننده",
+        "address": "آدرس",
+        "description": "توضیحات",
+        "actions": "عملیات"
+      }
+    },
+    "employee": {
+      "personnelCode": "کد پرسنلی",
+      "fullName": "نام کامل",
+      "firstname": "نام",
+      "phoneNumber": "شماره تلفن",
+      "password": "رمز عبور",
+      "nationalCode": "کد ملی",
+      "isDeleted": "حذف شده",
+      "details": "جزئیات",
+      "createUser": "ایجاد کاربر",
+      "cancel": "انصراف",
+      "update": "به‌روزرسانی",
+      "nickname": "نام مستعار",
+      "needToLocation": "نیاز به موقعیت",
+      "teamId": "شناسه تیم",
+      "shift": "شیفت",
+      "reports": "گزارش‌ها",
+      "create": {
+        "team": "تیم",
+        "organizationId": "سازمان",
+        "shift": "شیفت",
+        "name": "نام",
+        "profileImage": "تصویر پروفایل",
+        "lastname": "نام خانوادگی",
+        "phoneNumber": "شماره تلفن",
+        "password": "رمز عبور",
+        "role": "نقش",
+        "settings": {
+          "teamId": "تیم",
+          "shiftId": "شیفت",
+          "salary": "حقوق",
+          "needToLocation": "نیاز به موقعیت"
+        },
+        "firstname": "نام",
+        "nationalCode": "کد ملی",
+        "personnelCode": "کد پرسنلی",
+        "isDelete": "حذف شده",
+        "active": "فعال"
+      },
+      "organizationId": "شناسه سازمان"
+    },
+    "properties": {
+      "organization": "سازمان",
+      "department": "بخش",
+      "id": "شناسه",
+      "title": "عنوان",
+      "code": "کد",
+      "status": "وضعیت",
+      "createdAt": "زمان ایجاد",
+      "organizationId": "شناسه سازمان",
+      "departmentId": "شناسه بخش",
+      "details": "جزئیات",
+      "edit": "ویرایش",
+      "show": "نمایش",
+      "success": "تغییرات شما با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "update": "به‌روزرسانی",
+      "delete": "حذف",
+      "addnewPropery": "افزودن دارایی جدید",
+      "userId": "شناسه کاربر",
+      "propertyId": "شناسه اموال",
+      "deliveredAt": "تحویل در",
+      "property": "اموال",
+      "imageUrl": "آدرس تصویر",
+      "assignProperty": "تخصیص اموال",
+      "noPropertytoAssign": "هیچ ملکی برای تخصیص وجود ندارد",
+      "close": "بستن",
+      "assign": "تخصیص",
+      "actions": "عملیات",
+      "unAssign": "لغو تخصیص",
+      "addPropety" :"افزودن اموال"
+    },
+    "auth": {
+      "phoneNumber": "شماره تلفن",
+      "password": "رمز عبور",
+      "login": "ورود",
+      "formError": {
+        "required": "این فیلد الزامی است",
+        "invalid": "مقدار نامعتبر"
+      }
+    },
+    "alert": {
+      "success": "تغییرات شما با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
+      "noData": "داده‌ای وجود ندارد"
+    }
   }
 }

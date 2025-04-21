@@ -7,7 +7,7 @@ export const CardBalance3 = () => {
     <Card className="xl:max-w-sm bg-success rounded-xl shadow-md px-3 w-full">
       <CardBody className="py-5">
         <div className="flex gap-2.5">
-          <Community />
+          <Community  />
           <div className="flex flex-col">
             <span className="text-white">Card Insurance</span>
             <span className="text-white text-xs">1311 Cars</span>
