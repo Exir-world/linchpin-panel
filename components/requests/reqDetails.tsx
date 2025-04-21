@@ -166,11 +166,11 @@ const ReqDetails = () => {
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
-                  Check Request
+                  {t("checkRequest")}
                 </ModalHeader>
                 <ModalBody>
                   <Textarea
-                    label="Admin Comment"
+                    label={t("adminComment")}
                     {...register("adminComment", { required: true })}
                   ></Textarea>
                   <input type="hidden" {...register("action")} />
@@ -182,14 +182,14 @@ const ReqDetails = () => {
                     type="submit"
                     onClick={() => setValue("action", "REJECT")}
                   >
-                    Reject
+                    {t("reject")}
                   </Button>
                   <Button
                     color="primary"
                     type="submit"
                     onClick={() => setValue("action", "APPROVE")}
                   >
-                    Approve
+                    {t("approve")}
                   </Button>
                 </ModalFooter>
               </>

@@ -21,6 +21,7 @@ import { Controller, useForm } from "react-hook-form";
 import { AddUserFormData } from "@/helpers/types";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
+import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 type Role = {
   name: string;
@@ -368,18 +369,17 @@ const EmployeesList = () => {
                           control={control}
                           name="organizationId"
                           render={({ field }) => (
-                            <CustomDropdown
-                              dropdownItems={orgList}
+                            <Organizationdropdown
                               onChange={(val) => {
                                 const numericVal = Number(val);
                                 setTeamId(numericVal);
                                 setOrgId(numericVal);
                                 field.onChange(numericVal);
                               }}
-                              selectedValue={field.value}
                             />
                           )}
                         />
+
                         {errors.organizationId && (
                           <span className="text-red-500 text-sm">
                             {errors?.organizationId?.message as any}
@@ -420,6 +420,7 @@ const EmployeesList = () => {
                           name="teamId"
                           render={({ field }) => (
                             <CustomDropdown
+                              disabled={orgList.length === 0}
                               dropdownItems={teamList}
                               onChange={field.onChange}
                               selectedValue={field.value}

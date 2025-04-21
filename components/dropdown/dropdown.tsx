@@ -17,12 +17,14 @@ interface CustomDropdownProps {
   dropdownItems: DropdownItemType[];
   selectedValue?: string;
   onChange?: (value: string) => void;
+  disabled?: boolean;
 }
 
 export default function CustomDropdown({
   dropdownItems,
   selectedValue,
   onChange,
+  disabled = false,
 }: CustomDropdownProps) {
   // استفاده از state محلی برای ذخیره مقدار انتخاب شده
   const [localValue, setLocalValue] = React.useState<string>(
@@ -39,8 +41,8 @@ export default function CustomDropdown({
   const selectedKeys = React.useMemo(() => new Set([localValue]), [localValue]);
 
   return (
-    <Dropdown size="lg" className="w-full">
-      <DropdownTrigger>
+    <Dropdown size="lg" className="w-full" isDisabled={disabled}>
+      <DropdownTrigger disabled={disabled}>
         <Button
           className="capitalize w-[80%] py-2"
           variant="bordered"
@@ -57,6 +59,7 @@ export default function CustomDropdown({
         selectionMode="single"
         variant="flat"
         onSelectionChange={(keys) => {
+          if (disabled) return;
           const newKey = Array.from(keys)[0];
           // به‌روزرسانی state محلی به صورت همزمان
           setLocalValue(newKey as string);

@@ -57,6 +57,7 @@
       "checkRequest": "Check Request",
       "reject": "Reject",
       "approve": "Approve"
+      
     },
     "organizations": {
       "create": "Create",
