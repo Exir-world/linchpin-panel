@@ -19,7 +19,6 @@ import {
 } from "@nextui-org/react";
 import Icon from "../icon";
 import { Controller, useForm } from "react-hook-form";
-import { AddUserFormData } from "@/helpers/types";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";

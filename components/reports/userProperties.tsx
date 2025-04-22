@@ -1,45 +1,50 @@
 "use client";
-import { Del, Get, Post } from "@/lib/axios";
+import { Get, Post } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import formatDate from "@/helpers/dateConverter";
+
+import Icon from "../icon";
+import { addToast } from "@heroui/toast";
 import {
   Button,
   Checkbox,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
   useDisclosure,
 } from "@nextui-org/react";
-import Icon from "../icon";
-import { addToast } from "@heroui/toast";
 
-export interface Property {
+interface Category {
   id: number;
   title: string;
+}
+export interface Property {
+  id: number;
   code: string;
+  brand: string;
+  model: string;
+  description: string;
   status: string;
-  createdAt: string;
+  createdAt: string; // ISO timestamp
   organizationId: number;
-  departmentId: number;
+  departmentId: number | null;
   imageUrl: string | null;
-  userProperties: any[];
+  category: Category;
 }
 export interface PropertyItem {
   id: number;
   userId: number;
   propertyId: number;
-  deliveredAt: string;
+  deliveredAt: string; // ISO timestamp
   property: Property;
+  hasAlreadyReported: boolean;
 }
 
 const UserProperties = () => {
@@ -52,16 +57,27 @@ const UserProperties = () => {
   const [propertyList, setPropertyList] = useState<Property[]>([]);
   const [selectedProperties, setSelectedProperties] = useState<any[]>([]);
   const calType = locale == "en" ? "gregorian" : "jalali";
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUserProperties = async () => {
     const id = params.get("id");
-    if (!id) return;
-    const res = await Get(`property-user/user-properties/${id}`, {
-      headers: {
-        "Accept-Language": locale,
-      },
-    });
-    setUserProperties(res.data);
+    try {
+      if (!id) return;
+      setIsLoading(true);
+
+      const res = await Get(`property-user/user-properties/${id}`, {
+        headers: {
+          "Accept-Language": locale,
+        },
+      });
+      if (res.status === 200 || res.status === 201) {
+        setUserProperties(res.data || []);
+      }
+    } catch (error) {
+      throw new Error("failed to fetch");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const getPropertyList = async () => {
@@ -72,7 +88,7 @@ const UserProperties = () => {
     });
 
     if (res.status === 200 || res.status === 201) {
-      setPropertyList(res.data);
+      setPropertyList(res.data || []);
     }
   };
 
@@ -100,18 +116,17 @@ const UserProperties = () => {
   const tableCols = [
     {
       name: t("imageUrl"),
-      uid: "",
+      uid: "imageUrl",
       render: (record: PropertyItem) => {
         const url = record.property.imageUrl as string;
         return (
           <Image
             className="border border-gray-200 rounded-xl"
-            src={url}
+            src={url || ""}
             alt="property"
             width={80}
             height={80}
           ></Image>
-          //   <span>hey</span>
         );
       },
     },
@@ -119,7 +134,7 @@ const UserProperties = () => {
     // { name: t("userId"), uid: "userId" },
     {
       name: t("code"),
-      uid: "",
+      uid: "code",
       render: (record: PropertyItem) => {
         return <span>{record.property.code}</span>;
       },
@@ -127,16 +142,16 @@ const UserProperties = () => {
 
     {
       name: t("status"),
-      uid: "",
+      uid: "status",
       render: (record: PropertyItem) => {
         return <span>{record.property.status}</span>;
       },
     },
     {
       name: t("title"),
-      uid: "",
+      uid: "brand",
       render: (record: PropertyItem) => {
-        return <span>{record.property.title}</span>;
+        return <span>{record.property.brand}</span>;
       },
     },
     {
@@ -168,14 +183,13 @@ const UserProperties = () => {
     setSelectedProperties((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
-    console.log(selectedProperties);
   };
 
   const assignPropertyToUser = async () => {
     const userId = parseInt(params.get("id") as string);
 
     const apiParams = {
-      userId: userId,
+      userId,
       propertyIds: selectedProperties,
     };
 
@@ -200,7 +214,6 @@ const UserProperties = () => {
         <Modal
           isOpen={isOpen}
           onOpenChange={onOpenChange}
-          key={"hey"}
           className="min-h-[40vh] "
         >
           <ModalContent>
@@ -215,16 +228,20 @@ const UserProperties = () => {
                       propertyList.map((item: Property) => {
                         return (
                           <div
-                            className={`flex items-center w-full rounded-xl border border-gray-200 p-2 gap-2 hover:bg-gray-100 transition-all duration-200 ${
+                            className={`
+                            flex items-center w-full rounded-xl border border-gray-200
+                            p-2 gap-2 hover:bg-gray-100 transition-all duration-200
+                            ${
                               selectedProperties.includes(item.id)
                                 ? "bg-gray-100"
                                 : ""
-                            }`}
+                            }
+                          `}
                             key={item.id}
                             onClick={() => toggle(item.id)}
                           >
                             <div className="flex gap-4 items-center">
-                              <div className="">
+                              <div>
                                 <Checkbox
                                   color="secondary"
                                   isSelected={selectedProperties.includes(
@@ -241,10 +258,10 @@ const UserProperties = () => {
                               ></Image>
                             </div>
                             <div className="flex items-start grow  justify-evenly ">
-                              <div className="text-start  items-start">
-                                {/* <p className="text-start">{t("title")}</p> */}
-                                <p className="text-start">{item.title}</p>
-                                <p className="text-start">{item.code}</p>
+                              <div className="text-start  items-start flex">
+                                <p className="text-start">
+                                  {`${item.category.title} ${item.brand} ${item.model}`}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -277,6 +294,9 @@ const UserProperties = () => {
         </Modal>
       </div>
       <div>
+        <div className="w-full flex justify-center">
+          {isLoading && <Spinner label={t("loading")} />}
+        </div>
         <ReusableTable
           columns={tableCols as any}
           tableData={userProperties}

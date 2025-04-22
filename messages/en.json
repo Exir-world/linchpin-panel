@@ -56,7 +56,8 @@
       "selectDate": "Select date",
       "checkRequest": "Check Request",
       "reject": "Reject",
-      "approve": "Approve"
+      "approve": "Approve",
+      "loading": "Loading"
     },
     "organizations": {
       "create": "Create",
@@ -154,7 +155,8 @@
       "addPropety": "Add property",
       "brand": "Brand",
       "model": "Model",
-      "adminComment":"Admin comment"
+      "adminComment": "Admin comment",
+      "loading": "Loading"
     },
     "loading": "Loading",
     "categoryId": "Category id",

@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
@@ -64,12 +65,14 @@ export const UserRequests = () => {
   const [requestId, setRequestId] = useState<number | null>(null);
   const { handleSubmit, register, setValue } = useForm();
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = useState(false);
 
   const calendarType = locale === "en" ? "gregorian" : "jalali";
 
   const getUsersRequests = async () => {
     if (!userId) return;
     try {
+      setIsLoading(true);
       const res = await Get(`/requests?userId=${userId}`);
       console.log(res);
       if (res.status === 200) {
@@ -77,6 +80,8 @@ export const UserRequests = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -168,18 +173,20 @@ export const UserRequests = () => {
           record.status === "CANCELLED"
             ? "bg-[#6C757D]"
             : record.status === "PENDING"
-            ? "bg-[#FFC107]"
+            ? "bg-[#FFC107] "
             : record.status === "APPROVED"
             ? "bg-[#28A745]"
             : record.status === "REJECTED"
             ? "bg-[#DC3545]"
             : "bg-black";
         return (
-          <span
-            className={`font-medium text-white rounded-full py-1 px-2 text-sm flex items-center ${colorClass}`}
-          >
-            {record.status}
-          </span>
+          <div>
+            <p
+              className={`font-medium text-white rounded-full px-2 py-1 w-fit text-xs flex items-center text-center ${colorClass}`}
+            >
+              {record.status}
+            </p>
+          </div>
         );
       },
     },
@@ -313,7 +320,9 @@ export const UserRequests = () => {
           </ModalContent>
         </form>
       </Modal>
-
+      <div className="w-full flex justify-center">
+        {isLoading && <Spinner label={t("loading")} />}
+      </div>
       <ReusableTable
         columns={tableColumns}
         tableData={userRequests}

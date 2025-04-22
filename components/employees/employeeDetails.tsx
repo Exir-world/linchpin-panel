@@ -1,49 +1,23 @@
 "use client";
-import { User } from "@/helpers/types";
 import { Get, Patch } from "@/lib/axios";
 import { Button, Input, Switch } from "@nextui-org/react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
-import { useTranslations } from "next-intl";
-import { Key } from "lucide-react";
-import path from "path";
+import { useLocale, useTranslations } from "next-intl";
 import { addToast } from "@heroui/toast";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
-// const user: User = {
-//   organizationId: 0,
-//   firstname: "",
-//   name: "",
-//   profileImage: null,
-//   lastname: "",
-//   phoneNumber: "",
-//   password: "",
-//   role: {
-//     name: "",
-//     permissions: [],
-//     id: 0,
-//   },
-//   nationalCode: null,
-//   personnelCode: null,
-//   isDeleted: false,
-//   id: 0,
-// };
-
 const EmployeeDetails = () => {
   const params = useSearchParams();
-  const [userData, setUserData] = useState({} as User);
   const [isEditing, setIsEditing] = useState(false);
-  // const [formValues, setFormValues] = useState(user);
   const [roleList, setRoleList] = useState([]);
-  // const [orgList, setOrgList] = useState([]);
   const [orgId, setOrgId] = useState(null);
   const [shiftList, setShiftList] = useState([]);
   const [teamList, setTeamList] = useState([]);
-  const [currentLocale, setCurrentLocale] = useState<string>();
-  const pathname = usePathname();
   const t = useTranslations();
+  const locale = useLocale();
 
   const {
     control,
@@ -85,8 +59,10 @@ const EmployeeDetails = () => {
         setValue("organizationId", res.data.organizationId || "");
         setOrgId(res.data.organizationId || null);
         setValue("shiftId", res.data.settings?.shiftId || 0);
-        setValue("teamId", res.data.settings?.teamId || '');
+        setValue("teamId", res.data.settings?.teamId || "");
         setValue("salary", res.data.settings?.salary || 0);
+      } else {
+        return;
       }
     } catch (error) {
       console.log(error);
@@ -96,7 +72,7 @@ const EmployeeDetails = () => {
     try {
       const res = await Get(`/roles`, {
         headers: {
-          "Accept-Language": currentLocale,
+          "Accept-Language": locale,
         },
       });
       if (res.status === 200) {
@@ -131,8 +107,8 @@ const EmployeeDetails = () => {
 
   const getTeamLists = async () => {
     try {
+      if (!orgId) return;
       const res = await Get(`organization/${orgId}/teams`);
-      console.log(res);
       if (res.status === 200)
         setTeamList(
           res.data.map((el: any) => ({
@@ -145,9 +121,6 @@ const EmployeeDetails = () => {
     }
   };
 
-  const toggleEdit = () => {
-    setIsEditing(!isEditing);
-  };
   const onSubmit = async (data: any) => {
     const settings = {
       teamId: Number(data.teamId),
@@ -157,9 +130,10 @@ const EmployeeDetails = () => {
     };
     const { teamId, shiftId, salary, needToLocation, role, ...restOfData } =
       data;
+    const id = params.get("id");
 
     try {
-      const id = params.get("id");
+      if (!id) return;
       const res = await Patch(
         `/users/${id}`,
         {
@@ -171,7 +145,7 @@ const EmployeeDetails = () => {
         },
         {
           headers: {
-            "Accept-Language": "en",
+            "Accept-Language": locale,
           },
         }
       );
@@ -188,8 +162,6 @@ const EmployeeDetails = () => {
   };
 
   useEffect(() => {
-    const locale = pathname.split("/")[1] || "en";
-    setCurrentLocale(locale);
     getUserById();
     getRoleList();
     // getOranizationList();
@@ -197,6 +169,7 @@ const EmployeeDetails = () => {
 
   const getShifts = async () => {
     try {
+      if (!orgId) return;
       const res = await Get(`shifts/organization/${orgId}`);
       if (res.status === 200) {
         const allShifts = res.data.map((el: any) => ({

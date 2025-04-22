@@ -18,7 +18,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
-import CategoryDropdown from "../category-dropdown/category-dropdown";
 
 enum PropertyStatusEnum {
   GOOD = "good",

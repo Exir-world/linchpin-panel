@@ -2,15 +2,13 @@
 import { RequestItem } from "@/helpers/types";
 import { Get } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
-import { getLocale } from "next-intl/server";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
 import CustomDropdown from "../dropdown/dropdown";
 import clsx from "clsx";
 import { Button } from "@nextui-org/react";
 import Icon from "../icon";
-import { format } from "date-fns-jalali";
 import formatDate from "@/helpers/dateConverter";
 
 type ReqTypes = {
