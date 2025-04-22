@@ -162,9 +162,18 @@ const AddProperty = () => {
                     className="flex flex-col items-center gap-2 w-full  p-2"
                   >
                     <div className="flex items-center gap-2 w-full justify-between ">
-                      <Input label={t("code")} {...register("code")}></Input>
-                      <Input label={t("brand")} {...register("brand")}></Input>
-                      <Input label={t("model")} {...register("model")}></Input>
+                      <Input
+                        label={t("code")}
+                        {...register("code", { required: true })}
+                      ></Input>
+                      <Input
+                        label={t("brand")}
+                        {...register("brand", { required: true })}
+                      ></Input>
+                      <Input
+                        label={t("model")}
+                        {...register("model", { required: true })}
+                      ></Input>
                     </div>
                     <div className="grid grid-cols-4 gap-2 w-full p-3 justify-between">
                       <div className="flex flex-col gap-1">

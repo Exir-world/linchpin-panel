@@ -1,139 +1,96 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
-import { ChevronDownIcon } from "../icons/sidebar/chevron-down-icon";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
+import { ChevronDownIcon } from "../icons/sidebar/chevron-down-icon"; // Adjust path as needed
 import clsx from "clsx";
+import { useSidebarContext } from "../layout/layout-context"; // Adjust path as needed
+
+interface LinkItem {
+  label: string;
+  href: string;
+}
 
 interface Props {
   icon: React.ReactNode;
   title: string;
-  items: string[];
+  items: LinkItem[];
+  className?: string;
+  linkClassName?: string;
 }
 
-export const CollapseItems = ({ icon, items, title }: Props) => {
-  const [open, setOpen] = useState(false);
+const CollapseItems: React.FC<Props> = ({
+  icon,
+  title,
+  items,
+  className,
+  linkClassName,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const { collapsed } = useSidebarContext(); // Integrate with sidebar context
+
+  const toggleCollapse = () => {
+    if (!collapsed) {
+      // Only toggle if sidebar is not collapsed
+      setIsOpen((prev) => !prev);
+    }
+  };
 
   return (
-    <div className="flex gap-4 h-full items-center cursor-pointer">
-      <Accordion className="px-0">
-        <AccordionItem
-          indicator={<ChevronDownIcon />}
-          classNames={{
-            indicator: "data-[open=true]:-rotate-180",
-            trigger:
-              "py-0 min-h-[44px] hover:bg-default-100 rounded-xl active:scale-[0.98] transition-transform px-3.5",
-
-            title:
-              "px-0 flex text-base gap-2 h-full items-center cursor-pointer",
-          }}
-          aria-label="Accordion 1"
-          title={
-            <div className="flex flex-row gap-2">
-              <span>{icon}</span>
-              <span>{title}</span>
-            </div>
-          }
-        >
-          <div className="pl-12">
-            {/* {items.map((item, index) => (
-              <span
-                key={index}
-                className="w-full flex  text-default-500 hover:text-default-900 transition-colors"
-              >
-                {item}
-              </span>
-            ))} */}sfdsfsdfsaf
-          </div>
-        </AccordionItem>
-      </Accordion>
-      {/* <Accordion
-        title={
-          <div
-            className="flex items-center justify-between w-full py-5 px-7 rounded-8 transition-all duration-150 ease-in-out cursor-pointer hover:bg-accents2 active:scale-98"
-            // css={{
-            //   gap: "$6",
-            //   width: "100%",
-            //   py: "$5",
-            //   px: "$7",
-            //   borderRadius: "8px",
-            //   transition: "all 0.15s ease",
-            //   "&:active": {
-            //     transform: "scale(0.98)",
-            //   },
-            //   "&:hover": {
-            //     bg: "$accents2",
-            //   },
-            // }}
-            // justify={"between"}
-            onClick={handleToggle}
-          >
-            <div className="flex gap-4">
-              {icon}
-              <span
-                className="text-default-900 font-medium text-base"
-                //  span
-                //  weight={"normal"}
-                //  size={"$base"}
-                //  css={{
-                //    color: "$accents9",
-                //  }}
-              >
-                {title}
-              </span>
-            </div>
-
-            <ChevronUpIcon
-              className={clsx(
-                open ? "rotate-180" : "rotate-0",
-                "transition-all duration-300 ease-in-out transform"
-              )}
-              //   css={{
-              //     transition: "transform 0.3s ease",
-              //     transform: open ? "rotate(-180deg)" : "rotate(0deg)",
-              //   }}
-            />
-          </div>
-        }
-        //   css={{
-        //     width: "100%",
-        //     "& .nextui-collapse-view": {
-        //       p: "0",
-        //     },
-        //     "& .nextui-collapse-content": {
-        //       marginTop: "$1",
-        //       padding: "0px",
-        //     },
-        //   }}
-        divider={false}
-        showArrow={false}
+    <div className={clsx("w-full", className)}>
+      {/* Toggle Button */}
+      <button
+        onClick={toggleCollapse}
+        className={clsx(
+          "flex items-center w-full px-4 py-2 text-left transition-colors",
+          "hover:bg-gray-100 dark:hover:bg-gray-800",
+          isOpen && "bg-gray-50 dark:bg-gray-900"
+        )}
+        role="button"
+        aria-expanded={isOpen}
+        aria-controls={`collapse-${title}`}
+        disabled={collapsed} // Disable toggle when sidebar is collapsed
       >
-        {items.map((item, index) => (
-          <div
-            className="flex flex-col pl-8"
-            key={index}
-            // direction={"column"}
-            // css={{
-            //   paddingLeft: "$16",
-            // }}
-          >
-            <span
-              className="text-default-400 font-normal text-md"
-              //   span
-              //   weight={"normal"}
-              //   size={"$md"}
-              //   css={{
-              //     color: "$accents8",
-              //     cursor: "pointer",
-              //     "&:hover": {
-              //       color: "$accents9",
-              //     },
-              //   }}
-            >
-              {item}
-            </span>
-          </div>
-        ))}
-      </Accordion> */}
+        <span className="mr-2">{icon}</span>
+        <span className="flex-1 text-sm font-medium">{title}</span>
+        <ChevronDownIcon
+          className={clsx(
+            "w-4 h-4 transition-transform duration-200",
+            isOpen && "rotate-180"
+          )}
+        />
+      </button>
+
+      {/* Collapsible Content */}
+      <div
+        id={`collapse-${title}`}
+        className={clsx(
+          "overflow-hidden transition-all duration-200 ease-in-out",
+          isOpen ? "max-h-96" : "max-h-0"
+        )}
+      >
+        <div className="flex flex-col gap-1 py-2">
+          {items.map((item) => {
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={clsx(
+                  "block px-6 py-2 text-sm transition-colors",
+                  "hover:bg-gray-100 dark:hover:bg-gray-800",
+
+                  linkClassName
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
+
+export default CollapseItems;

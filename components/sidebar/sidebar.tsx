@@ -12,7 +12,7 @@ import { ReportsIcon } from "../icons/sidebar/reports-icon";
 import { DevIcon } from "../icons/sidebar/dev-icon";
 import { ViewIcon } from "../icons/sidebar/view-icon";
 import { SettingsIcon } from "../icons/sidebar/settings-icon";
-import { CollapseItems } from "./collapse-items";
+// import { CollapseItems } from "./collapse-items";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarMenu } from "./sidebar-menu";
 import { FilterIcon } from "../icons/sidebar/filter-icon";
@@ -21,12 +21,19 @@ import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Icon from "../icon";
+import CollapseItems from "./collapse-items";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname().split("/")[2];
   const { collapsed, setCollapsed } = useSidebarContext();
   const t = useTranslations();
   const locale = useLocale();
+
+  const propertiesSubmeu = [
+    { href: "/reports", label: "reports" },
+    { href: "/reports", label: "reports" },
+  ];
+
   return (
     <aside className="h-screen z-[20] sticky top-0">
       {collapsed ? (
@@ -74,22 +81,39 @@ export const SidebarWrapper = () => {
                 href="/salarySlip"
                 icon={<CustomersIcon />}
               />
-              <SidebarItem
+              {/* <SidebarItem
                 isActive={pathname === "properties"}
                 title={t("global.main-menu.properties")}
                 href="/properties"
                 icon={<Icon name="file-sliders" classname="mx-1" />}
-              />
+              /> */}
               <CollapseItems
                 icon={<BalanceIcon />}
-                items={["Banks Accounts", "Credit Cards", "Loans"]}
-                title="Balances"
+                items={[
+                  {
+                    label: t("global.main-menu.properties"),
+                    href: "/properties",
+                  },
+                  {
+                    label: t("global.main-menu.categories"),
+                    href: "/property-categories",
+                  },
+                  {
+                    label: t("global.main-menu.management"),
+                    href: "/property-management",
+                  },
+                  {
+                    label: t("global.main-menu.reports"),
+                    href: "/property-reports",
+                  },
+                ]}
+                title={t("global.main-menu.properties")}
               />
-              <SidebarItem
+              {/* <SidebarItem
                 isActive={pathname === "products"}
                 title="Products"
                 icon={<ProductsIcon />}
-              />
+              /> */}
             </SidebarMenu>
 
             <SidebarMenu title="General">

@@ -8,7 +8,10 @@
       "requests": "Requests",
       "salary-slip": "Salary slip",
       "employees": "Employees",
-      "properties": "Properties"
+      "properties": "Properties",
+      "features": "Features",
+      "categories": "Categories",
+      "management": "Management"
     },
     "reports": {
       "selectDate": "Select date",
