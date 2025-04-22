@@ -116,7 +116,10 @@
         "isDelete": "حذف شده",
         "active": "فعال"
       },
-      "organizationId": "شناسه سازمان"
+      "organizationId": "شناسه سازمان",
+      "editUser": "ویرایش کاربر",
+      "edit": "ویرایش",
+      "save": "ذخیره"
     },
     "properties": {
       "organization": "سازمان",
@@ -147,8 +150,10 @@
       "assign": "تخصیص",
       "actions": "عملیات",
       "unAssign": "لغو تخصیص",
-      "addPropety" :"افزودن اموال"
+      "addPropety": "افزودن اموال"
     },
+    "loading": "در حال بارگذاری",
+
     "auth": {
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",

@@ -176,7 +176,7 @@ export const UserRequests = () => {
             : "bg-black";
         return (
           <span
-            className={`font-medium text-white rounded-full py-1 px-2 text-sm ${colorClass}`}
+            className={`font-medium text-white rounded-full py-1 px-2 text-sm flex items-center ${colorClass}`}
           >
             {record.status}
           </span>

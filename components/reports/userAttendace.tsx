@@ -163,8 +163,8 @@ const UserAttendace = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
-        <div className="flex flex-col">
+      <div className="flex items-center gap-3 pb-3">
+        <div className="flex flex-col gap-1">
           <span>{t("global.reports.startDate")}</span>
           <DatePicker
             value={startDate}
@@ -182,7 +182,7 @@ const UserAttendace = () => {
             }}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-1">
           <span>{t("global.reports.endDate")}</span>
           <DatePicker
             value={endDate}

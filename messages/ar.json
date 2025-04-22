@@ -116,7 +116,10 @@
         "isDelete": "محذوف",
         "active": "نشط"
       },
-      "organizationId": "معرف المنظمة"
+      "organizationId": "معرف المنظمة",
+      "editUser": "تعديل المستخدم",
+      "edit": "تعديل",
+      "save": "حفظ"
     },
     "properties": {
       "organization": "المنظمة",

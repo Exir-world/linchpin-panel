@@ -41,13 +41,9 @@ export default function CustomDropdown({
   const selectedKeys = React.useMemo(() => new Set([localValue]), [localValue]);
 
   return (
-    <Dropdown size="lg" className="w-full" isDisabled={disabled}>
+    <Dropdown className="w-full" isDisabled={disabled}>
       <DropdownTrigger disabled={disabled}>
-        <Button
-          className="capitalize w-[80%] py-2"
-          variant="bordered"
-          size="lg"
-        >
+        <Button className="capitalize w-[80%] py-2" variant="bordered">
           {dropdownItems.find((item) => item.key === localValue)?.label ||
             localValue}
         </Button>

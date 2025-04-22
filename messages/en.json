@@ -57,7 +57,6 @@
       "checkRequest": "Check Request",
       "reject": "Reject",
       "approve": "Approve"
-      
     },
     "organizations": {
       "create": "Create",
@@ -118,7 +117,10 @@
         "isDelete": "Is Deleted",
         "active": "Active"
       },
-      "organizationId": "Organization Id"
+      "organizationId": "Organization Id",
+      "editUser": "Edit user",
+      "edit": "Edit",
+      "save": "Save"
     },
     "properties": {
       "organization": "Organization",
@@ -149,9 +151,13 @@
       "assign": "Assign",
       "actions": "Actions",
       "unAssign": "Unassign",
-      "addPropety": "Add property"
+      "addPropety": "Add property",
+      "brand": "Brand",
+      "model": "Model",
+      "adminComment":"Admin comment"
     },
-
+    "loading": "Loading",
+    "categoryId": "Category id",
     "auth": {
       "phoneNumber": "Phone number",
       "password": "Password",

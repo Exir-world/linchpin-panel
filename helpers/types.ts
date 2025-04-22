@@ -115,4 +115,24 @@ export interface PropertyDetail {
   departmentId: number | null;
 }
 
+// The nested category object on each feature
+export interface CategoryItem {
+  id: number;
+  title: string;
+}
 
+// Each feature, which includes its own category
+export interface Feature {
+  id: number;
+  title: string;
+  category: CategoryItem;
+}
+
+// Top‑level category object, which holds an array of features
+export interface CategoryWithFeatures {
+  id: number;
+  title: string;
+  features: Feature[];
+}
+
+export type PropertiesCategory = CategoryWithFeatures[];

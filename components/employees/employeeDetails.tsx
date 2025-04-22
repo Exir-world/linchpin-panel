@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
 import path from "path";
 import { addToast } from "@heroui/toast";
+import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 // const user: User = {
 //   organizationId: 0,
@@ -36,7 +37,7 @@ const EmployeeDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   // const [formValues, setFormValues] = useState(user);
   const [roleList, setRoleList] = useState([]);
-  const [orgList, setOrgList] = useState([]);
+  // const [orgList, setOrgList] = useState([]);
   const [orgId, setOrgId] = useState(null);
   const [shiftList, setShiftList] = useState([]);
   const [teamList, setTeamList] = useState([]);
@@ -62,7 +63,7 @@ const EmployeeDetails = () => {
       organizationId: "",
       shiftId: 0,
       teamId: 0,
-      salary: '',
+      salary: "",
       needToLocation: undefined,
     },
   });
@@ -84,7 +85,7 @@ const EmployeeDetails = () => {
         setValue("organizationId", res.data.organizationId || "");
         setOrgId(res.data.organizationId || null);
         setValue("shiftId", res.data.settings?.shiftId || 0);
-        setValue("teamId", res.data.settings?.teamId || 0);
+        setValue("teamId", res.data.settings?.teamId || '');
         setValue("salary", res.data.settings?.salary || 0);
       }
     } catch (error) {
@@ -108,25 +109,25 @@ const EmployeeDetails = () => {
     }
   };
 
-  const getOranizationList = async () => {
-    try {
-      const res = await Get("/organization/admin/organizations", {
-        headers: {
-          "Accept-Language": currentLocale,
-        },
-      });
-      if (res.status === 200) {
-        setOrgList(
-          res.data.map((el: any) => ({
-            key: +el.id,
-            label: el.name,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getOranizationList = async () => {
+  //   try {
+  //     const res = await Get("/organization/admin/organizations", {
+  //       headers: {
+  //         "Accept-Language": currentLocale,
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       setOrgList(
+  //         res.data.map((el: any) => ({
+  //           key: +el.id,
+  //           label: el.name,
+  //         }))
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const getTeamLists = async () => {
     try {
@@ -191,7 +192,7 @@ const EmployeeDetails = () => {
     setCurrentLocale(locale);
     getUserById();
     getRoleList();
-    getOranizationList();
+    // getOranizationList();
   }, []);
 
   const getShifts = async () => {
@@ -221,7 +222,7 @@ const EmployeeDetails = () => {
   return (
     <div>
       <div className="p-4">
-        Edit user{" "}
+        {t("global.employee.editUser")}
         <Button
           type="button"
           variant="bordered"
@@ -230,7 +231,7 @@ const EmployeeDetails = () => {
             setIsEditing(!isEditing);
           }}
         >
-          {isEditing ? "Save" : "Edit"}
+          {isEditing ? t("global.employee.save") : t("global.employee.edit")}
         </Button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex p-3 gap-2">
@@ -447,16 +448,15 @@ const EmployeeDetails = () => {
                 control={control}
                 name="organizationId"
                 render={({ field }) => (
-                  <CustomDropdown
-                    dropdownItems={orgList}
+                  <Organizationdropdown
                     onChange={(val) => {
                       field.onChange(val);
                       handleOrgId(val);
                     }}
-                    selectedValue={field.value}
                   />
                 )}
               />
+
               {/* <CustomDropdown
                 dropdownItems={orgList}
                 onChange={(val) => handleOrgId(val)}
