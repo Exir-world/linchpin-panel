@@ -152,6 +152,22 @@
       "unAssign": "إلغاء التعيين",
       "addPropety": "إضافة أصل"
     },
+    "category": {
+      "createCat": "إنشاء فئة",
+      "title": "العنوان",
+      "addFeature": "إضافة ميزة",
+      "remove": "إزالة",
+      "create": "إنشاء",
+      "close": "إغلاق",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "noFeaturesToEdit": "لا توجد ميزات للتعديل",
+      "feature": "الميزة",
+      "categoryTitle": "عنوان الفئة",
+      "modalTitle": "تعديل الفئة والميزات",
+      "showDetails": "عرض التفاصيل"
+    },
+    "loading": "جارٍ التحميل",
     "auth": {
       "phoneNumber": "رقم الهاتف",
       "password": "كلمة المرور",

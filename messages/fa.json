@@ -8,13 +8,16 @@
       "requests": "درخواست‌ها",
       "salary-slip": "فیش حقوقی",
       "employees": "کارمندان",
-      "properties": "اموال"
+      "properties": "اموال",
+      "features": "ویژگی‌ها",
+      "categories": "دسته‌بندی‌ها",
+      "management": "مدیریت"
     },
     "reports": {
       "selectDate": "انتخاب تاریخ",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
-      "list": "لیست",
+      "list": "فهرست",
       "details": "جزئیات",
       "properties": "اموال",
       "attendance": "حضور و غیاب",
@@ -28,8 +31,8 @@
     },
     "requests": {
       "filter": {
-        "pending": "در حال انتظار",
-        "approved": "تایید شده",
+        "pending": "در انتظار",
+        "approved": "تأیید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
         "all": "همه"
@@ -37,16 +40,16 @@
       "id": "شناسه",
       "status": "وضعیت",
       "type": "نوع",
-      "description": "توضیحات",
+      "description": "شرح",
       "adminComment": "نظر مدیر",
       "userId": "شناسه کاربر",
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
-      "reviewedById": "شناسه بررسی‌کننده",
-      "reviewedAt": "زمان بررسی",
-      "createdAt": "زمان ایجاد",
-      "updatedAt": "زمان به‌روزرسانی",
-      "actions": "عملیات",
+      "reviewedById": "شناسه بازبین",
+      "reviewedAt": "زمان بازبینی",
+      "createdAt": "تاریخ ایجاد",
+      "updatedAt": "تاریخ به‌روزرسانی",
+      "actions": "اقدامات",
       "details": "جزئیات",
       "firstname": "نام",
       "lastname": "نام خانوادگی",
@@ -56,7 +59,8 @@
       "selectDate": "انتخاب تاریخ",
       "checkRequest": "بررسی درخواست",
       "reject": "رد",
-      "approve": "تایید"
+      "approve": "تأیید",
+      "loading": "در حال بارگذاری"
     },
     "organizations": {
       "create": "ایجاد",
@@ -74,7 +78,7 @@
         "creatorId": "شناسه ایجادکننده",
         "address": "آدرس",
         "description": "توضیحات",
-        "actions": "عملیات"
+        "actions": "اقدامات"
       }
     },
     "employee": {
@@ -84,10 +88,10 @@
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "nationalCode": "کد ملی",
-      "isDeleted": "حذف شده",
+      "isDeleted": "حذف‌شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "انصراف",
+      "cancel": "لغو",
       "update": "به‌روزرسانی",
       "nickname": "نام مستعار",
       "needToLocation": "نیاز به موقعیت",
@@ -99,7 +103,7 @@
         "organizationId": "سازمان",
         "shift": "شیفت",
         "name": "نام",
-        "profileImage": "تصویر پروفایل",
+        "profileImage": "عکس پروفایل",
         "lastname": "نام خانوادگی",
         "phoneNumber": "شماره تلفن",
         "password": "رمز عبور",
@@ -113,7 +117,7 @@
         "firstname": "نام",
         "nationalCode": "کد ملی",
         "personnelCode": "کد پرسنلی",
-        "isDelete": "حذف شده",
+        "isDelete": "حذف‌شده",
         "active": "فعال"
       },
       "organizationId": "شناسه سازمان",
@@ -128,32 +132,51 @@
       "title": "عنوان",
       "code": "کد",
       "status": "وضعیت",
-      "createdAt": "زمان ایجاد",
+      "createdAt": "تاریخ ایجاد",
       "organizationId": "شناسه سازمان",
       "departmentId": "شناسه بخش",
       "details": "جزئیات",
       "edit": "ویرایش",
       "show": "نمایش",
-      "success": "تغییرات شما با موفقیت ذخیره شد!",
-      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "success": "تغییرات با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً مجدداً تلاش کنید.",
       "update": "به‌روزرسانی",
       "delete": "حذف",
-      "addnewPropery": "افزودن دارایی جدید",
+      "addnewPropery": "افزودن ملک جدید",
       "userId": "شناسه کاربر",
-      "propertyId": "شناسه اموال",
-      "deliveredAt": "تحویل در",
-      "property": "اموال",
+      "propertyId": "شناسه ملک",
+      "deliveredAt": "تاریخ تحویل",
+      "property": "ملک",
       "imageUrl": "آدرس تصویر",
-      "assignProperty": "تخصیص اموال",
-      "noPropertytoAssign": "هیچ ملکی برای تخصیص وجود ندارد",
+      "assignProperty": "اختصاص ملک",
+      "noPropertytoAssign": "هیچ ملکی برای اختصاص وجود ندارد",
       "close": "بستن",
-      "assign": "تخصیص",
-      "actions": "عملیات",
-      "unAssign": "لغو تخصیص",
-      "addPropety": "افزودن اموال"
+      "assign": "اختصاص",
+      "actions": "اقدامات",
+      "unAssign": "لغو اختصاص",
+      "addPropety": "افزودن ملک",
+      "brand": "برند",
+      "model": "مدل",
+      "adminComment": "نظر مدیر",
+      "loading": "در حال بارگذاری"
+    },
+    "category": {
+      "createCat": "ایجاد دسته‌بندی",
+      "title": "عنوان",
+      "addFeature": "افزودن ویژگی",
+      "remove": "حذف",
+      "create": "ایجاد",
+      "close": "بستن",
+      "cancel": "لغو",
+      "save": "ذخیره",
+      "noFeaturesToEdit": "هیچ ویژگی برای ویرایش وجود ندارد",
+      "feature": "ویژگی",
+      "categoryTitle": "عنوان دسته‌بندی",
+      "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
+      "showDetails": "نمایش جزئیات"
     },
     "loading": "در حال بارگذاری",
-
+    "categoryId": "شناسه دسته",
     "auth": {
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
@@ -164,10 +187,10 @@
       }
     },
     "alert": {
-      "success": "تغییرات شما با موفقیت ذخیره شد!",
-      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "success": "تغییرات با موفقیت ذخیره شد!",
+      "error": "خطایی رخ داد. لطفاً مجدداً تلاش کنید.",
       "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
-      "noData": "داده‌ای وجود ندارد"
+      "noData": "داده‌ای موجود نیست"
     }
   }
 }

@@ -1,9 +1,12 @@
-import React from 'react'
+import PropertyCategory from "@/components/property-categories/propertyCategory";
+import React from "react";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <PropertyCategory></PropertyCategory>
+    </div>
+  );
+};
 
-export default page
+export default page;

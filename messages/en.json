@@ -161,8 +161,33 @@
       "adminComment": "Admin comment",
       "loading": "Loading"
     },
+    "porperty-reports": {
+      "userId": "User Id",
+      "propertyId": "Property Id",
+      "report": "Report",
+      "status": "Status",
+      "createdAt": "Created at",
+      "actions": "Actions"
+    },
+    "category": {
+      "createCat": "Create category",
+      "title": "Title",
+      "addFeature": "Add Feature",
+      "remove": "Remove",
+      "create": "Create",
+      "close": "Close",
+      "cancel": "Cancel",
+      "save": "Save",
+      "noFeaturesToEdit": "No features to edit",
+      "feature": "Feature",
+      "categoryTitle": "Category Title",
+      "modalTitle": "Edit Category & Features",
+      "showDetails": "Show Details"
+    },
+
     "loading": "Loading",
     "categoryId": "Category id",
+    "palceholder": "Type here",
     "auth": {
       "phoneNumber": "Phone number",
       "password": "Password",

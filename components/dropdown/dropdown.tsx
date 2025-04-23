@@ -49,6 +49,7 @@ export default function CustomDropdown({
         </Button>
       </DropdownTrigger>
       <DropdownMenu
+        className="overflow-y-auto max-h-60 "
         disallowEmptySelection
         aria-label="Dynamic Dropdown"
         selectedKeys={selectedKeys}

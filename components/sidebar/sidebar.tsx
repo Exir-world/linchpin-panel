@@ -96,15 +96,11 @@ export const SidebarWrapper = () => {
                   },
                   {
                     label: t("global.main-menu.categories"),
-                    href: "/property-categories",
-                  },
-                  {
-                    label: t("global.main-menu.management"),
-                    href: "/property-management",
+                    href: "/properties/categories",
                   },
                   {
                     label: t("global.main-menu.reports"),
-                    href: "/property-reports",
+                    href: "/properties/reports",
                   },
                 ]}
                 title={t("global.main-menu.properties")}
