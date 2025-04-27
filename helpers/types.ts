@@ -115,4 +115,56 @@ export interface PropertyDetail {
   departmentId: number | null;
 }
 
+// The nested category object on each feature
+export interface CategoryItem {
+  id: number;
+  title: string;
+}
 
+// Each feature, which includes its own category
+export interface Feature {
+  id: number;
+  title: string;
+  category: CategoryItem;
+}
+
+// Top‑level category object, which holds an array of features
+export interface CategoryWithFeatures {
+  id: number;
+  title: string;
+  features: Feature[];
+}
+
+export type PropertiesCategory = CategoryWithFeatures[];
+
+// Type for the Category object
+interface Category {
+  id: number;
+  title: string;
+}
+
+// Type for the Property object
+interface Property {
+  id: number;
+  code: string;
+  brand: string;
+  model: string;
+  description: string;
+  status: string;
+  createdAt: string; // Use a string for ISO date format or Date if you want to convert it
+  organizationId: number;
+  departmentId: number;
+  imageUrl: string;
+  category: Category;
+}
+
+// Type for the PropertyReport object
+export interface PropertyReport {
+  id: number;
+  userId: number;
+  propertyId: number;
+  report: string;
+  status: string;
+  createdAt: string; // Use a string for ISO date format or Date if you want to convert it
+  property: Property;
+}

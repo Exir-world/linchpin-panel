@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import ReusableTable from "../reusabelTable/table";
 import { format as formatJalali, parseISO, toDate } from "date-fns-jalali";
 import { format } from "date-fns";
+import { Spinner } from "@nextui-org/react";
 
 interface InputData {
   stops: any[];
@@ -37,6 +38,8 @@ const UserAttendace = () => {
   const [startDate, setStartDate] = useState<Date | any>("");
   const [endDate, setEndDate] = useState<Date | any>("");
   const [reportData, setReportData] = useState([] as OutputData[]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const id = params.get("id");
 
   const formatDateToLocal = (date: Date): string => {
@@ -110,15 +113,22 @@ const UserAttendace = () => {
 
   const getUserAttendanceReport = async () => {
     if (!id) return;
+    try {
+      setIsLoading(true);
 
-    const res = await Get(
-      `attendance/admin/filter?userId=${id}&startDate=${startDate}&endDate=${endDate}`
-    );
-    console.log(res);
-    if (res.status === 200) {
-      const reports = groupByDate(res.data);
+      const res = await Get(
+        `attendance/admin/filter?userId=${id}&startDate=${startDate}&endDate=${endDate}`
+      );
+      console.log(res);
+      if (res.status === 200) {
+        const reports = groupByDate(res.data);
 
-      setReportData(reports);
+        setReportData(reports);
+      }
+    } catch (error) {
+      throw new Error("failed to fetch");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -163,8 +173,8 @@ const UserAttendace = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
-        <div className="flex flex-col">
+      <div className="flex items-center gap-3 pb-3">
+        <div className="flex flex-col gap-1">
           <span>{t("global.reports.startDate")}</span>
           <DatePicker
             value={startDate}
@@ -182,7 +192,7 @@ const UserAttendace = () => {
             }}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-1">
           <span>{t("global.reports.endDate")}</span>
           <DatePicker
             value={endDate}
@@ -201,6 +211,11 @@ const UserAttendace = () => {
           />
         </div>
       </div>
+      {isLoading && (
+        <div className="flex flex-col justify-center grow w-full items-center">
+          <Spinner label={t("global.loading")} />
+        </div>
+      )}
       <ReusableTable columns={tableCols} tableData={reportData}></ReusableTable>
     </div>
   );

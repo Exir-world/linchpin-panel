@@ -8,7 +8,12 @@
       "requests": "Requests",
       "salary-slip": "Salary slip",
       "employees": "Employees",
-      "properties": "Properties"
+      "properties": "Properties",
+      "features": "Features",
+      "categories": "Categories",
+      "management": "Management",
+      "general": "General",
+      "mainMenu": "Main menu"
     },
     "reports": {
       "selectDate": "Select date",
@@ -19,7 +24,15 @@
       "properties": "Properties",
       "attendance": "Attendance",
       "startDate": "Start date",
-      "endDate": "End date"
+      "endDate": "End date",
+      "pending": "Pending",
+      "repairing": "Repairing",
+      "repaired": "Repaired",
+      "broken": "Broken",
+      "category": "Category",
+      "status": "Status",
+      "reportAndDetail": " Property Report Details",
+      "reportCode": "Report Code"
     },
     "attendance": {
       "date": "Date",
@@ -56,7 +69,8 @@
       "selectDate": "Select date",
       "checkRequest": "Check Request",
       "reject": "Reject",
-      "approve": "Approve"
+      "approve": "Approve",
+      "loading": "Loading"
     },
     "organizations": {
       "create": "Create",
@@ -117,7 +131,10 @@
         "isDelete": "Is Deleted",
         "active": "Active"
       },
-      "organizationId": "Organization Id"
+      "organizationId": "Organization Id",
+      "editUser": "Edit user",
+      "edit": "Edit",
+      "save": "Save"
     },
     "properties": {
       "organization": "Organization",
@@ -148,9 +165,39 @@
       "assign": "Assign",
       "actions": "Actions",
       "unAssign": "Unassign",
-      "addPropety": "Add property"
+      "addPropety": "Add property",
+      "brand": "Brand",
+      "model": "Model",
+      "adminComment": "Admin comment",
+      "loading": "Loading"
+    },
+    "porperty-reports": {
+      "userId": "User Id",
+      "propertyId": "Property Id",
+      "report": "Report",
+      "status": "Status",
+      "createdAt": "Created at",
+      "actions": "Actions"
+    },
+    "category": {
+      "createCat": "Create category",
+      "title": "Title",
+      "addFeature": "Add Feature",
+      "remove": "Remove",
+      "create": "Create",
+      "close": "Close",
+      "cancel": "Cancel",
+      "save": "Save",
+      "noFeaturesToEdit": "No features to edit",
+      "feature": "Feature",
+      "categoryTitle": "Category Title",
+      "modalTitle": "Edit Category & Features",
+      "showDetails": "Show Details"
     },
 
+    "loading": "Loading",
+    "categoryId": "Category id",
+    "palceholder": "Type here",
     "auth": {
       "phoneNumber": "Phone number",
       "password": "Password",

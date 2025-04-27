@@ -15,12 +15,13 @@ import {
   useDisclosure,
   Switch,
   Checkbox,
+  Spinner,
 } from "@nextui-org/react";
 import Icon from "../icon";
 import { Controller, useForm } from "react-hook-form";
-import { AddUserFormData } from "@/helpers/types";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
+import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 type Role = {
   name: string;
@@ -54,6 +55,7 @@ const EmployeesList = () => {
   const [orgId, setOrgId] = useState<null | number>(null);
   const [shiftList, setShiftList] = useState([]);
   const [shiftId, setShiftId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const locale = useLocale();
   const [currentLocale, setCurrentLocale] = useState<string>();
@@ -70,8 +72,8 @@ const EmployeesList = () => {
   const getUsersList = async () => {
     const locale = pathname.split("/")[1] || "en";
     setCurrentLocale(locale);
-
     try {
+      setIsLoading(true);
       const res = await Get(`/users`, {
         headers: {
           "Accept-Language": currentLocale,
@@ -82,6 +84,8 @@ const EmployeesList = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const getOranizationList = async () => {
@@ -368,18 +372,17 @@ const EmployeesList = () => {
                           control={control}
                           name="organizationId"
                           render={({ field }) => (
-                            <CustomDropdown
-                              dropdownItems={orgList}
+                            <Organizationdropdown
                               onChange={(val) => {
                                 const numericVal = Number(val);
                                 setTeamId(numericVal);
                                 setOrgId(numericVal);
                                 field.onChange(numericVal);
                               }}
-                              selectedValue={field.value}
                             />
                           )}
                         />
+
                         {errors.organizationId && (
                           <span className="text-red-500 text-sm">
                             {errors?.organizationId?.message as any}
@@ -401,10 +404,11 @@ const EmployeesList = () => {
                                 field.onChange(numericVal);
                                 setShiftId(numericVal);
                               }}
-                              selectedValue={field.value}
+                              selectedValue={field.value as any}
                             />
                           )}
                         />
+
                         {errors.organizationId && (
                           <span className="text-red-500 text-sm">
                             {errors?.organizationId?.message as any}
@@ -420,6 +424,7 @@ const EmployeesList = () => {
                           name="teamId"
                           render={({ field }) => (
                             <CustomDropdown
+                              disabled={orgList.length === 0}
                               dropdownItems={teamList}
                               onChange={field.onChange}
                               selectedValue={field.value}
@@ -507,10 +512,18 @@ const EmployeesList = () => {
           </form>
         </Modal>
       </div>
-      <ReusableTable
-        columns={tableColumns}
-        tableData={usersList}
-      ></ReusableTable>
+      {isLoading ? (
+        <Spinner
+          className=" mt-[30vh]"
+          classNames={{ label: "text-foreground " }}
+          label={t("global.loading")}
+        />
+      ) : (
+        <ReusableTable
+          columns={tableColumns}
+          tableData={usersList}
+        ></ReusableTable>
+      )}
     </div>
   );
 };

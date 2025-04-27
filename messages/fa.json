@@ -6,30 +6,41 @@
       "organizations": "سازمان‌ها",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
-      "salary-slip": "فیش حقوقی",
+      "salary-slip": "پیش‌فاکتور حقوق",
       "employees": "کارمندان",
-      "properties": "اموال"
+      "properties": "املاک",
+      "features": "ویژگی‌ها",
+      "categories": "دسته‌بندی‌ها",
+      "management": "مدیریت"
     },
     "reports": {
-      "selectDate": "انتخاب تاریخ",
+      "selectDate": "تاریخ را انتخاب کنید",
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
       "list": "لیست",
       "details": "جزئیات",
-      "properties": "اموال",
+      "properties": "املاک",
       "attendance": "حضور و غیاب",
       "startDate": "تاریخ شروع",
-      "endDate": "تاریخ پایان"
+      "endDate": "تاریخ پایان",
+      "pending": "منتظر",
+      "repairing": "در حال تعمیر",
+      "repaired": "تعمیر شده",
+      "broken": "شکسته",
+      "category": "دسته‌بندی",
+      "status": "وضعیت",
+      "reportAndDetail": "جزئیات گزارش ملک",
+      "reportCode": "کد گزارش"
     },
     "attendance": {
       "date": "تاریخ",
       "duration": "مدت زمان",
-      "attendance": "حضور و غیاب"
+      "attendance": "حضور"
     },
     "requests": {
       "filter": {
         "pending": "در حال انتظار",
-        "approved": "تایید شده",
+        "approved": "تأیید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
         "all": "همه"
@@ -42,10 +53,10 @@
       "userId": "شناسه کاربر",
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
-      "reviewedById": "شناسه بررسی‌کننده",
-      "reviewedAt": "زمان بررسی",
-      "createdAt": "زمان ایجاد",
-      "updatedAt": "زمان به‌روزرسانی",
+      "reviewedById": "بررسی شده توسط شناسه",
+      "reviewedAt": "بررسی شده در",
+      "createdAt": "ایجاد شده در",
+      "updatedAt": "به‌روزرسانی شده در",
       "actions": "عملیات",
       "details": "جزئیات",
       "firstname": "نام",
@@ -53,10 +64,11 @@
       "name": "نام نمایشی",
       "personnelCode": "کد پرسنلی",
       "phoneNumber": "شماره تلفن",
-      "selectDate": "انتخاب تاریخ",
+      "selectDate": "تاریخ را انتخاب کنید",
       "checkRequest": "بررسی درخواست",
-      "reject": "رد",
-      "approve": "تایید"
+      "reject": "رد کردن",
+      "approve": "تأیید کردن",
+      "loading": "در حال بارگذاری"
     },
     "organizations": {
       "create": "ایجاد",
@@ -71,7 +83,7 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه ایجادکننده",
+        "creatorId": "شناسه ایجاد کننده",
         "address": "آدرس",
         "description": "توضیحات",
         "actions": "عملیات"
@@ -84,10 +96,10 @@
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "nationalCode": "کد ملی",
-      "isDeleted": "حذف شده",
+      "isDeleted": "آیا حذف شده است؟",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "انصراف",
+      "cancel": "لغو",
       "update": "به‌روزرسانی",
       "nickname": "نام مستعار",
       "needToLocation": "نیاز به موقعیت",
@@ -96,7 +108,7 @@
       "reports": "گزارش‌ها",
       "create": {
         "team": "تیم",
-        "organizationId": "سازمان",
+        "organizationId": "شناسه سازمان",
         "shift": "شیفت",
         "name": "نام",
         "profileImage": "تصویر پروفایل",
@@ -113,55 +125,89 @@
         "firstname": "نام",
         "nationalCode": "کد ملی",
         "personnelCode": "کد پرسنلی",
-        "isDelete": "حذف شده",
+        "isDelete": "آیا حذف شده است؟",
         "active": "فعال"
       },
-      "organizationId": "شناسه سازمان"
+      "organizationId": "شناسه سازمان",
+      "editUser": "ویرایش کاربر",
+      "edit": "ویرایش",
+      "save": "ذخیره"
     },
     "properties": {
       "organization": "سازمان",
-      "department": "بخش",
+      "department": "دپارتمان",
       "id": "شناسه",
       "title": "عنوان",
       "code": "کد",
       "status": "وضعیت",
-      "createdAt": "زمان ایجاد",
+      "createdAt": "تاریخ ایجاد",
       "organizationId": "شناسه سازمان",
-      "departmentId": "شناسه بخش",
+      "departmentId": "شناسه دپارتمان",
       "details": "جزئیات",
       "edit": "ویرایش",
       "show": "نمایش",
-      "success": "تغییرات شما با موفقیت ذخیره شد!",
-      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+      "success": "تغییرات شما ذخیره شد!",
+      "error": "چیزی اشتباه پیش آمد. لطفاً دوباره تلاش کنید.",
       "update": "به‌روزرسانی",
       "delete": "حذف",
-      "addnewPropery": "افزودن دارایی جدید",
+      "addnewPropery": "افزودن ملک جدید",
       "userId": "شناسه کاربر",
-      "propertyId": "شناسه اموال",
-      "deliveredAt": "تحویل در",
-      "property": "اموال",
+      "propertyId": "شناسه ملک",
+      "deliveredAt": "تحویل داده شده در",
+      "property": "ملک",
       "imageUrl": "آدرس تصویر",
-      "assignProperty": "تخصیص اموال",
-      "noPropertytoAssign": "هیچ ملکی برای تخصیص وجود ندارد",
+      "assignProperty": "اختصاص ملک",
+      "noPropertytoAssign": "ملکی برای اختصاص وجود ندارد",
       "close": "بستن",
-      "assign": "تخصیص",
+      "assign": "اختصاص دادن",
       "actions": "عملیات",
-      "unAssign": "لغو تخصیص",
-      "addPropety" :"افزودن اموال"
+      "unAssign": "لغو اختصاص",
+      "addPropety": "افزودن ملک",
+      "brand": "برند",
+      "model": "مدل",
+      "adminComment": "نظر مدیر",
+      "loading": "در حال بارگذاری"
     },
+    "porperty-reports": {
+      "userId": "شناسه کاربر",
+      "propertyId": "شناسه ملک",
+      "report": "گزارش",
+      "status": "وضعیت",
+      "createdAt": "تاریخ ایجاد",
+      "actions": "عملیات"
+    },
+    "category": {
+      "createCat": "ایجاد دسته‌بندی",
+      "title": "عنوان",
+      "addFeature": "افزودن ویژگی",
+      "remove": "حذف",
+      "create": "ایجاد",
+      "close": "بستن",
+      "cancel": "لغو",
+      "save": "ذخیره",
+      "noFeaturesToEdit": "هیچ ویژگی برای ویرایش وجود ندارد",
+      "feature": "ویژگی",
+      "categoryTitle": "عنوان دسته‌بندی",
+      "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
+      "showDetails": "نمایش جزئیات"
+    },
+
+    "loading": "در حال بارگذاری",
+    "categoryId": "شناسه دسته‌بندی",
+    "palceholder": "اینجا تایپ کنید",
     "auth": {
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
       "login": "ورود",
       "formError": {
         "required": "این فیلد الزامی است",
-        "invalid": "مقدار نامعتبر"
+        "invalid": "مقدار فیلد معتبر نیست"
       }
     },
     "alert": {
-      "success": "تغییرات شما با موفقیت ذخیره شد!",
-      "error": "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
-      "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
+      "success": "تغییرات شما ذخیره شد!",
+      "error": "چیزی اشتباه پیش آمد. لطفاً دوباره تلاش کنید.",
+      "Warning": "لطفاً در انجام این اقدام احتیاط کنید.",
       "noData": "داده‌ای وجود ندارد"
     }
   }

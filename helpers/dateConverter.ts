@@ -20,11 +20,11 @@ function formatDate(
   // Check for invalid or null date
   // 1) If date is null/undefined
   if (!dateObject) {
-    return "Invalid date";
+    return "-";
   }
   // 2) If date is an invalid Date object
   if (isNaN(dateObject.getTime())) {
-    return "Invalid date";
+    return "-";
   }
 
   // Now we have a valid Date object

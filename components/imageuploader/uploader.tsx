@@ -1,23 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Uploady, { useItemProgressListener, useUploady } from "@rpldy/uploady";
 import UploadButton from "@rpldy/upload-button";
 import UploadPreview from "@rpldy/upload-preview";
-import Icon from "../icon";
-// import { Line } from 'rc-progress';
-import { ImageUp } from "lucide-react";
 
 type Props = {
   destinationUrl: string;
 };
+
+// این کامپوننت برای نمایش پیشرفت آپلود
 const UploadProgress: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const progressData = useItemProgressListener();
 
-  if (progressData && progressData.completed > progress) {
-    setProgress(progressData.completed);
-  }
+  // به‌جای setState درون render، از useEffect استفاده می‌کنیم
+  useEffect(() => {
+    if (progressData && progressData.completed > progress) {
+      setProgress(progressData.completed);
+    }
+  }, [progressData, progress]);
 
   return progressData ? (
     <div className="mt-4">
@@ -26,43 +28,53 @@ const UploadProgress: React.FC = () => {
   ) : null;
 };
 
-const FileUploader = ({ destinationUrl = "" }: Props) => {
+// این کامپوننت زمانی داخل <Uploady> رندر می‌شود و هوک useUploady مجاز است
+const UploadActions: React.FC<{
+  clearError: () => void;
+}> = ({ clearError }) => {
+  const uploady = useUploady();
+
+  return (
+    <button
+      onClick={() => {
+        clearError();
+        uploady.processPending();
+      }}
+      className="px-4 py-2 flex gap-1 bg-green-500 text-white rounded hover:bg-green-600 transition "
+    >
+      Upload Files
+    </button>
+  );
+};
+
+const FileUploader: React.FC<Props> = ({ destinationUrl }) => {
   const [uploadError, setUploadError] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col items-center justify-center   p-4 w-52">
+    <div className="flex flex-col items-center justify-center p-4 w-30 ">
       <Uploady
         destination={{ url: destinationUrl }}
         autoUpload
         accept="image/*,.pdf"
         multiple
-        onError={(error) => {
-          setUploadError("Upload failed. Please try again.");
-          console.error("Upload Error:", error);
-        }}
       >
         <div className="flex flex-col items-center space-y-4">
-          <UploadButton
-            autoUpload
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-          >
+          <UploadButton className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
             Select Files
           </UploadButton>
-          <button
-            onClick={() => {
-              setUploadError(null);
-              useUploady().processPending();
-            }}
-            className="px-4 py-2 flex gap-1 bg-green-500 text-white rounded hover:bg-green-600 transition "
-          >
-            Upload Files
-          </button>
+
+          {/* اینجا کامپوننتی داریم که هوک useUploady را در سطح معتبر فراخوانی می‌کند */}
+          <UploadActions clearError={() => setUploadError(null)} />
+
           <UploadPreview
             previewComponentProps={{
-              className: "mt-4 w-40 rounded shadow flex items-center flex-wrap gap-2",
+              className:
+                "mt-4  rounded shadow flex items-center flex-wrap gap-2 size-32",
             }}
           />
+
           <UploadProgress />
+
           {uploadError && <p className="text-red-500 mt-2">{uploadError}</p>}
         </div>
       </Uploady>

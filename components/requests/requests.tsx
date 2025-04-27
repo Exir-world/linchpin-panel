@@ -2,17 +2,14 @@
 import { RequestItem } from "@/helpers/types";
 import { Get } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
-import { getLocale } from "next-intl/server";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
 import CustomDropdown from "../dropdown/dropdown";
 import clsx from "clsx";
 import { Button } from "@nextui-org/react";
 import Icon from "../icon";
-import { format } from "date-fns-jalali";
 import formatDate from "@/helpers/dateConverter";
-import { render } from "react-dom";
 
 type ReqTypes = {
   requestId: number;
@@ -31,28 +28,31 @@ const RequestsList = () => {
   const requestTypes = [
     {
       label: t("filter.all"),
-      key: t("filter.all"),
+      key: "null",
     },
     {
       label: t("filter.pending"),
-      key: t("filter.pending"),
+      key: "PENDING",
     },
     {
       label: t("filter.approved"),
-      key: t("filter.approved"),
+      key: "APPROVED",
     },
     {
       label: t("filter.rejected"),
-      key: t("filter.rejected"),
+      key: "REJECTED",
     },
     {
       label: t("filter.Cancelled"),
-      key: t("filter.Cancelled"),
+      key: "CANCELLED",
     },
   ];
 
   const getRequestst = async () => {
-    const url = status === "All" ? "requests" : `requests?status=${status}`;
+    const url =
+      status === "All" || status === "null"
+        ? "requests"
+        : `requests?status=${status}`;
     try {
       const res = await Get(url, {
         headers: {

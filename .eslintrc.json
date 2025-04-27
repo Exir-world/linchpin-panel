@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    // 0 = off, 1 = warn, 2 = error
+    "react-hooks/exhaustive-deps": 0
+  }
 }

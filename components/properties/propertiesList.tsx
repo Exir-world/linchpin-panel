@@ -9,6 +9,7 @@ import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Icon from "../icon";
 import AddProperty from "./addProperty";
+import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 const PropertiesList = () => {
   const [orgList, setOrgList] = useState([]);
@@ -20,26 +21,26 @@ const PropertiesList = () => {
   const router = useRouter();
   const t = useTranslations("global.properties");
 
-  const getOranizationList = async () => {
-    try {
-      const res = await Get("/organization/admin/organizations", {
-        headers: {
-          "Accept-Language": locale,
-        },
-      });
+  // const getOranizationList = async () => {
+  //   try {
+  //     const res = await Get("/organization/admin/organizations", {
+  //       headers: {
+  //         "Accept-Language": locale,
+  //       },
+  //     });
 
-      if (res.status === 200) {
-        setOrgList(
-          res.data.map((el: any) => ({
-            key: +el.id,
-            label: el.name,
-          }))
-        );
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (res.status === 200) {
+  //       setOrgList(
+  //         res.data.map((el: any) => ({
+  //           key: +el.id,
+  //           label: el.name,
+  //         }))
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // const getFilteredPropertiesList = async () => {
   //   const res = await Get(
@@ -85,9 +86,9 @@ const PropertiesList = () => {
     }
   };
 
-  useEffect(() => {
-    getOranizationList();
-  }, []);
+  // useEffect(() => {
+  //   getOranizationList();
+  // }, []);
 
   // useEffect(() => {
   //   getDepartmentList();
@@ -95,8 +96,9 @@ const PropertiesList = () => {
 
   useEffect(() => {
     getDepartmentList();
-    // getFilteredPropertiesList();
-    getPropertyList();
+    if (orgId && departmentId) {
+      getPropertyList();
+    }
   }, [orgId, departmentId]);
 
   const tableCols = [
@@ -137,9 +139,10 @@ const PropertiesList = () => {
         <div className="flex items-center p-2 gap-x-8 ">
           <div className="flex flex-col items-center gap-2">
             <span className="text-sm">{t("organization")}</span>
-            <CustomDropdown
-              dropdownItems={orgList}
+            <Organizationdropdown
               onChange={(val) => {
+                console.log(val);
+
                 setOrgId(val);
               }}
             />

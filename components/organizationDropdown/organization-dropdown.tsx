@@ -1,55 +1,80 @@
 "use client";
-import React from "react";
+import { Get } from "@/lib/axios";
 import {
+  Button,
   Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
   DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
 } from "@nextui-org/react";
-import { Button } from "@nextui-org/react";
+import { useLocale } from "next-intl";
+import React, { useEffect, useState } from "react";
 
 interface DropdownItemType {
   key: string;
   label: string;
 }
 
-interface CustomDropdownProps {
-  dropdownItems: DropdownItemType[];
-  selectedValue?: string;
+interface Organizationdropdown {
+  //   selectedValue?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
 }
 
-export default function CustomDropdown({
-  dropdownItems,
-  selectedValue,
+const Organizationdropdown = ({
   onChange,
   disabled = false,
-}: CustomDropdownProps) {
-  // استفاده از state محلی برای ذخیره مقدار انتخاب شده
+}: Organizationdropdown) => {
+  const [organizationList, setOrganizationList] = useState<DropdownItemType[]>(
+    []
+  );
+  const locale = useLocale();
+
+  const getOrgList = async () => {
+    try {
+      const res = await Get("/organization/admin/organizations", {
+        headers: {
+          "Accept-Language": locale,
+        },
+      });
+      if (res.status === 200) {
+        const list = res.data.map((el: any) => ({
+          key: String(el.id),
+          label: el.name,
+        }));
+        setOrganizationList(list);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const [localValue, setLocalValue] = React.useState<string>(
-    selectedValue || dropdownItems[0]?.key || ""
+    organizationList[0]?.key || ""
   );
 
   // در صورتی که مقدار props تغییر کرد، state محلی هم به‌روز می‌شود
   React.useEffect(() => {
-    if (selectedValue !== undefined) {
-      setLocalValue(selectedValue);
-    }
-  }, [selectedValue]);
+    getOrgList();
+    console.log(organizationList.find((item) => item.key === localValue));
+
+    // setLocalValue(organizationList[0]?.key);
+  }, []);
 
   const selectedKeys = React.useMemo(() => new Set([localValue]), [localValue]);
+
+  const selectedLabel = organizationList.find(
+    (item) => item.key === localValue
+  )?.label;
 
   return (
     <Dropdown className="w-full" isDisabled={disabled}>
       <DropdownTrigger disabled={disabled}>
         <Button className="capitalize w-[80%] py-2" variant="bordered">
-          {dropdownItems.find((item) => item.key === localValue)?.label ||
-            localValue}
+          {/* {organizationList.find((item) => item.key === localValue)?.label} */}
+          {selectedLabel}
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        className="overflow-y-auto max-h-60 "
         disallowEmptySelection
         aria-label="Dynamic Dropdown"
         selectedKeys={selectedKeys}
@@ -65,10 +90,12 @@ export default function CustomDropdown({
           }
         }}
       >
-        {dropdownItems.map((item) => (
+        {organizationList.map((item) => (
           <DropdownItem key={item.key}>{item.label}</DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
   );
-}
+};
+
+export default Organizationdropdown;
