@@ -271,7 +271,7 @@ const PropertyReports = () => {
                     {formatDate(
                       reportItem?.createdAt as any,
                       locale,
-                      "gregorian"
+                      locale === "en" ? "gregorian" : "jalali"
                     )}
                   </p>
                   <div className="mt-4">

@@ -38,17 +38,17 @@ export const NavbarWrapper = ({ children }: Props) => {
             placeholder="Search..."
           /> */}
         </NavbarContent>
-        {/* <NavbarContent
+        <NavbarContent
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
         >
-          <div className="flex items-center gap-2 max-md:hidden">
+          {/* <div className="flex items-center gap-2 max-md:hidden">
             <FeedbackIcon />
             <span>Feedback?</span>
-          </div>
+          </div> */}
           <LangSwitcher></LangSwitcher>
 
-          <NotificationsDropdown />
+          {/* <NotificationsDropdown />
 
           <div className="max-md:hidden">
             <SupportIcon />
@@ -59,11 +59,11 @@ export const NavbarWrapper = ({ children }: Props) => {
             target={"_blank"}
           >
             <GithubIcon />
-          </Link>
-          <NavbarContent>
+          </Link> */}
+          {/* <NavbarContent>
             <UserDropdown />
-          </NavbarContent>
-        </NavbarContent> */}
+          </NavbarContent> */}
+        </NavbarContent>
       </Navbar>
       {children}
     </div>
