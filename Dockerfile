@@ -26,16 +26,12 @@ RUN npm install --legacy-peer-deps --only=production
 
 # Copy built app from builder
 COPY --from=builder /app/.next .next
-
-# Only copy the public folder if it exists
-RUN test -d /public && cp -R /public /public 
-
-# Copy other necessary files
+COPY --from=builder /app/public public
 COPY --from=builder /app/next.config.js .
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/node_modules ./node_modules
 
-# Expose port (you can change this if needed)
+# Expose port
 EXPOSE 3000
 
 # Set environment variables
