@@ -28,7 +28,7 @@ RUN npm install --legacy-peer-deps --only=production
 COPY --from=builder /app/.next .next
 
 # Only copy the public folder if it exists
-RUN test -d /app/public && cp -R /app/public /app/public || echo "No public folder found"
+RUN test -d /public && cp -R /public /public 
 
 # Copy other necessary files
 COPY --from=builder /app/next.config.js .
