@@ -27,12 +27,6 @@ export const SidebarWrapper = () => {
   const pathname = usePathname().split("/")[2];
   const { collapsed, setCollapsed } = useSidebarContext();
   const t = useTranslations();
-  const locale = useLocale();
-
-  const propertiesSubmeu = [
-    { href: "/reports", label: "reports" },
-    { href: "/reports", label: "reports" },
-  ];
 
   return (
     <aside className="h-screen z-[20] sticky top-0">
@@ -44,13 +38,15 @@ export const SidebarWrapper = () => {
           collapsed: collapsed,
         })}
       >
-        <div className={Sidebar.Header()}>
-          <CompaniesDropdown />
-        </div>
+        <div className={Sidebar.Header()}>{/* <CompaniesDropdown /> */}</div>
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
-            <SidebarItem title="Home" icon={<HomeIcon />} href="/" />
-            <SidebarMenu title="Main Menu">
+            <SidebarItem
+              title={t("global.home")}
+              icon={<HomeIcon />}
+              href="/"
+            />
+            <SidebarMenu title={t("global.main-menu.mainMenu")}>
               <SidebarItem
                 isActive={pathname === "employees"}
                 title={t("global.main-menu.employees")}
@@ -112,7 +108,7 @@ export const SidebarWrapper = () => {
               /> */}
             </SidebarMenu>
 
-            <SidebarMenu title="General">
+            {/* <SidebarMenu title={t("global.main-menu.general")}>
               <SidebarItem
                 isActive={pathname === "/developers"}
                 title="Developers"
@@ -128,18 +124,18 @@ export const SidebarWrapper = () => {
                 title="Settings"
                 icon={<SettingsIcon />}
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
 
-            <SidebarMenu title="Updates">
+            {/* <SidebarMenu title="Updates">
               <SidebarItem
                 isActive={pathname === "/changelog"}
                 title="Changelog"
                 icon={<ChangeLogIcon />}
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
           </div>
           <div className={Sidebar.Footer()}>
-            <Tooltip content={"Settings"} color="primary">
+            {/* <Tooltip content={"Settings"} color="primary">
               <div className="max-w-fit">
                 <SettingsIcon />
               </div>
@@ -154,7 +150,7 @@ export const SidebarWrapper = () => {
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                 size="sm"
               />
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </div>

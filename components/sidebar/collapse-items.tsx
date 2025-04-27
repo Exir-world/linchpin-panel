@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDownIcon } from "../icons/sidebar/chevron-down-icon"; // Adjust path as needed
 import clsx from "clsx";
 import { useSidebarContext } from "../layout/layout-context"; // Adjust path as needed
+import useDir from "@/hooks/useDirection";
 
 interface LinkItem {
   label: string;
@@ -43,7 +44,7 @@ const CollapseItems: React.FC<Props> = ({
       <button
         onClick={toggleCollapse}
         className={clsx(
-          "flex items-center w-full px-4 py-2 text-left transition-colors",
+          "flex items-center w-full px-4 py-2 text-start  transition-colors",
           "hover:bg-gray-100 dark:hover:bg-gray-800",
           isOpen && "bg-gray-50 dark:bg-gray-900"
         )}

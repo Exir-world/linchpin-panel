@@ -11,7 +11,9 @@
       "properties": "Properties",
       "features": "Features",
       "categories": "Categories",
-      "management": "Management"
+      "management": "Management",
+      "general": "General",
+      "mainMenu": "Main menu"
     },
     "reports": {
       "selectDate": "Select date",
@@ -22,7 +24,15 @@
       "properties": "Properties",
       "attendance": "Attendance",
       "startDate": "Start date",
-      "endDate": "End date"
+      "endDate": "End date",
+      "pending": "Pending",
+      "repairing": "Repairing",
+      "repaired": "Repaired",
+      "broken": "Broken",
+      "category": "Category",
+      "status": "Status",
+      "reportAndDetail": " Property Report Details",
+      "reportCode": "Report Code"
     },
     "attendance": {
       "date": "Date",
