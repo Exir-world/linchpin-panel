@@ -11,7 +11,9 @@
       "properties": "العقارات",
       "features": "الميزات",
       "categories": "الفئات",
-      "management": "الإدارة"
+      "management": "الإدارة",
+      "general": "عام",
+      "mainMenu": "القائمة الرئيسية"
     },
     "reports": {
       "selectDate": "حدد التاريخ",
@@ -191,7 +193,6 @@
       "modalTitle": "تعديل الفئة والميزات",
       "showDetails": "عرض التفاصيل"
     },
-
     "loading": "جاري التحميل",
     "categoryId": "هوية الفئة",
     "palceholder": "اكتب هنا",
@@ -209,6 +210,10 @@
       "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
       "Warning": "يرجى الحذر عند إجراء هذا الإجراء.",
       "noData": "لا توجد بيانات"
-    }
+    },
+    "select": "اختيار",
+    "general": "عام",
+    "management": "الإدارة",
+    "select": "اختيار"
   }
 }

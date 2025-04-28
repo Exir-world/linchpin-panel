@@ -2,6 +2,7 @@
   "global": {
     "home": "Home",
     "title": "Hello",
+    "select": "select",
     "main-menu": {
       "organizations": "Organizations",
       "reports": "Reports",

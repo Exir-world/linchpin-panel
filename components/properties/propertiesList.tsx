@@ -5,14 +5,14 @@ import React, { useEffect, useState } from "react";
 import CustomDropdown from "../dropdown/dropdown";
 import ReusableTable from "../reusabelTable/table";
 import formatDate from "@/helpers/dateConverter";
-import { Button } from "@nextui-org/react";
+import { Button, Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import Icon from "../icon";
 import AddProperty from "./addProperty";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 const PropertiesList = () => {
-  const [orgList, setOrgList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [departmentId, setDepartmentId] = useState<null | string>(null);
   const [orgId, setOrgId] = useState<null | string>(null);
   const [departmentList, setDepartmentList] = useState([]);
@@ -74,15 +74,22 @@ const PropertiesList = () => {
 
   const getPropertyList = async () => {
     if (orgId || departmentId) {
-      const res = await Get(
-        `properties?organizationId=${orgId}&departmentId=${departmentId}`,
-        {
-          headers: {
-            "Accept-Language": locale,
-          },
-        }
-      );
-      setPropertyList(res.data);
+      setIsLoading(true);
+      try {
+        const res = await Get(
+          `properties?organizationId=${orgId}&departmentId=${departmentId}`,
+          {
+            headers: {
+              "Accept-Language": locale,
+            },
+          }
+        );
+        setPropertyList(res.data);
+      } catch (error) {
+        throw new Error("failed to fetch properties list");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -133,6 +140,7 @@ const PropertiesList = () => {
       },
     },
   ];
+
   return (
     <div>
       <div className="p-3 flex flex-col md:flex-row  items-center justify-between">
@@ -167,6 +175,13 @@ const PropertiesList = () => {
           </Button> */}
           <AddProperty></AddProperty>
         </div>
+      </div>
+      <div>
+        {isLoading && (
+          <div className="flex justify-center items-center h-[50vh]">
+            <Spinner color="primary" />
+          </div>
+        )}
       </div>
       <div>
         <ReusableTable

@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
 interface DropdownItemType {
@@ -29,6 +29,7 @@ const Organizationdropdown = ({
     []
   );
   const locale = useLocale();
+  const t = useTranslations();
 
   const getOrgList = async () => {
     try {
@@ -70,8 +71,7 @@ const Organizationdropdown = ({
     <Dropdown className="w-full" isDisabled={disabled}>
       <DropdownTrigger disabled={disabled}>
         <Button className="capitalize w-[80%] py-2" variant="bordered">
-          {/* {organizationList.find((item) => item.key === localValue)?.label} */}
-          {selectedLabel}
+          {selectedLabel || t("global.select")}
         </Button>
       </DropdownTrigger>
       <DropdownMenu

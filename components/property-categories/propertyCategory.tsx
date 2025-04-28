@@ -8,6 +8,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from "@nextui-org/react";
 import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
@@ -98,7 +99,6 @@ const PropertyCategory = () => {
       title: data.title,
       features: data.features.map(({ id, title }) => ({ id, title })),
     };
-    console.log("send to backend:", payload);
     const catId = selectedCat?.id;
     const res = await Patch(`property-categories/${catId}`, payload);
     console.log(res);
@@ -132,12 +132,17 @@ const PropertyCategory = () => {
   };
   return (
     <div>
+      {isLoading && (
+        <div className="w-full flex flex-col justify-center items-center h-[100vh]">
+          <Spinner color="primary" label={t("global.loading")}></Spinner>
+        </div>
+      )}
       <div className="w-full flex items-center p-3 ">
         {/* <Button onPress={() => setIsModalOpen(true)}>
           Create category
           <Icon name="folder-plus" />
         </Button> */}
-        <CreateCategory></CreateCategory>
+        <CreateCategory onCreate={() => getCategories()}></CreateCategory>
       </div>
       <div className="flex flex-wrap gap-3 p-4 justify-center">
         {catList.map((item) => (
