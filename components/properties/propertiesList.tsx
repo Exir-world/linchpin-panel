@@ -175,22 +175,24 @@ const PropertiesList = () => {
           </Button> */}
           <AddProperty></AddProperty>
         </div>
+
       </div>
       <div>
-        {isLoading && (
-          <div className="flex justify-center items-center h-[50vh]">
+        {isLoading ? (
+          <div className="flex flex-col justify-center items-center h-[50vh] gap-4">
             <Spinner color="primary" />
+            <span className="text-sm text-gray-500">{t("loading")}</span>
           </div>
+        ) : (
+          <ReusableTable
+            columns={tableCols}
+            tableData={propertyList}
+          ></ReusableTable>
         )}
-      </div>
-      <div>
-        <ReusableTable
-          columns={tableCols}
-          tableData={propertyList}
-        ></ReusableTable>
       </div>
     </div>
   );
 };
 
 export default PropertiesList;
+

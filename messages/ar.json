@@ -168,7 +168,9 @@
       "brand": "العلامة التجارية",
       "model": "النموذج",
       "adminComment": "تعليق المسؤول",
-      "loading": "جاري التحميل"
+      "loading": "جاري التحميل",
+      "category": "الفئة",
+      "selectAll": "اختيار الكل"
     },
     "porperty-reports": {
       "userId": "هوية المستخدم",
@@ -213,7 +215,6 @@
     },
     "select": "اختيار",
     "general": "عام",
-    "management": "الإدارة",
-    "select": "اختيار"
+    "management": "الإدارة"
   }
 }

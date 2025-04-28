@@ -168,7 +168,9 @@
       "brand": "برند",
       "model": "مدل",
       "adminComment": "نظر مدیر",
-      "loading": "در حال بارگذاری"
+      "loading": "در حال بارگذاری",
+      "category": "دسته‌بندی",
+      "selectAll": "انتخاب همه"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",

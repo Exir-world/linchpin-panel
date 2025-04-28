@@ -9,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
 import formatDate from "@/helpers/dateConverter";
 import { addToast } from "@heroui/toast";
+import FileUploader from "../imageuploader/uploader";
 
 enum PropertyStatusEnum {
   GOOD = "good",
@@ -26,6 +27,7 @@ const PropertyDetails = () => {
   const params = useSearchParams();
   const t = useTranslations("global.properties");
   const calType = locale == "en" ? "gregorian" : "jalali";
+
   const getPropertyById = async () => {
     const id = params.get("id");
     if (!id) return;
@@ -135,6 +137,10 @@ const PropertyDetails = () => {
     }
   };
 
+  const handleUploadSucess = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <div className="w-full p-2">
       <div className=" w-full flex items-end  justify-between p-3">
@@ -222,31 +228,45 @@ const PropertyDetails = () => {
               />
             </div>
           </div>
-          <div>
+          <div className="w-full grid grid-cols-3 items-center ">
             {editMode && (
               <>
-                <div className="text-sm py-2">{t("departmentId")}</div>
-                <Controller
-                  name="departmentId"
-                  control={control}
-                  render={({ field }) => (
-                    <CustomDropdown
-                      dropdownItems={departmentList}
-                      onChange={(val) => {
-                        const numericVal = Number(val);
-                        setOrgId(numericVal);
-                        field.onChange(numericVal);
-                      }}
-                      selectedValue={field.value}
-                    />
-                  )}
-                />
+                <div className=" ">
+                  <p className="text-sm py-2">{t("departmentId")}</p>
+                  <Controller
+                    name="departmentId"
+                    control={control}
+                    render={({ field }) => (
+                      <CustomDropdown
+                        dropdownItems={departmentList}
+                        onChange={(val) => {
+                          const numericVal = Number(val);
+                          setOrgId(numericVal);
+                          field.onChange(numericVal);
+                        }}
+                        selectedValue={field.value}
+                      />
+                    )}
+                  />
+                </div>
               </>
             )}
+            <div>
+              <p>{t("upload")}</p>
+              <FileUploader
+                autoUpload
+                onUploadSuccess={(data) => handleUploadSucess(data)}
+              ></FileUploader>
+            </div>
           </div>
         </div>
         <div className="w-full flex justify-center items-center gap-x-6 py-6">
-          <Button type="button" color="danger" onPress={handleDeleteProperty} isDisabled={!editMode} >
+          <Button
+            type="button"
+            color="danger"
+            onPress={handleDeleteProperty}
+            isDisabled={!editMode}
+          >
             {t("delete")}
           </Button>
           <Button type="submit" color="primary" isDisabled={!editMode}>

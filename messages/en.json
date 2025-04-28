@@ -170,7 +170,10 @@
       "brand": "Brand",
       "model": "Model",
       "adminComment": "Admin comment",
-      "loading": "Loading"
+      "loading": "Loading",
+      "category": "Category",
+      "selectAll": "Select All",
+      "upload": "Upload"
     },
     "porperty-reports": {
       "userId": "User Id",
