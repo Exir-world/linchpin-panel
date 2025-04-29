@@ -4,13 +4,15 @@ import React, { useState, useRef, ChangeEvent, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/react";
 import Icon from "../icon";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onUploadSuccess?: (response: any) => void;
   onUploadError?: (error: any) => void;
   maxFileSize?: number; // حداکثر حجم فایل به بایت
   allowedFileTypes?: string[]; // انواع فایل مجاز
-  autoUpload?: boolean
+  autoUpload?: boolean;
 };
 
 const FileUploader: React.FC<Props> = ({
@@ -18,32 +20,39 @@ const FileUploader: React.FC<Props> = ({
   onUploadError,
   maxFileSize = 20 * 1024 * 1024, // 5MB پیش‌فرض
   allowedFileTypes = ["image/*", ".pdf"],
-  autoUpload = false
+  autoUpload = false,
 }) => {
   const [files, setFiles] = useState<FileList | null>(null);
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  const t = useTranslations();
   const validateFiles = (files: FileList): boolean => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       // بررسی حجم فایل
       if (file.size > maxFileSize) {
-        setError(`حجم فایل ${file.name} بیش از حد مجاز است (${maxFileSize / (1024 * 1024)}MB)`);
+        setError(
+          `حجم فایل ${file.name} بیش از حد مجاز است (${
+            maxFileSize / (1024 * 1024)
+          }MB)`
+        );
         return false;
       }
 
       // بررسی نوع فایل
-      const fileType = file.type || file.name.split('.').pop() || '';
-      if (!allowedFileTypes.some(type => {
-        if (type.includes('*')) {
-          return fileType.startsWith(type.replace('*', ''));
-        }
-        return fileType === type;
-      })) {
+      const fileType = file.type || file.name.split(".").pop() || "";
+      if (
+        !allowedFileTypes.some((type) => {
+          if (type.includes("*")) {
+            return fileType.startsWith(type.replace("*", ""));
+          }
+          return fileType === type;
+        })
+      ) {
         setError(`نوع فایل ${file.name} مجاز نیست`);
         return false;
       }
@@ -57,7 +66,7 @@ const FileUploader: React.FC<Props> = ({
         setFiles(e.target.files);
         setProgress(0);
         setError(null);
-        
+
         // اگر autoUpload فعال باشد، بلافاصله آپلود را شروع می‌کنیم
         if (autoUpload) {
           upload();
@@ -66,6 +75,13 @@ const FileUploader: React.FC<Props> = ({
         if (inputRef.current) inputRef.current.value = "";
         setFiles(null);
       }
+
+      const reader = new FileReader();
+      const file = e.target.files?.[0];
+      reader.onload = () => {
+        setPreviewSrc(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -127,16 +143,20 @@ const FileUploader: React.FC<Props> = ({
         className="mb-4"
         disabled={isUploading}
       />
-      <Button color="primary" onPress={() => inputRef.current?.click()}><Icon name='image-up'></Icon>
-        Upload
-      </Button>
+      <div className="flex items-center gap-3 ">
+        <Button color="primary" onPress={() => inputRef.current?.click()}>
+          <Icon name="image-up"></Icon>
+          {t("global.uploadImg")}
+        </Button>
+        <div className="p-2">
+          {previewSrc && (
+            <Image src={previewSrc} alt="Preview" width={100} height={70} />
+          )}
+        </div>
+      </div>
       {files && files.length > 0 && !autoUpload && (
         <div className="flex flex-col items-center gap-2">
-          <Button
-            color="primary"
-            onPress={upload}
-            isDisabled={isUploading}
-          >
+          <Button color="primary" onPress={upload} isDisabled={isUploading}>
             {isUploading ? (
               <span className="flex items-center gap-2">
                 <span className="animate-spin">⌛</span>

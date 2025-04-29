@@ -123,7 +123,6 @@ const AddProperty = () => {
     const numericOrgId = parseInt(data.organizationId);
     const departmentId = parseInt(data.departmentId);
     const categoryId = parseInt(data.categoryId);
-    console.log(data);
     const imageUrl = uploadSuccessRes !== null ? uploadSuccessRes?.[0].url : ""
     const res = await Post(`properties`, {
       ...data,
@@ -276,7 +275,7 @@ const AddProperty = () => {
                           <div key={feature.id} className="flex flex-col gap-1">
                             <input
                               type="hidden"
-                              {...register(`features.${idx}.id`, {
+                              {...register(`features.${idx}.featureId`, {
                                 setValueAs: (v) => Number(v),
                               })}
                               value={feature.id}
