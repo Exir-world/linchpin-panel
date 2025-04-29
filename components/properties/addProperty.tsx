@@ -27,6 +27,11 @@ type OrgListTypes = {
   key: string;
   label: string;
 };
+type UploadRes = {
+  originalName: string,
+  url: string
+}
+
 const AddProperty = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [departmentList, setDepartmentList] = useState<any[]>([]);
@@ -36,7 +41,7 @@ const AddProperty = () => {
   const [categoryList, setCategoryList] = useState<any[]>([]);
   const [categoryResponse, setCategoryResponse] = useState<any[]>([]);
   const [features, setFeatures] = useState<any[]>([]);
-
+  const [uploadSuccessRes, setUploadSuccessRes] = useState<null | UploadRes[]>(null)
   const t = useTranslations("global.properties");
   const locale = useLocale();
   const { handleSubmit, register, control, setValue } = useForm();
@@ -94,7 +99,7 @@ const AddProperty = () => {
         key: el.id,
         label: el.title,
       }));
-      const optional = { key: "انتخاب همه", label: "انتخاب همه" };
+      const optional = { key: t("selectAll"), label: t("selectAll") };
       const data = [optional, ...departments];
       setDepartmentList(data as []);
     }
@@ -118,14 +123,13 @@ const AddProperty = () => {
     const numericOrgId = parseInt(data.organizationId);
     const departmentId = parseInt(data.departmentId);
     const categoryId = parseInt(data.categoryId);
-    console.log(data);
-
+    const imageUrl = uploadSuccessRes !== null ? uploadSuccessRes?.[0].url : ""
     const res = await Post(`properties`, {
       ...data,
       organizationId: numericOrgId,
       departmentId: departmentId,
       categoryId,
-      imageUrl: "",
+      imageUrl: imageUrl,
     });
     if (res.status === 201 || res.status === 200) {
       addToast({
@@ -140,6 +144,13 @@ const AddProperty = () => {
       });
     }
   };
+
+
+  const handleUploadSuccess = (data: UploadRes[]) => {
+    console.log(data);
+    setUploadSuccessRes(data)
+  }
+
 
   return (
     <div>
@@ -236,7 +247,7 @@ const AddProperty = () => {
                         />
                       </div>
                       <div className="flex flex-col gap-1">
-                        <p>category</p>
+                        <p>{t("category")}</p>
                         <Controller
                           name="categoryId"
                           control={control}
@@ -264,7 +275,7 @@ const AddProperty = () => {
                           <div key={feature.id} className="flex flex-col gap-1">
                             <input
                               type="hidden"
-                              {...register(`features.${idx}.id`, {
+                              {...register(`features.${idx}.featureId`, {
                                 setValueAs: (v) => Number(v),
                               })}
                               value={feature.id}
@@ -279,7 +290,7 @@ const AddProperty = () => {
                     </div>
                     <div className="w-full py-2 flex items-center gap-4 ">
                       <div className="">
-                        <FileUploader destinationUrl=""></FileUploader>
+                        <FileUploader onUploadSuccess={(data) => handleUploadSuccess(data)}></FileUploader>
                       </div>
                       <div className="grow">
                         <Textarea

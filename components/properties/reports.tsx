@@ -14,6 +14,7 @@ import {
   ModalHeader,
   Spinner,
   useDisclosure,
+  Divider,
 } from "@nextui-org/react";
 import CustomDropdown from "../dropdown/dropdown";
 import { debounce } from "@/utils/debounce";
@@ -24,6 +25,7 @@ type Category = {
   key: string;
   label: string;
 };
+
 const PropertyReports = () => {
   const [reportList, setReportList] = useState<PropertyReport[]>([]);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -63,9 +65,8 @@ const PropertyReports = () => {
     if (reportCode === null && catid === null && status === null) {
       url = `property-reports/all`;
     } else {
-      url = `property-reports/all?code=${reportCode || ""}&categoryId=${
-        catid || ""
-      }&status=${status || ""}`;
+      url = `property-reports/all?code=${reportCode || ""}&categoryId=${catid || ""
+        }&status=${status || ""}`;
     }
     try {
       setIsLoading(true);
@@ -104,7 +105,7 @@ const PropertyReports = () => {
     } catch (error) {
       throw new Error("failed to fetch");
     } finally {
-      setIsLoading(false);
+      setIsModalLoading(false);
     }
   };
 
@@ -124,7 +125,7 @@ const PropertyReports = () => {
   useEffect(() => {
     getReportsById(propertyId!);
     getCategoryIds();
-  }, [propertyId, isOpen]);
+  }, [propertyId]);
 
   useEffect(() => {
     getAllReports();
@@ -177,142 +178,180 @@ const PropertyReports = () => {
     debouncedSearch(val);
   };
   const tableCols = [
-    { name: t("global.porperty-reports.userId"), uid: "userId" },
-    { name: t("global.porperty-reports.propertyId"), uid: "propertyId" },
-    { name: t("global.porperty-reports.report"), uid: "report" },
-    { name: t("global.porperty-reports.status"), uid: "status" },
+    {
+      name: t("global.porperty-reports.propertyCode"),
+      uid: "propertyCode",
+      render: (record: PropertyReport) => (
+        <span className="font-medium">{record.property?.code || "-"}</span>
+      ),
+    },
+    {
+      name: t("global.porperty-reports.report"),
+      uid: "report",
+      render: (record: PropertyReport) => (
+        <span className="text-gray-600">{record.report}</span>
+      ),
+    },
+    {
+      name: t("global.porperty-reports.status"),
+      uid: "status",
+      render: (record: PropertyReport) => (
+        <span className={`px-2 py-1 rounded-full text-sm ${record.status === "pending" ? "bg-yellow-100 text-yellow-800" :
+            record.status === "repairing" ? "bg-blue-100 text-blue-800" :
+              record.status === "repaired" ? "bg-green-100 text-green-800" :
+                "bg-red-100 text-red-800"
+          }`}>
+          {t(`global.reports.${record.status}`)}
+        </span>
+      ),
+    },
     {
       name: t("global.porperty-reports.createdAt"),
       uid: "createdAt",
       render: (record: PropertyReport) => {
         const calandarTypes = locale === "en" ? "gregorian" : "jalali";
         return (
-          <span>{formatDate(record.createdAt, locale, calandarTypes)} </span>
+          <span className="text-gray-600">
+            {formatDate(record.createdAt, locale, calandarTypes)}
+          </span>
         );
       },
     },
     {
       name: t("global.porperty-reports.actions"),
       uid: "actions",
-      render: (record: PropertyReport) => {
-        return (
-          <div className="flex gap-2">
-            <Button
-              className="text-blue-500 hover:text-blue-700"
-              onPress={() => handleModalOpen(record.id)}
-            >
-              {t("global.porperty-reports.actions")}
-            </Button>
-          </div>
-        );
-      },
+      render: (record: PropertyReport) => (
+        <div className="flex gap-2">
+          <Button
+            color="primary"
+            variant="light"
+            onPress={() => handleModalOpen(record.id)}
+            size="sm"
+          >
+            {t("global.porperty-reports.actions")}
+          </Button>
+        </div>
+      ),
     },
   ];
 
   return (
-    <div className="p-1">
-      <div className="flex items-end gap-2 w-full justify-between p-2 ">
-        <div className="flex items-center gap-2">
-          <div>
-            <p>{t("global.reports.category")}</p>
+    <div className="p-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 w-full p-4 bg-white rounded-lg shadow-sm mb-6">
+        <div className="flex flex-col sm:flex-row gap-4 w-full">
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-700 mb-2">
+              {t("global.reports.category")}
+            </p>
             <CustomDropdown
               dropdownItems={categoryIds}
-              selectedValue={
-                categoryIds.find((el: any) => el.key === catid)?.label
-              }
+              selectedValue={categoryIds.find((el: any) => el.key === catid)?.label}
               onChange={(val) => handleCatId(val)}
-            ></CustomDropdown>
+            />
           </div>
-          <div>
-            <p>{t("global.reports.status")}</p>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-700 mb-2">
+              {t("global.reports.status")}
+            </p>
             <CustomDropdown
               dropdownItems={statusOptions}
-              selectedValue={
-                categoryIds.find((el: any) => el.key === catid)?.label
-              }
+              selectedValue={statusOptions.find((el: any) => el.key === status)?.label}
               onChange={(val) => handleStatus(val)}
-            ></CustomDropdown>
+            />
+          </div>
+          <div className="flex-1">
+            <Input
+              label={t("global.reports.reportCode")}
+              onChange={(e) => handlesearch(e.target.value)}
+              placeholder={t("global.palceholder")}
+              classNames={{
+                label: "text-sm font-medium",
+                input: "text-sm"
+              }}
+            />
           </div>
         </div>
-        <div>
-          <Input
-            label={t("global.reports.reportCode")}
-            onChange={(e) => handlesearch(e.target.value)}
-          ></Input>
-        </div>
       </div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="xl">
+
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <Spinner size="lg" />
+        </div>
+      ) : reportList.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">
+          {t("global.porperty-reports.noReports")}
+        </div>
+      ) : (
+        <ReusableTable
+          columns={tableCols}
+          tableData={reportList}
+        />
+      )}
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        size="xl"
+        classNames={{
+          base: "max-w-2xl",
+          header: "border-b border-gray-200",
+          footer: "border-t border-gray-200",
+        }}
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {t("global.reports.reportAndDetail")}
+                <h3 className="text-lg font-semibold">
+                  {t("global.porperty-reports.reportDetails")}
+                </h3>
+                <p className="text-sm text-gray-500">
+                  {reportItem?.property?.code}
+                </p>
               </ModalHeader>
               <ModalBody>
-                <div>
-                  <p>
-                    <strong>Property Code:</strong> {reportItem?.property.code}
-                  </p>
-                  <p>
-                    <strong>Brand:</strong> {reportItem?.property.brand}
-                  </p>
-                  <p>
-                    <strong>Model:</strong> {reportItem?.property.model}
-                  </p>
-                  <p>
-                    <strong>Category:</strong>{" "}
-                    {reportItem?.property.category.title}
-                  </p>
-                  <p>
-                    <strong>Report:</strong> {reportItem?.report}
-                  </p>
-                  <p>
-                    <strong>Created At:</strong>{" "}
-                    {formatDate(
-                      reportItem?.createdAt as any,
-                      locale,
-                      locale === "en" ? "gregorian" : "jalali"
-                    )}
-                  </p>
-                  <div className="mt-4">
-                    <label htmlFor="status">Change Status:</label>
-                    <CustomDropdown
-                      dropdownItems={statusOptions}
-                      selectedValue={
-                        statusOptions.find(
-                          (option) => option.key === reportItem?.status
-                        )?.label
-                      }
-                      onChange={(val) => {
-                        setChangedStatus(val);
-                      }}
-                    />
+                {isModalLoading ? (
+                  <div className="flex justify-center items-center py-8">
+                    <Spinner size="lg" />
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">
+                        {t("global.porperty-reports.report")}
+                      </h4>
+                      <p className="text-gray-600">{reportItem?.report}</p>
+                    </div>
+                    <Divider />
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">
+                        {t("global.porperty-reports.changeStatus")}
+                      </h4>
+                      <CustomDropdown
+                        dropdownItems={statusOptions}
+                        selectedValue={statusOptions.find((el: any) => el.key === changedStatus)?.label}
+                        onChange={(val) => setChangedStatus(val)}
+                      />
+                    </div>
+                  </div>
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  {t("global.porperty-reports.close")}
                 </Button>
                 <Button
                   color="primary"
-                  onPress={() => {
-                    handleStatusChange();
-                  }}
+                  onPress={handleStatusChange}
+                  isDisabled={!changedStatus}
                 >
-                  Save Changes
+                  {t("global.porperty-reports.updateStatus")}
                 </Button>
               </ModalFooter>
             </>
           )}
         </ModalContent>
       </Modal>
-      <ReusableTable columns={tableCols} tableData={reportList}></ReusableTable>
-      {isLoading && (
-        <div className="flex flex-col items-center grow w-full h-full justify-center mt-auto">
-          <Spinner></Spinner>
-        </div>
-      )}
     </div>
   );
 };

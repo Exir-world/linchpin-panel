@@ -107,12 +107,20 @@ export interface PropertyItem {
 
 export interface PropertyDetail {
   id: number;
-  title: string;
+  brand: string;
+  model: string;
   code: string;
-  status: string; // You could change this to a union type if the possible statuses are known, e.g., 'good' | 'bad'
-  createdAt: string; // ISO date string (or use Date if you plan to convert it)
+  description: string | null;
+  status: string;
+  createdAt: string;
   organizationId: number;
   departmentId: number | null;
+  categoryId: number | null;
+  imageUrl: string | null;
+  features: {
+    id: number;
+    title: string;
+  }[];
 }
 
 // The nested category object on each feature
@@ -167,4 +175,13 @@ export interface PropertyReport {
   status: string;
   createdAt: string; // Use a string for ISO date format or Date if you want to convert it
   property: Property;
+}
+
+export interface CategoryFeature {
+  id: number;
+  title: string;
+  category: {
+    id: number;
+    title: string;
+  };
 }

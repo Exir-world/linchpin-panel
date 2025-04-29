@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --font-vazir: var(--font-vazir);
+    --font-iransans: var(--font-iransans);
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -10,4 +19,20 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-vazir {
+  font-family: var(--font-vazir);
+}
+
+.font-iransans {
+  font-family: var(--font-iransans);
 }

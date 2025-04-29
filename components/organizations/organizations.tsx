@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
+  Spinner,
 } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
@@ -37,16 +38,20 @@ const OrganizationsList = () => {
   const [data, setData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   const getOranizationList = async () => {
     try {
+      setIsLoading(true);
       const res = await Get("/organization/admin/organizations");
       if (res.status === 200) {
         setData(res.data);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -158,7 +163,14 @@ const OrganizationsList = () => {
         </div>
       </div>
       <div>
-        <ReusableTable tableData={data} columns={tableColumns}></ReusableTable>
+        {isLoading ? (
+          <div className="flex flex-col justify-center items-center h-[50vh] gap-4">
+            <Spinner color="primary" />
+            <span className="text-sm text-gray-500">{t("global.loading")}</span>
+          </div>
+        ) : (
+          <ReusableTable tableData={data} columns={tableColumns}></ReusableTable>
+        )}
       </div>
       {/*  !!!  Modal for creating an organization  !!! */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

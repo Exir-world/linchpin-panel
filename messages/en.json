@@ -2,6 +2,7 @@
   "global": {
     "home": "Home",
     "title": "Hello",
+    "select": "select",
     "main-menu": {
       "organizations": "Organizations",
       "reports": "Reports",
@@ -85,7 +86,6 @@
       "columns": {
         "id": "Id",
         "name": "Name",
-
         "creatorId": "CreatorId",
         "address": "Address",
         "description": "Description",
@@ -150,7 +150,7 @@
       "edit": "Edit",
       "show": "Show",
       "success": "Your changes have been saved!",
-      "error": " Something went wrong. Please try again.",
+      "error": "Something went wrong. Please try again.",
       "update": "Update",
       "delete": "Delete",
       "addnewPropery": "Add new propery",
@@ -169,7 +169,23 @@
       "brand": "Brand",
       "model": "Model",
       "adminComment": "Admin comment",
-      "loading": "Loading"
+      "loading": "Loading",
+      "category": "Category",
+      "selectAll": "Select All",
+      "upload": "Upload",
+      "description": "Description",
+      "categoryId": "Category",
+      "image": "Image",
+      "features": "Features",
+      "addFeature": "Add Feature",
+      "featureTitle": "Feature Title",
+      "save": "Save",
+      "categoryIdRequired": "Please select a category",
+      "featureValue": "Feature value",
+      "deleteConfirmation": "Delete Property Confirmation",
+      "deleteConfirmationMessage": "Are you sure you want to delete this property?",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     },
     "porperty-reports": {
       "userId": "User Id",
@@ -177,7 +193,21 @@
       "report": "Report",
       "status": "Status",
       "createdAt": "Created at",
-      "actions": "Actions"
+      "actions": "Actions",
+      "propertyCode": "Property code",
+      "changeStatus": "Change Status",
+      "newStatus": "New Status",
+      "updateStatus": "Update Status",
+      "reportDetails": "Report Details",
+      "loading": "Loading...",
+      "noReports": "No reports found",
+      "close": "Close",
+      "view": "View",
+      "delete": "Delete",
+      "deleteConfirmation": "Delete Confirmation",
+      "deleteConfirmationMessage": "Are you sure you want to delete this report?",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     },
     "category": {
       "createCat": "Create category",
@@ -194,10 +224,10 @@
       "modalTitle": "Edit Category & Features",
       "showDetails": "Show Details"
     },
-
     "loading": "Loading",
     "categoryId": "Category id",
     "palceholder": "Type here",
+    "uploadImg": "Upload image",
     "auth": {
       "phoneNumber": "Phone number",
       "password": "Password",

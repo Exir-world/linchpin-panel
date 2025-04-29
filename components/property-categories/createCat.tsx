@@ -22,7 +22,7 @@ type FormValues = {
   features: { value: string }[];
 };
 
-const CreateCategory = () => {
+const CreateCategory = ({ onCreate }: { onCreate: () => void }) => {
   const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
   const locale = useLocale();
   const t = useTranslations();
@@ -55,6 +55,7 @@ const CreateCategory = () => {
         title: t("global.alert.success"),
         color: "success",
       });
+      onCreate();
     } else {
       addToast({
         title: t("global.alert.error"),

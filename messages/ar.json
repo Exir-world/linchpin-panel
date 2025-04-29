@@ -2,6 +2,7 @@
   "global": {
     "home": "الصفحة الرئيسية",
     "title": "مرحباً",
+    "select": "اختيار",
     "main-menu": {
       "organizations": "المنظمات",
       "reports": "التقارير",
@@ -11,7 +12,9 @@
       "properties": "العقارات",
       "features": "الميزات",
       "categories": "الفئات",
-      "management": "الإدارة"
+      "management": "الإدارة",
+      "general": "عام",
+      "mainMenu": "القائمة الرئيسية"
     },
     "reports": {
       "selectDate": "حدد التاريخ",
@@ -164,9 +167,26 @@
       "unAssign": "إلغاء التخصيص",
       "addPropety": "إضافة عقار",
       "brand": "العلامة التجارية",
-      "model": "النموذج",
+      "model": "الموديل",
       "adminComment": "تعليق المسؤول",
-      "loading": "جاري التحميل"
+      "loading": "جاري التحميل",
+      "category": "الفئة",
+      "selectAll": "اختيار الكل",
+      "description": "الوصف",
+      "categoryId": "الفئة",
+      "organizationId": "المنظمة",
+      "departmentId": "القسم",
+      "image": "الصورة",
+      "features": "الميزات",
+      "addFeature": "إضافة ميزة",
+      "featureTitle": "عنوان الميزة",
+      "save": "حفظ",
+      "categoryIdRequired": "الرجاء اختيار فئة",
+      "featureValue": "قيمة الميزة",
+      "deleteConfirmation": "تأكيد حذف العقار",
+      "deleteConfirmationMessage": "هل أنت متأكد من حذف هذا العقار؟",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد"
     },
     "porperty-reports": {
       "userId": "هوية المستخدم",
@@ -174,7 +194,21 @@
       "report": "التقرير",
       "status": "الحالة",
       "createdAt": "تم الإنشاء في",
-      "actions": "الإجراءات"
+      "actions": "الإجراءات",
+      "propertyCode": "كود العقار",
+      "changeStatus": "تغيير الحالة",
+      "newStatus": "الحالة الجديدة",
+      "updateStatus": "تحديث الحالة",
+      "reportDetails": "تفاصيل التقرير",
+      "loading": "جاري التحميل...",
+      "noReports": "لم يتم العثور على تقارير",
+      "close": "إغلاق",
+      "view": "عرض",
+      "delete": "حذف",
+      "deleteConfirmation": "تأكيد الحذف",
+      "deleteConfirmationMessage": "هل أنت متأكد من حذف هذا التقرير؟",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد"
     },
     "category": {
       "createCat": "إنشاء فئة",
@@ -191,10 +225,10 @@
       "modalTitle": "تعديل الفئة والميزات",
       "showDetails": "عرض التفاصيل"
     },
-
     "loading": "جاري التحميل",
     "categoryId": "هوية الفئة",
     "palceholder": "اكتب هنا",
+    "uploadImg": "رفع صورة",
     "auth": {
       "phoneNumber": "رقم الهاتف",
       "password": "كلمة المرور",
@@ -209,6 +243,8 @@
       "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
       "Warning": "يرجى الحذر عند إجراء هذا الإجراء.",
       "noData": "لا توجد بيانات"
-    }
+    },
+    "general": "عام",
+    "management": "الإدارة"
   }
 }

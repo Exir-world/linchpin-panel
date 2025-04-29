@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
 import CustomDropdown from "../dropdown/dropdown";
 import clsx from "clsx";
-import { Button } from "@nextui-org/react";
+import { Button, Spinner } from "@nextui-org/react";
 import Icon from "../icon";
 import formatDate from "@/helpers/dateConverter";
 
@@ -21,6 +21,7 @@ const RequestsList = () => {
   const t = useTranslations("global.requests");
   const [status, setStatus] = useState("All");
   const [reqTypes, setReqTypes] = useState([] as ReqTypes[]);
+  const [isLoading, setIsLoading] = useState(true);
   const locale = useLocale();
   const router = useRouter();
   const cal = locale === "fa" ? "jalali" : "gregorian";
@@ -54,6 +55,7 @@ const RequestsList = () => {
         ? "requests"
         : `requests?status=${status}`;
     try {
+      setIsLoading(true);
       const res = await Get(url, {
         headers: {
           "Accept-Language": locale,
@@ -64,6 +66,8 @@ const RequestsList = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -222,10 +226,17 @@ const RequestsList = () => {
         </div>
       </div>
       <div>
-        <ReusableTable
-          columns={tableColumns}
-          tableData={requests}
-        ></ReusableTable>
+        {isLoading ? (
+          <div className="flex flex-col justify-center items-center h-[50vh] gap-4">
+            <Spinner color="primary" />
+            <span className="text-sm text-gray-500">{t("loading")}</span>
+          </div>
+        ) : (
+          <ReusableTable
+            columns={tableColumns}
+            tableData={requests}
+          ></ReusableTable>
+        )}
       </div>
     </div>
   );

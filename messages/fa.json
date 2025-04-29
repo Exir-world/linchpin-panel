@@ -2,6 +2,7 @@
   "global": {
     "home": "خانه",
     "title": "سلام",
+    "select": "انتخاب",
     "main-menu": {
       "organizations": "سازمان‌ها",
       "reports": "گزارش‌ها",
@@ -11,7 +12,9 @@
       "properties": "املاک",
       "features": "ویژگی‌ها",
       "categories": "دسته‌بندی‌ها",
-      "management": "مدیریت"
+      "management": "مدیریت",
+      "general": "عمومی",
+      "mainMenu": "منوی اصلی"
     },
     "reports": {
       "selectDate": "تاریخ را انتخاب کنید",
@@ -166,7 +169,22 @@
       "brand": "برند",
       "model": "مدل",
       "adminComment": "نظر مدیر",
-      "loading": "در حال بارگذاری"
+      "loading": "در حال بارگذاری",
+      "category": "دسته‌بندی",
+      "selectAll": "انتخاب همه",
+      "description": "توضیحات",
+      "categoryId": "دسته‌بندی",
+      "image": "تصویر",
+      "features": "ویژگی‌ها",
+      "addFeature": "افزودن ویژگی",
+      "featureTitle": "عنوان ویژگی",
+      "save": "ذخیره",
+      "categoryIdRequired": "لطفاً دسته‌بندی را انتخاب کنید",
+      "featureValue": "مقدار ویژگی",
+      "deleteConfirmation": "تایید حذف ملک",
+      "deleteConfirmationMessage": "آیا از حذف این ملک اطمینان دارید؟",
+      "cancel": "انصراف",
+      "confirm": "تایید"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",
@@ -174,7 +192,21 @@
       "report": "گزارش",
       "status": "وضعیت",
       "createdAt": "تاریخ ایجاد",
-      "actions": "عملیات"
+      "actions": "عملیات",
+      "propertyCode": "کد ملک",
+      "changeStatus": "تغییر وضعیت",
+      "newStatus": "وضعیت جدید",
+      "updateStatus": "به‌روزرسانی وضعیت",
+      "reportDetails": "جزئیات گزارش",
+      "loading": "در حال بارگذاری...",
+      "noReports": "گزارشی یافت نشد",
+      "close": "بستن",
+      "view": "مشاهده",
+      "delete": "حذف",
+      "deleteConfirmation": "تایید حذف",
+      "deleteConfirmationMessage": "آیا از حذف این گزارش اطمینان دارید؟",
+      "cancel": "انصراف",
+      "confirm": "تایید"
     },
     "category": {
       "createCat": "ایجاد دسته‌بندی",
@@ -191,10 +223,10 @@
       "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
       "showDetails": "نمایش جزئیات"
     },
-
     "loading": "در حال بارگذاری",
     "categoryId": "شناسه دسته‌بندی",
     "palceholder": "اینجا تایپ کنید",
+    "uploadImg": "آپلود تصویر",
     "auth": {
       "phoneNumber": "شماره تلفن",
       "password": "رمز عبور",
@@ -210,5 +242,8 @@
       "Warning": "لطفاً در انجام این اقدام احتیاط کنید.",
       "noData": "داده‌ای وجود ندارد"
     }
-  }
+  },
+  "general": "عمومی",
+  "management": "مدیریت",
+  "select": "انتخاب"
 }
