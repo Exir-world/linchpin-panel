@@ -15,15 +15,18 @@ enum PropertyStatusEnum {
   GOOD = "good",
   BROKEN = "broken",
 }
-
+type DropdownTypes = {
+  label: string
+  key: string
+}
 const PropertyDetails = () => {
   const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure()
   const [propertyDetail, setPropertyDetail] = useState({} as PropertyDetail);
   const [editMode, setEditMode] = useState(false);
-  const [orgList, setOrgList] = useState([]);
+  const [orgList, setOrgList] = useState<DropdownTypes[]>([]);
   const [orgId, setOrgId] = useState<any>(null);
   const [departmentList, setDepartmentList] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
+  const [categoryList, setCategoryList] = useState<DropdownTypes[]>([]);
   const [categoryId, setCategoryId] = useState<null | number>(null);
   const [features, setFeatures] = useState<
     { featureId?: number; value: string }[]
@@ -366,7 +369,7 @@ const PropertyDetails = () => {
                     field.onChange(Number(val));
                     setCategoryId(Number(val));
                   }}
-                  selectedValue={field.value}
+                  selectedValue={categoryList.find((el) => el.key === field.value)?.label}
                 />
               )}
             />
@@ -387,7 +390,7 @@ const PropertyDetails = () => {
                     setOrgId(numericVal);
                     field.onChange(numericVal);
                   }}
-                  selectedValue={field.value}
+                  selectedValue={orgList.find((el: any) => el.key === field.value)?.label}
                 />
               )}
             />
@@ -492,10 +495,10 @@ const PropertyDetails = () => {
         </div>
 
         {editMode && (
-          <div className="flex justify-between mt-8">
-            <Button 
-              onPress={handleDeleteClick} 
-              color="danger" 
+          <div className="flex justify-evenly mt-16 px-3">
+            <Button
+              onPress={handleDeleteClick}
+              color="danger"
               type="button"
               isLoading={isLoading}
             >
@@ -508,8 +511,8 @@ const PropertyDetails = () => {
         )}
       </form>
 
-      <Modal 
-        isOpen={isDeleteModalOpen} 
+      <Modal
+        isOpen={isDeleteModalOpen}
         onOpenChange={setIsDeleteModalOpen}
         size="sm"
       >
@@ -526,8 +529,8 @@ const PropertyDetails = () => {
                 <Button color="danger" variant="light" onPress={onClose}>
                   {t("cancel")}
                 </Button>
-                <Button 
-                  color="primary" 
+                <Button
+                  color="primary"
                   onPress={handleDeleteConfirm}
                   isLoading={isLoading}
                 >

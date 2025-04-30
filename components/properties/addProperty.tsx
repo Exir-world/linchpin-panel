@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import Icon from "../icon";
-import PhotoUploader from "../imageuploader/uploader";
 import FileUploader from "../imageuploader/uploader";
 import { Get, Post } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
@@ -23,14 +22,31 @@ enum PropertyStatusEnum {
   GOOD = "good",
   BROKEN = "broken",
 }
+
 type OrgListTypes = {
   key: string;
   label: string;
 };
+
 type UploadRes = {
-  originalName: string,
-  url: string
-}
+  originalName: string;
+  url: string;
+};
+
+type FormValues = {
+  code: string;
+  brand: string;
+  model: string;
+  status: string;
+  organizationId: string;
+  departmentId: string;
+  categoryId: string;
+  description: string;
+  features: Array<{
+    featureId: number;
+    value: string;
+  }>;
+};
 
 const AddProperty = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -41,10 +57,18 @@ const AddProperty = () => {
   const [categoryList, setCategoryList] = useState<any[]>([]);
   const [categoryResponse, setCategoryResponse] = useState<any[]>([]);
   const [features, setFeatures] = useState<any[]>([]);
-  const [uploadSuccessRes, setUploadSuccessRes] = useState<null | UploadRes[]>(null)
+  const [uploadSuccessRes, setUploadSuccessRes] = useState<UploadRes[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("global.properties");
   const locale = useLocale();
-  const { handleSubmit, register, control, setValue } = useForm();
+  
+  const { handleSubmit, register, control, setValue, formState: { errors } } = useForm<FormValues>({
+    defaultValues: {
+      organizationId: "3",
+      categoryId: "1",
+      status: PropertyStatusEnum.GOOD,
+    }
+  });
 
   const getOranizationList = async () => {
     try {
@@ -63,9 +87,13 @@ const AddProperty = () => {
         );
       }
     } catch (error) {
-      console.log(error);
+      addToast({
+        title: t("error"),
+        color: "danger",
+      });
     }
   };
+
 
   const getCategories = async () => {
     try {
@@ -83,25 +111,35 @@ const AddProperty = () => {
         setCategoryResponse(res.data);
       }
     } catch (error) {
-      console.log(error);
+      addToast({
+        title: t("error"),
+        color: "danger",
+      });
     }
   };
 
   const getDepartmentList = async () => {
     if (!orgId) return;
-    const res = await Get(`organization/${orgId}/departments`, {
-      headers: {
-        "Accept-Language": locale,
-      },
-    });
-    if (res.status === 200) {
-      const departments = res?.data.map((el: any) => ({
-        key: el.id,
-        label: el.title,
-      }));
-      const optional = { key: t("selectAll"), label: t("selectAll") };
-      const data = [optional, ...departments];
-      setDepartmentList(data as []);
+    try {
+      const res = await Get(`organization/${orgId}/departments`, {
+        headers: {
+          "Accept-Language": locale,
+        },
+      });
+      if (res.status === 200) {
+        const departments = res?.data.map((el: any) => ({
+          key: el.id,
+          label: el.title,
+        }));
+        const optional = { key: t("selectAll"), label: t("selectAll") };
+        const data = [optional, ...departments];
+        setDepartmentList(data as []);
+      }
+    } catch (error) {
+      addToast({
+        title: t("error"),
+        color: "danger",
+      });
     }
   };
 
@@ -120,37 +158,46 @@ const AddProperty = () => {
   }, [orgId]);
 
   const onsubmit = async (data: any) => {
-    const numericOrgId = parseInt(data.organizationId);
-    const departmentId = parseInt(data.departmentId);
-    const categoryId = parseInt(data.categoryId);
-    const imageUrl = uploadSuccessRes !== null ? uploadSuccessRes?.[0].url : ""
-    const res = await Post(`properties`, {
-      ...data,
-      organizationId: numericOrgId,
-      departmentId: departmentId,
-      categoryId,
-      imageUrl: imageUrl,
-    });
-    if (res.status === 201 || res.status === 200) {
-      addToast({
-        title: t("success"),
-        color: "success",
+    setIsLoading(true);
+    try {
+      const numericOrgId = parseInt(data.organizationId);
+      const departmentId = parseInt(data.departmentId);
+      const categoryId = parseInt(data.categoryId);
+      const imageUrl = uploadSuccessRes.length > 0 ? uploadSuccessRes[0].url : "";
+
+      const res = await Post(`properties`, {
+        ...data,
+        organizationId: numericOrgId,
+        departmentId: departmentId,
+        categoryId,
+        imageUrl: imageUrl,
       });
-      onClose();
-    } else {
+
+      if (res.status === 201 || res.status === 200) {
+        addToast({
+          title: t("success"),
+          color: "success",
+        });
+        onClose();
+      } else {
+        addToast({
+          title: t("error"),
+          color: "danger",
+        });
+      }
+    } catch (error) {
       addToast({
         title: t("error"),
         color: "danger",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-
   const handleUploadSuccess = (data: UploadRes[]) => {
-    console.log(data);
-    setUploadSuccessRes(data)
-  }
-
+    setUploadSuccessRes(data);
+  };
 
   return (
     <div>
@@ -167,24 +214,36 @@ const AddProperty = () => {
                 {t("addPropety")}
               </ModalHeader>
               <ModalBody className="overflow-y-auto max-h-[60vh] w-full">
-                <div className="flex flex-col items-center w-full  gap-2  ">
+                <div className="flex flex-col items-center w-full gap-2">
                   <form
                     onSubmit={handleSubmit(onsubmit)}
-                    className="flex flex-col items-center gap-2 w-full  p-2"
+                    className="flex flex-col items-center gap-2 w-full p-2"
                   >
-                    <div className="flex items-center gap-2 w-full justify-between ">
-                      <Input
-                        label={t("code")}
-                        {...register("code", { required: true })}
-                      ></Input>
-                      <Input
-                        label={t("brand")}
-                        {...register("brand", { required: true })}
-                      ></Input>
-                      <Input
-                        label={t("model")}
-                        {...register("model", { required: true })}
-                      ></Input>
+                    <div className="flex items-center gap-2 w-full justify-between">
+                      <div className="flex-1">
+                        <Input
+                          label={t("code")}
+                          {...register("code", { required: true })}
+                          isInvalid={!!errors.code}
+                          errorMessage={errors.code?.message as string}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <Input
+                          label={t("brand")}
+                          {...register("brand", { required: true })}
+                          isInvalid={!!errors.brand}
+                          errorMessage={errors.brand?.message as string}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <Input
+                          label={t("model")}
+                          {...register("model", { required: true })}
+                          isInvalid={!!errors.model}
+                          errorMessage={errors.model?.message as string}
+                        />
+                      </div>
                     </div>
                     <div className="grid grid-cols-4 gap-2 w-full p-3 justify-between">
                       <div className="flex flex-col gap-1">
@@ -209,6 +268,7 @@ const AddProperty = () => {
                         <Controller
                           name="organizationId"
                           control={control}
+                          defaultValue="1"
                           render={({ field }) => (
                             <CustomDropdown
                               dropdownItems={orgList}
@@ -218,8 +278,7 @@ const AddProperty = () => {
                                 setOrgId(numericVal);
                               }}
                               selectedValue={
-                                orgList.find((el: any) => el.key === orgId)
-                                  ?.label
+                                orgList.find((el: any) => el.key === orgId)?.label
                               }
                             />
                           )}
@@ -251,19 +310,21 @@ const AddProperty = () => {
                         <Controller
                           name="categoryId"
                           control={control}
+                          defaultValue="1"
                           render={({ field }) => (
                             <CustomDropdown
                               dropdownItems={categoryList}
                               onChange={(val) => {
                                 field.onChange(val);
-                                const categoryId =
-                                  typeof val === "string" ? parseInt(val) : val;
+                                const categoryId = typeof val === "string" ? parseInt(val) : val;
                                 const category = categoryResponse.find(
                                   (el) => el.id === categoryId
                                 );
-                                // console.log(category);
-                                setFeatures(category.features);
+                                setFeatures(category?.features || []);
                               }}
+                              selectedValue={
+                                categoryList.find((el: any) => el.key === field.value)?.label
+                              }
                             />
                           )}
                         />
@@ -290,7 +351,7 @@ const AddProperty = () => {
                     </div>
                     <div className="w-full py-2 flex items-center gap-4 ">
                       <div className="">
-                        <FileUploader onUploadSuccess={(data) => handleUploadSuccess(data)}></FileUploader>
+                        <FileUploader autoUpload onUploadSuccess={(data) => handleUploadSuccess(data)}></FileUploader>
                       </div>
                       <div className="grow">
                         <Textarea
@@ -300,17 +361,21 @@ const AddProperty = () => {
                         ></Textarea>
                       </div>
                     </div>
-                    <div className="flex gap-4 py-5">
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        {t("close")}
-                      </Button>
-                      <Button color="primary" type="submit">
-                        {t("addnewPropery")}
-                      </Button>
-                    </div>
                   </form>
                 </div>
               </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  {t("cancel")}
+                </Button>
+                <Button
+                  color="primary"
+                  onPress={() => handleSubmit(onsubmit)()}
+                  isLoading={isLoading}
+                >
+                  {t("save")}
+                </Button>
+              </ModalFooter>
             </>
           )}
         </ModalContent>
