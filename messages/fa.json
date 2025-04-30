@@ -3,6 +3,8 @@
     "home": "خانه",
     "title": "سلام",
     "select": "انتخاب",
+    "pleaseSelect": "لطفا انتخاب کنید",
+
     "main-menu": {
       "organizations": "سازمان‌ها",
       "reports": "گزارش‌ها",

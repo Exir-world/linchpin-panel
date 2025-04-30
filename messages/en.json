@@ -3,6 +3,7 @@
     "home": "Home",
     "title": "Hello",
     "select": "select",
+    "pleaseSelect": "Please select",
     "main-menu": {
       "organizations": "Organizations",
       "reports": "Reports",

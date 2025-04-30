@@ -167,6 +167,7 @@ const PropertyReports = () => {
         color: "success",
       });
       onClose();
+      getAllReports() // refresh the data 
     } else {
       addToast({
         title: t("global.alert.error"),
