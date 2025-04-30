@@ -7,7 +7,6 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
 
 interface DropdownItemType {
   key: string;
@@ -27,10 +26,9 @@ export default function CustomDropdown({
   onChange,
   disabled = false,
 }: CustomDropdownProps) {
-  const t = useTranslations()
   // استفاده از state محلی برای ذخیره مقدار انتخاب شده
   const [localValue, setLocalValue] = React.useState<string>(
-    selectedValue || t("global.pleaseSelect")
+    selectedValue || dropdownItems[0]?.key || ""
   );
 
   // در صورتی که مقدار props تغییر کرد، state محلی هم به‌روز می‌شود

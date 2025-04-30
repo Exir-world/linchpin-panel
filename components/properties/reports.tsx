@@ -198,9 +198,9 @@ const PropertyReports = () => {
       uid: "status",
       render: (record: PropertyReport) => (
         <span className={`px-2 py-1 rounded-full text-sm ${record.status === "pending" ? "bg-yellow-100 text-yellow-800" :
-            record.status === "repairing" ? "bg-blue-100 text-blue-800" :
-              record.status === "repaired" ? "bg-green-100 text-green-800" :
-                "bg-red-100 text-red-800"
+          record.status === "repairing" ? "bg-blue-100 text-blue-800" :
+            record.status === "repaired" ? "bg-green-100 text-green-800" :
+              "bg-red-100 text-red-800"
           }`}>
           {t(`global.reports.${record.status}`)}
         </span>
@@ -235,6 +235,7 @@ const PropertyReports = () => {
       ),
     },
   ];
+  console.log(categoryIds, 'from here');
 
   return (
     <div className="p-4">
@@ -246,7 +247,7 @@ const PropertyReports = () => {
             </p>
             <CustomDropdown
               dropdownItems={categoryIds}
-              selectedValue={categoryIds.find((el: any) => el.key === catid)?.label}
+              // selectedValue={categoryIds.find((el: any) => el.key === catid)?.label}
               onChange={(val) => handleCatId(val)}
             />
           </div>
