@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroui/system": "^2.4.13",
-    "@heroui/theme": "^2.4.13",
+    "@heroui/date-input": "^2.3.18",
+    "@heroui/system": "^2.4.15",
+    "@heroui/theme": "^2.4.15",
     "@heroui/toast": "^2.0.7",
     "@nextui-org/react": "2.0.22",
     "@rpldy/upload-button": "^1.9.1",

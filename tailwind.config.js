@@ -7,9 +7,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "// Or if using `src` directory:\r\n    \"./src/**/*.{js,ts,jsx,tsx,mdx}\"",
+    "// Or if using `src` directory:\\r\\n    \\\"./src/**/*.{js,ts,jsx,tsx,mdx}\\\"",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@heroui/theme/dist/components/(toast|spinner).js"
+    "./node_modules/@heroui/theme/dist/components/(date-input|toast|form|spinner).js"
   ],
   theme: {
     extend: {

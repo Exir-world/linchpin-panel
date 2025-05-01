@@ -39,7 +39,12 @@
     "attendance": {
       "date": "Date",
       "duration": "Duration",
-      "attendance": "Attendance"
+      "attendance": "Attendance",
+      "edit": "Edit",
+      "show": "Show",
+      "save": "Save",
+      "entry": "Entry",
+      "exit": "Exit"
     },
     "requests": {
       "filter": {

@@ -235,7 +235,6 @@ const PropertyReports = () => {
       ),
     },
   ];
-  console.log(categoryIds, 'from here');
 
   return (
     <div className="p-4">

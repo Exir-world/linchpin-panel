@@ -110,6 +110,7 @@ const UserProperties = () => {
         title: t("success"),
         color: "success",
       });
+      getUserProperties()
     }
   };
 
