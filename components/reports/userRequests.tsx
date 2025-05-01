@@ -133,8 +133,9 @@ export const UserRequests = () => {
           },
         }
       );
-      if (res.status === 201) {
+      if (res.status === 201 || res.status === 200) {
         onClose();
+        getUsersRequests()
       }
     } catch (error) {
       console.log(error);
@@ -173,12 +174,12 @@ export const UserRequests = () => {
           record.status === "CANCELLED"
             ? "bg-[#6C757D]"
             : record.status === "PENDING"
-            ? "bg-[#FFC107] "
-            : record.status === "APPROVED"
-            ? "bg-[#28A745]"
-            : record.status === "REJECTED"
-            ? "bg-[#DC3545]"
-            : "bg-black";
+              ? "bg-[#FFC107] "
+              : record.status === "APPROVED"
+                ? "bg-[#28A745]"
+                : record.status === "REJECTED"
+                  ? "bg-[#DC3545]"
+                  : "bg-black";
         return (
           <div>
             <p

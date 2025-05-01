@@ -4,6 +4,7 @@ import { NextUIProvider } from "@nextui-org/system";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
 import { ToastProvider } from "@heroui/toast";
+import { FontProvider } from "../../components/fontProvider/FontProvider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         attribute="class"
         {...themeProps}
       >
+
         {children}
       </NextThemesProvider>
     </NextUIProvider>

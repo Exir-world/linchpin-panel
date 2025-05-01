@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { getCookie, setCookie } from "cookies-next";
-import { error } from "console";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 

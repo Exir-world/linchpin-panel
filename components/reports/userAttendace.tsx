@@ -3,13 +3,19 @@ import DatePicker from "react-multi-date-picker";
 import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import { useTranslations } from "next-intl";
-import { Get } from "@/lib/axios";
+import { useLocale, useTranslations } from "next-intl";
+import { Get, Patch } from "@/lib/axios";
 import { useSearchParams } from "next/navigation";
 import ReusableTable from "../reusabelTable/table";
 import { format as formatJalali, parseISO, toDate } from "date-fns-jalali";
-import { format } from "date-fns";
-import { Spinner } from "@nextui-org/react";
+import { format, setHours, setMinutes } from "date-fns";
+import { Button, Input, Spinner, Tooltip } from "@nextui-org/react";
+import { Controller, useForm } from "react-hook-form";
+import { TimeInput } from "@heroui/date-input";
+import { Time } from "@internationalized/date";
+import useDir from "@/hooks/useDirection";
+import { addToast } from "@heroui/toast";
+import Icon from "../icon";
 
 interface InputData {
   stops: any[];
@@ -24,6 +30,9 @@ interface InputData {
 interface TimeEntry {
   in: string; // زمان ورود به فرمت HH:mm
   out: string; // زمان خروج به فرمت HH:mm
+  inDate: string; // تاریخ ورود به فرمت YYYY-MM-DD
+  outDate: string; // تاریخ خروج به فرمت YYYY-MM-DD
+  attendanceId: number;
 }
 
 interface OutputData {
@@ -39,7 +48,9 @@ const UserAttendace = () => {
   const [endDate, setEndDate] = useState<Date | any>("");
   const [reportData, setReportData] = useState([] as OutputData[]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [isEditDate, setIsEditDate] = useState(false);
+  const { register, handleSubmit, control } = useForm();
+  const locale = useLocale();
   const id = params.get("id");
 
   const formatDateToLocal = (date: Date): string => {
@@ -86,12 +97,16 @@ const UserAttendace = () => {
 
     return Object.keys(grouped).map((date) => {
       const entries = grouped[date];
+
       const times: TimeEntry[] = entries.map((entry) => {
         const checkIn = entry.checkIn ? new Date(entry.checkIn) : null;
         const checkOut = entry.checkOut ? new Date(entry.checkOut) : null;
         return {
           in: checkIn ? formatTimeToLocal(checkIn) : "-",
           out: checkOut ? formatTimeToLocal(checkOut) : "-",
+          inDate: checkIn ? checkIn.toISOString() : "-",
+          outDate: checkOut ? checkOut.toISOString() : "-",
+          attendanceId: entry.id,
         };
       });
 
@@ -123,7 +138,13 @@ const UserAttendace = () => {
       if (res.status === 200) {
         const reports = groupByDate(res.data);
 
-        setReportData(reports);
+        const reportsWithId = reports.map((report, index) => ({
+          ...report,
+          id: res.data[index].id, // اضافه کردن شناسه به هر گزارش
+        }));
+        console.log(reportsWithId);
+
+        setReportData([...reportsWithId]);
       }
     } catch (error) {
       throw new Error("failed to fetch");
@@ -154,16 +175,178 @@ const UserAttendace = () => {
     {
       name: t("global.attendance.attendance"),
       uid: "times",
-      render: (record: OutputData) => (
-        <div className="flex flex-col gap-1">
-          {record.times.map((el, idx) => (
-            <div key={idx} className="flex justify-start gap-4">
-              <span>{el.in}</span>
-              <span>{el.out}</span>
-            </div>
-          ))}
-        </div>
-      ),
+      render: (record: OutputData) => {
+        return (
+          <div className="flex flex-col gap-1">
+            {record.times.map((el, idx) => {
+              const defaultIn = el.in;
+              const defaultOut = el.out;
+
+              return (
+                <div key={idx} className="flex justify-start gap-4">
+                  {isEditDate ? (
+                    <form
+                      onSubmitCapture={handleSubmit(async (data, e) => {
+                        e?.preventDefault();
+                        const checkInTime = data.times?.[idx]?.checkIn;
+                        const checkOutTime = data.times?.[idx]?.checkOut;
+
+                        if (!checkInTime || !checkOutTime) {
+                          return;
+                        }
+
+                        const inDateObj = parseISO(el.inDate);
+                        const [checkInHour, checkInMinute] = checkInTime
+                          .split(":")
+                          .map(Number);
+                        const [checkOutHour, checkOutMinute] = checkOutTime
+                          .split(":")
+                          .map(Number);
+
+                        const newCheckInDate = setMinutes(
+                          setHours(inDateObj, checkInHour),
+                          checkInMinute
+                        );
+                        const newCheckOutDate = setMinutes(
+                          setHours(inDateObj, checkOutHour),
+                          checkOutMinute
+                        );
+
+                        const checkInFull = newCheckInDate.toISOString();
+                        const checkOutFull = newCheckOutDate.toISOString();
+
+                        console.log({
+                          checkIn: checkInFull,
+                          checkOut: checkOutFull,
+                          attendanceId: el.attendanceId,
+                        });
+                        const params = {
+                          checkIn: checkInFull,
+                          checkOut: checkOutFull,
+                          attendanceId: el.attendanceId,
+                        };
+                        const res = await Patch(
+                          `attendance/admin`,
+                          { ...params },
+                          {
+                            headers: {
+                              "Accept-Language": locale,
+                            },
+                          }
+                        );
+
+                        if (res.status === 200 || res.status === 201) {
+                          getUserAttendanceReport();
+                          addToast({
+                            title: t("global.alert.success"),
+                            color: "success",
+                          });
+                        }
+                      })}
+                      className="flex gap-2 items-end"
+                    >
+                        <div className="flex flex-col gap-1">
+                        <p className="text-xs">
+                          {t("global.attendance.entry")}
+                        </p>
+                        <Controller
+                          name={`times.${idx}.checkIn`}
+                          control={control}
+                          defaultValue={defaultIn}
+                          render={({ field }) => (
+                          <input
+                            {...field}
+                            type="time"
+                            style={{
+                            padding: "5px 10px",
+                            border: "1px solid #ccc",
+                            borderRadius: "5px",
+                            fontSize: "14px",
+                            textAlign: "center",
+                            }}
+                            onChange={(e) => {
+                            const updatedValue = e.target.value;
+                            field.onChange(updatedValue); // Update the current field value
+                            }}
+                          />
+                          )}
+                        />
+                        </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-xs">{t("global.attendance.exit")}</p>
+                        <Controller
+                          name={`times.${idx}.checkOut`}
+                          control={control}
+                          defaultValue={defaultOut}
+                          render={({ field }) => (
+                            <input
+                              {...field}
+                              type="time"
+                              style={{
+                                padding: "5px 10px",
+                                border: "1px solid #ccc",
+                                borderRadius: "5px",
+                                fontSize: "14px",
+                                textAlign: "center",
+                              }}
+                            />
+                          )}
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition text-xs"
+                      >
+                        {t("global.attendance.save")}
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="flex gap-2 items-center p-1">
+                      <div className="flex flex-col gap-1">
+                        {/* <p
+                          className="text-xs font-medium text-gray-600"
+                          style={{
+                            marginBottom: "4px",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {t("global.attendance.entry")}
+                        </p> */}
+
+                        <Tooltip
+                          content={t("global.attendance.entry")}
+                          color="success"
+                        >
+                          <span>{el.in}</span>
+                        </Tooltip>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        {/* <p
+                          className="text-xs font-medium text-gray-600"
+                          style={{
+                            marginBottom: "4px",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {t("global.attendance.exit")}
+                        </p> */}
+
+                        <Tooltip
+                          content={t("global.attendance.exit")}
+                          color="secondary"
+                        >
+                          <span>{el.out}</span>
+                        </Tooltip>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      },
     },
   ];
 
@@ -175,7 +358,7 @@ const UserAttendace = () => {
     <div>
       <div className="flex items-center gap-3 pb-3">
         <div className="flex flex-col gap-1">
-          <span>{t("global.reports.startDate")}</span>
+          <span className="text-sm">{t("global.reports.startDate")}</span>
           <DatePicker
             value={startDate}
             onChange={(val) => handleStartDate(val)}
@@ -193,7 +376,7 @@ const UserAttendace = () => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <span>{t("global.reports.endDate")}</span>
+          <span className="text-sm">{t("global.reports.endDate")}</span>
           <DatePicker
             value={endDate}
             onChange={(val) => handleEndDate(val)}
@@ -209,6 +392,14 @@ const UserAttendace = () => {
               border: "1px solid #ccc",
             }}
           />
+        </div>
+        <div>
+          <Button onPress={() => setIsEditDate(!isEditDate)}>
+            {isEditDate
+              ? t("global.attendance.show")
+              : t("global.attendance.edit")}
+            {/* <Icon name="file"></Icon> */}
+          </Button>
         </div>
       </div>
       {isLoading && (
