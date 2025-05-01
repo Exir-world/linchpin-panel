@@ -243,9 +243,9 @@ const UserAttendace = () => {
                           });
                         }
                       })}
-                      className="flex gap-2 items-end "
+                      className="flex gap-2 items-end"
                     >
-                      <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-1">
                         <p className="text-xs">
                           {t("global.attendance.entry")}
                         </p>
@@ -254,20 +254,24 @@ const UserAttendace = () => {
                           control={control}
                           defaultValue={defaultIn}
                           render={({ field }) => (
-                            <input
-                              {...field}
-                              type="time"
-                              style={{
-                                padding: "5px 10px",
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                fontSize: "14px",
-                                textAlign: "center",
-                              }}
-                            />
+                          <input
+                            {...field}
+                            type="time"
+                            style={{
+                            padding: "5px 10px",
+                            border: "1px solid #ccc",
+                            borderRadius: "5px",
+                            fontSize: "14px",
+                            textAlign: "center",
+                            }}
+                            onChange={(e) => {
+                            const updatedValue = e.target.value;
+                            field.onChange(updatedValue); // Update the current field value
+                            }}
+                          />
                           )}
                         />
-                      </div>
+                        </div>
                       <div className="flex flex-col gap-1">
                         <p className="text-xs">{t("global.attendance.exit")}</p>
                         <Controller
