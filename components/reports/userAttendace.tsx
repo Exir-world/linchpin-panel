@@ -45,14 +45,17 @@ const UserAttendace = () => {
   const [endDate, setEndDate] = useState<Date | any>("");
   const [reportData, setReportData] = useState([] as OutputData[]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEditDate, setIsEditDate] = useState(false);
   //
-  const [exitHour, setExitHour] = useState("");
-  const [entrytHour, setEntryHour] = useState("");
   const [editRowId, setEditRowId] = useState<number | null>(null);
-  const [timePickersState, setTimePickersState] = useState<
-    { attendanceId: number; checkIn: string; checkOut: string }[]
-  >([]);
+  const [timePickersState, setTimePickersState] = useState<{
+    attendanceId: number | null;
+    checkIn: string;
+    checkOut: string;
+  }>({
+    attendanceId: null,
+    checkIn: "",
+    checkOut: "",
+  });
 
   //
   const locale = useLocale();
@@ -147,7 +150,6 @@ const UserAttendace = () => {
           ...report,
           id: res.data[index].id, // اضافه کردن شناسه به هر گزارش
         }));
-        console.log(reportsWithId);
 
         setReportData([...reportsWithId]);
       }
@@ -168,22 +170,62 @@ const UserAttendace = () => {
     setEndDate(new Date(gregorianDate).toISOString());
   };
 
-  const handleExiteDate = (attendanceId: number, value: DateObject | any) => {
-    const isoString = value?.toDate?.()?.toISOString();
-    // setExitHour(isoString);
-    //
+  const handleExiteDate = (
+    attendanceId: any,
+    value: any,
+    originalDateObj: any
+  ) => {
+    if (!value) return;
+
+    const selectedTime = value.toDate();
+    const baseDate = new Date(originalDateObj);
+
+    if (isNaN(baseDate.getTime())) {
+      console.error("⚠️ Invalid base date:", originalDateObj);
+      return;
+    }
+
+    baseDate.setHours(selectedTime.getHours());
+    baseDate.setMinutes(selectedTime.getMinutes());
+    baseDate.setSeconds(0);
+    baseDate.setMilliseconds(0);
+
+    const isoString = baseDate.toISOString();
+
     setTimePickersState((prev) => ({
       ...prev,
-      checkOut: isoString,
       attendanceId,
+      checkOut: isoString,
     }));
   };
 
-  const handleEntryDate = (attendanceId: number, value: DateObject | any) => {
-    const isoString = value?.toDate?.()?.toISOString();
-    // setEntryHour(isoString);
-    //
-    setTimePickersState((prev) => ({ ...prev, checkIn: isoString }));
+  const handleEntryDate = (
+    attendanceId: any,
+    value: any,
+    originalDateObj: any
+  ) => {
+    if (!value) return;
+
+    const selectedTime = value.toDate(); // این ساعت کاربره
+    const baseDate = new Date(originalDateObj); // این باید یک Date واقعی باشه
+
+    if (isNaN(baseDate.getTime())) {
+      console.error("⚠️ Invalid base date:", originalDateObj);
+      return;
+    }
+
+    baseDate.setHours(selectedTime.getHours());
+    baseDate.setMinutes(selectedTime.getMinutes());
+    baseDate.setSeconds(0);
+    baseDate.setMilliseconds(0);
+
+    const isoString = baseDate.toISOString();
+
+    setTimePickersState((prev) => ({
+      ...prev,
+      attendanceId,
+      checkIn: isoString,
+    }));
   };
 
   const hanldeEditHours = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -234,44 +276,58 @@ const UserAttendace = () => {
                       className="flex gap-3  items-end "
                       onSubmit={(e) => hanldeEditHours(e)}
                     >
-                      <div className="flex flex-col gap-2 w-32">
-                        <p className="text-xs text-default-500">
-                          {t("global.attendance.entry")}
-                        </p>
-                        <DatePicker
-                          style={{ width: "100px" }}
-                          disableDayPicker
-                          format="hh:mm:ss A"
-                          plugins={[<TimePicker />]}
-                          onChange={(value) => {
-                            handleEntryDate(el.attendanceId, value);
-                          }}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 w-32">
-                        <p className="text-xs">{t("global.attendance.exit")}</p>
-                        <DatePicker
-                          style={{ width: "100px" }}
-                          disableDayPicker
-                          format="hh:mm:ss A"
-                          onChange={(value) => {
-                            handleExiteDate(el.attendanceId, value);
-                          }}
-                          plugins={[<TimePicker />]}
-                        />
+                      <div className="flex gap-2 items-center">
+                        <div className="flex flex-col gap-2 w-32">
+                          <p className="text-xs text-default-500">
+                            {t("global.attendance.entry")}
+                          </p>
+                          <DatePicker
+                            style={{ width: "100px" }}
+                            disableDayPicker
+                            format="hh:mm:ss A"
+                            plugins={[<TimePicker />]}
+                            onChange={(value) => {
+                              handleEntryDate(
+                                el.attendanceId,
+                                value,
+                                el.inDate
+                              );
+                            }}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1 w-32">
+                          <p className="text-xs">
+                            {t("global.attendance.exit")}
+                          </p>
+                          <DatePicker
+                            style={{ width: "100px" }}
+                            disableDayPicker
+                            format="hh:mm:ss A"
+                            onChange={(value) => {
+                              handleExiteDate(
+                                el.attendanceId,
+                                value,
+                                el.outDate
+                              );
+                            }}
+                            plugins={[<TimePicker />]}
+                          />
+                        </div>
                       </div>
 
-                      <Button type="submit" size="sm" color="success">
-                        {t("global.attendance.save")}
-                      </Button>
-                      <Button
-                        size="sm"
-                        type="button"
-                        color="danger"
-                        onClick={() => setEditRowId(null)}
-                      >
-                        {t("global.attendance.cancel")}
-                      </Button>
+                      <div className="flex gap-2 items-center">
+                        <Button type="submit" size="sm" color="success">
+                          {t("global.attendance.save")}
+                        </Button>
+                        <Button
+                          size="sm"
+                          type="button"
+                          color="danger"
+                          onClick={() => setEditRowId(null)}
+                        >
+                          {t("global.attendance.cancel")}
+                        </Button>
+                      </div>
                     </form>
                   ) : (
                     <div className="flex gap-5 items-center">
@@ -293,7 +349,15 @@ const UserAttendace = () => {
                         isIconOnly
                         color="primary"
                         variant="flat"
-                        onClick={() => setEditRowId(el.attendanceId)}
+                        onClick={() => {
+                          setEditRowId(el.attendanceId);
+                          // clear the state before setting the new one
+                          setTimePickersState({
+                            attendanceId: el.attendanceId,
+                            checkIn: "",
+                            checkOut: "",
+                          });
+                        }}
                       >
                         <Icon name="square-pen"></Icon>
                         {/* {t("global.attendance.edit")} */}
