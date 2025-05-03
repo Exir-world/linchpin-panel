@@ -1,6 +1,6 @@
 {
   "global": {
-    "home": "صفحه اصلی",
+    "home": "خانه",
     "title": "سلام",
     "select": "انتخاب",
     "pleaseSelect": "لطفاً انتخاب کنید",
@@ -9,7 +9,7 @@
       "reports": "گزارش‌ها",
       "requests": "درخواست‌ها",
       "salary-slip": "فیش حقوقی",
-      "employees": "کارکنان",
+      "employees": "کارمندان",
       "properties": "اموال",
       "features": "ویژگی‌ها",
       "categories": "دسته‌بندی‌ها",
@@ -33,7 +33,7 @@
       "broken": "خراب",
       "category": "دسته‌بندی",
       "status": "وضعیت",
-      "reportAndDetail": "جزئیات گزارش اموال",
+      "reportAndDetail": "جزئیات گزارش ملک",
       "reportCode": "کد گزارش"
     },
     "attendance": {
@@ -44,12 +44,13 @@
       "show": "نمایش",
       "save": "ذخیره",
       "entry": "ورود",
-      "exit": "خروج"
+      "exit": "خروج",
+      "cancel": "انصراف"
     },
     "requests": {
       "filter": {
         "pending": "در انتظار",
-        "approved": "تأیید شده",
+        "approved": "تایید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
         "all": "همه"
@@ -63,9 +64,9 @@
       "startTime": "زمان شروع",
       "endTime": "زمان پایان",
       "reviewedById": "بررسی شده توسط",
-      "reviewedAt": "زمان بررسی",
-      "createdAt": "ایجاد شده در",
-      "updatedAt": "به‌روزرسانی شده در",
+      "reviewedAt": "تاریخ بررسی",
+      "createdAt": "تاریخ ایجاد",
+      "updatedAt": "تاریخ به‌روزرسانی",
       "actions": "عملیات",
       "details": "جزئیات",
       "firstname": "نام",
@@ -76,12 +77,12 @@
       "selectDate": "انتخاب تاریخ",
       "checkRequest": "بررسی درخواست",
       "reject": "رد",
-      "approve": "تأیید",
+      "approve": "تایید",
       "loading": "در حال بارگذاری"
     },
     "organizations": {
       "create": "ایجاد",
-      "update": "به‌روزرسانی",
+      "update": "ویرایش",
       "create-org": "ایجاد سازمان",
       "edit-org": "ویرایش سازمان",
       "close": "بستن",
@@ -92,7 +93,7 @@
       "columns": {
         "id": "شناسه",
         "name": "نام",
-        "creatorId": "شناسه ایجادکننده",
+        "creatorId": "شناسه ایجاد کننده",
         "address": "آدرس",
         "description": "توضیحات",
         "actions": "عملیات"
@@ -108,10 +109,10 @@
       "isDeleted": "حذف شده",
       "details": "جزئیات",
       "createUser": "ایجاد کاربر",
-      "cancel": "لغو",
-      "update": "به‌روزرسانی",
+      "cancel": "انصراف",
+      "update": "ویرایش",
       "nickname": "نام مستعار",
-      "needToLocation": "نیاز به موقعیت",
+      "needToLocation": "نیاز به مکان",
       "teamId": "شناسه تیم",
       "shift": "شیفت",
       "reports": "گزارش‌ها",
@@ -129,7 +130,7 @@
           "teamId": "تیم",
           "shiftId": "شیفت",
           "salary": "حقوق",
-          "needToLocation": "نیاز به موقعیت"
+          "needToLocation": "نیاز به مکان"
         },
         "firstname": "نام",
         "nationalCode": "کد ملی",
@@ -144,20 +145,20 @@
     },
     "properties": {
       "organization": "سازمان",
-      "department": "بخش",
+      "department": "دپارتمان",
       "id": "شناسه",
       "title": "عنوان",
       "code": "کد",
       "status": "وضعیت",
-      "createdAt": "ایجاد شده در",
+      "createdAt": "تاریخ ایجاد",
       "organizationId": "شناسه سازمان",
-      "departmentId": "شناسه بخش",
+      "departmentId": "شناسه دپارتمان",
       "details": "جزئیات",
       "edit": "ویرایش",
       "show": "نمایش",
       "success": "تغییرات شما ذخیره شد!",
-      "error": "مشکلی پیش آمده است. لطفاً دوباره امتحان کنید.",
-      "update": "به‌روزرسانی",
+      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "update": "ویرایش",
       "delete": "حذف",
       "addnewPropery": "افزودن ملک جدید",
       "userId": "شناسه کاربر",
@@ -166,7 +167,7 @@
       "property": "ملک",
       "imageUrl": "آدرس تصویر",
       "assignProperty": "اختصاص ملک",
-      "noPropertytoAssign": "هیچ ملکی برای اختصاص وجود ندارد",
+      "noPropertytoAssign": "ملکی برای اختصاص وجود ندارد",
       "close": "بستن",
       "assign": "اختصاص",
       "actions": "عملیات",
@@ -188,32 +189,32 @@
       "save": "ذخیره",
       "categoryIdRequired": "لطفاً یک دسته‌بندی انتخاب کنید",
       "featureValue": "مقدار ویژگی",
-      "deleteConfirmation": "تأیید حذف ملک",
+      "deleteConfirmation": "تایید حذف ملک",
       "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این ملک را حذف کنید؟",
-      "cancel": "لغو",
-      "confirm": "تأیید"
+      "cancel": "انصراف",
+      "confirm": "تایید"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",
       "propertyId": "شناسه ملک",
       "report": "گزارش",
       "status": "وضعیت",
-      "createdAt": "ایجاد شده در",
+      "createdAt": "تاریخ ایجاد",
       "actions": "عملیات",
       "propertyCode": "کد ملک",
       "changeStatus": "تغییر وضعیت",
       "newStatus": "وضعیت جدید",
-      "updateStatus": "به‌روزرسانی وضعیت",
+      "updateStatus": "بروزرسانی وضعیت",
       "reportDetails": "جزئیات گزارش",
       "loading": "در حال بارگذاری...",
-      "noReports": "هیچ گزارشی یافت نشد",
+      "noReports": "گزارشی یافت نشد",
       "close": "بستن",
       "view": "مشاهده",
       "delete": "حذف",
-      "deleteConfirmation": "تأیید حذف",
+      "deleteConfirmation": "تایید حذف",
       "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این گزارش را حذف کنید؟",
-      "cancel": "لغو",
-      "confirm": "تأیید"
+      "cancel": "انصراف",
+      "confirm": "تایید"
     },
     "category": {
       "createCat": "ایجاد دسته‌بندی",
@@ -222,9 +223,9 @@
       "remove": "حذف",
       "create": "ایجاد",
       "close": "بستن",
-      "cancel": "لغو",
+      "cancel": "انصراف",
       "save": "ذخیره",
-      "noFeaturesToEdit": "هیچ ویژگی برای ویرایش وجود ندارد",
+      "noFeaturesToEdit": "ویژگی برای ویرایش وجود ندارد",
       "feature": "ویژگی",
       "categoryTitle": "عنوان دسته‌بندی",
       "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
@@ -239,14 +240,14 @@
       "password": "رمز عبور",
       "login": "ورود",
       "formError": {
-        "required": "این فیلد الزامی است",
-        "invalid": "مقدار فیلد نامعتبر است"
+        "required": "این فیلد اجباری است",
+        "invalid": "مقدار نامعتبر"
       }
     },
     "alert": {
       "success": "تغییرات شما ذخیره شد!",
-      "error": "مشکلی پیش آمده است. لطفاً دوباره امتحان کنید.",
-      "Warning": "لطفاً با احتیاط عمل کنید.",
+      "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
+      "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
       "noData": "داده‌ای وجود ندارد"
     }
   }
