@@ -11,11 +11,9 @@ import { format as formatJalali, parseISO, toDate } from "date-fns-jalali";
 import { format, setHours, setMinutes } from "date-fns";
 import { Button, Input, Spinner, Tooltip } from "@nextui-org/react";
 import { Controller, useForm } from "react-hook-form";
-import { TimeInput } from "@heroui/date-input";
-import { Time } from "@internationalized/date";
-import useDir from "@/hooks/useDirection";
-import { addToast } from "@heroui/toast";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import Icon from "../icon";
+import { addToast } from "@heroui/toast";
 
 interface InputData {
   stops: any[];
@@ -49,7 +47,15 @@ const UserAttendace = () => {
   const [reportData, setReportData] = useState([] as OutputData[]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditDate, setIsEditDate] = useState(false);
-  const { register, handleSubmit, control } = useForm();
+  //
+  const [exitHour, setExitHour] = useState("");
+  const [entrytHour, setEntryHour] = useState("");
+  const [editRowId, setEditRowId] = useState<number | null>(null);
+  const [timePickersState, setTimePickersState] = useState<
+    { attendanceId: number; checkIn: string; checkOut: string }[]
+  >([]);
+
+  //
   const locale = useLocale();
   const id = params.get("id");
 
@@ -163,6 +169,45 @@ const UserAttendace = () => {
     setEndDate(new Date(gregorianDate).toISOString());
   };
 
+  const handleExiteDate = (attendanceId: number, value: DateObject | any) => {
+    const isoString = value?.toDate?.()?.toISOString();
+    // setExitHour(isoString);
+    //
+    setTimePickersState((prev) => ({
+      ...prev,
+      checkOut: isoString,
+      attendanceId,
+    }));
+  };
+
+  const handleEntryDate = (attendanceId: number, value: DateObject | any) => {
+    const isoString = value?.toDate?.()?.toISOString();
+    // setEntryHour(isoString);
+    //
+    setTimePickersState((prev) => ({ ...prev, checkIn: isoString }));
+  };
+
+  const hanldeEditHours = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(timePickersState);
+    try {
+      const res = await Patch(`attendance/admin`, timePickersState);
+      if (res.status === 200 || res.status === 201) {
+        setEditRowId(null);
+        getUserAttendanceReport();
+        addToast({
+          color: "success",
+          title: t("global.alert.success"),
+        });
+      }
+    } catch (error) {
+      addToast({
+        color: "danger",
+        title: t("global.alert.error"),
+      });
+    }
+  };
+
   const tableCols = [
     { name: t("global.attendance.date"), uid: "date" },
     {
@@ -179,166 +224,81 @@ const UserAttendace = () => {
         return (
           <div className="flex flex-col gap-1">
             {record.times.map((el, idx) => {
-              const defaultIn = el.in;
-              const defaultOut = el.out;
-
+              const isEditing = editRowId === el.attendanceId;
               return (
-                <div key={idx} className="flex justify-start gap-4">
-                  {isEditDate ? (
+                <div
+                  key={idx}
+                  className="flex justify-between items-center gap-4"
+                >
+                  {isEditing ? (
                     <form
-                      onSubmitCapture={handleSubmit(async (data, e) => {
-                        e?.preventDefault();
-                        const checkInTime = data.times?.[idx]?.checkIn;
-                        const checkOutTime = data.times?.[idx]?.checkOut;
-
-                        if (!checkInTime || !checkOutTime) {
-                          return;
-                        }
-
-                        const inDateObj = parseISO(el.inDate);
-                        const [checkInHour, checkInMinute] = checkInTime
-                          .split(":")
-                          .map(Number);
-                        const [checkOutHour, checkOutMinute] = checkOutTime
-                          .split(":")
-                          .map(Number);
-
-                        const newCheckInDate = setMinutes(
-                          setHours(inDateObj, checkInHour),
-                          checkInMinute
-                        );
-                        const newCheckOutDate = setMinutes(
-                          setHours(inDateObj, checkOutHour),
-                          checkOutMinute
-                        );
-
-                        const checkInFull = newCheckInDate.toISOString();
-                        const checkOutFull = newCheckOutDate.toISOString();
-
-                        console.log({
-                          checkIn: checkInFull,
-                          checkOut: checkOutFull,
-                          attendanceId: el.attendanceId,
-                        });
-                        const params = {
-                          checkIn: checkInFull,
-                          checkOut: checkOutFull,
-                          attendanceId: el.attendanceId,
-                        };
-                        const res = await Patch(
-                          `attendance/admin`,
-                          { ...params },
-                          {
-                            headers: {
-                              "Accept-Language": locale,
-                            },
-                          }
-                        );
-
-                        if (res.status === 200 || res.status === 201) {
-                          getUserAttendanceReport();
-                          addToast({
-                            title: t("global.alert.success"),
-                            color: "success",
-                          });
-                        }
-                      })}
-                      className="flex gap-2 items-end"
+                      className="flex gap-3  items-end "
+                      onSubmit={(e) => hanldeEditHours(e)}
                     >
-                        <div className="flex flex-col gap-1">
-                        <p className="text-xs">
+                      <div className="flex flex-col gap-2 w-32">
+                        <p className="text-xs text-default-500">
                           {t("global.attendance.entry")}
                         </p>
-                        <Controller
-                          name={`times.${idx}.checkIn`}
-                          control={control}
-                          defaultValue={defaultIn}
-                          render={({ field }) => (
-                          <input
-                            {...field}
-                            type="time"
-                            style={{
-                            padding: "5px 10px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px",
-                            fontSize: "14px",
-                            textAlign: "center",
-                            }}
-                            onChange={(e) => {
-                            const updatedValue = e.target.value;
-                            field.onChange(updatedValue); // Update the current field value
-                            }}
-                          />
-                          )}
+                        <DatePicker
+                          style={{ width: "100px" }}
+                          disableDayPicker
+                          format="hh:mm:ss A"
+                          plugins={[<TimePicker />]}
+                          onChange={(value) => {
+                            handleEntryDate(el.attendanceId, value);
+                          }}
                         />
-                        </div>
-                      <div className="flex flex-col gap-1">
+                      </div>
+                      <div className="flex flex-col gap-1 w-32">
                         <p className="text-xs">{t("global.attendance.exit")}</p>
-                        <Controller
-                          name={`times.${idx}.checkOut`}
-                          control={control}
-                          defaultValue={defaultOut}
-                          render={({ field }) => (
-                            <input
-                              {...field}
-                              type="time"
-                              style={{
-                                padding: "5px 10px",
-                                border: "1px solid #ccc",
-                                borderRadius: "5px",
-                                fontSize: "14px",
-                                textAlign: "center",
-                              }}
-                            />
-                          )}
+                        <DatePicker
+                          style={{ width: "100px" }}
+                          disableDayPicker
+                          format="hh:mm:ss A"
+                          onChange={(value) => {
+                            handleExiteDate(el.attendanceId, value);
+                          }}
+                          plugins={[<TimePicker />]}
                         />
                       </div>
 
-                      <button
-                        type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition text-xs"
-                      >
+                      <Button type="submit" size="sm" color="success">
                         {t("global.attendance.save")}
-                      </button>
+                      </Button>
+                      <Button
+                        size="sm"
+                        type="button"
+                        color="danger"
+                        onClick={() => setEditRowId(null)}
+                      >
+                        {t("global.attendance.cancel")}
+                      </Button>
                     </form>
                   ) : (
-                    <div className="flex gap-2 items-center p-1">
-                      <div className="flex flex-col gap-1">
-                        {/* <p
-                          className="text-xs font-medium text-gray-600"
-                          style={{
-                            marginBottom: "4px",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {t("global.attendance.entry")}
-                        </p> */}
-
-                        <Tooltip
-                          content={t("global.attendance.entry")}
-                          color="success"
-                        >
-                          <span>{el.in}</span>
-                        </Tooltip>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        {/* <p
-                          className="text-xs font-medium text-gray-600"
-                          style={{
-                            marginBottom: "4px",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {t("global.attendance.exit")}
-                        </p> */}
-
-                        <Tooltip
-                          content={t("global.attendance.exit")}
-                          color="secondary"
-                        >
-                          <span>{el.out}</span>
-                        </Tooltip>
-                      </div>
+                    <div className="flex gap-5 items-center">
+                      <Tooltip
+                        content={t("global.attendance.entry")}
+                        color="success"
+                      >
+                        <span>{el.in}</span>
+                      </Tooltip>
+                      <Tooltip
+                        content={t("global.attendance.exit")}
+                        color="secondary"
+                      >
+                        <span>{el.out}</span>
+                      </Tooltip>
+                      <Button
+                        type="button"
+                        size="sm"
+                        isIconOnly
+                        color="primary"
+                        variant="flat"
+                        onClick={() => setEditRowId(el.attendanceId)}
+                      >
+                        <Icon name="square-pen"></Icon>
+                        {/* {t("global.attendance.edit")} */}
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -392,14 +352,6 @@ const UserAttendace = () => {
               border: "1px solid #ccc",
             }}
           />
-        </div>
-        <div>
-          <Button onPress={() => setIsEditDate(!isEditDate)}>
-            {isEditDate
-              ? t("global.attendance.show")
-              : t("global.attendance.edit")}
-            {/* <Icon name="file"></Icon> */}
-          </Button>
         </div>
       </div>
       {isLoading && (
