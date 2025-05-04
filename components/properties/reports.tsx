@@ -246,7 +246,7 @@ const PropertyReports = () => {
             </p>
             <CustomDropdown
               dropdownItems={categoryIds}
-              // selectedValue={categoryIds.find((el: any) => el.key === catid)?.label}
+              selectedValue={categoryIds.find((el: Category) => parseInt(el.key) === catid)?.label}
               onChange={(val) => handleCatId(val)}
             />
           </div>
