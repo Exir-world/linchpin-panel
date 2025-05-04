@@ -103,35 +103,67 @@ const UserAttendace = () => {
       return acc;
     }, {});
 
-    return Object.keys(grouped).map((date) => {
-      const entries = grouped[date];
+    return Object.keys(grouped)
+      .map((date) => {
+        // Filter out the stops
+        const entries = grouped[date].filter(
+          (item) => !item.stops || item.stops.length === 0
+        );
 
-      const times: TimeEntry[] = entries.map((entry) => {
-        const checkIn = entry.checkIn ? new Date(entry.checkIn) : null;
-        const checkOut = entry.checkOut ? new Date(entry.checkOut) : null;
+        if (entries.length === 0) return null; // Skip if no valid entries
+
+        // Create times array for all valid entries
+        const times: TimeEntry[] = entries.map((entry) => {
+          const checkIn = entry.checkIn ? new Date(entry.checkIn) : null;
+          const checkOut = entry.checkOut ? new Date(entry.checkOut) : null;
+
+          return {
+            in: checkIn ? formatTimeToLocal(checkIn) : "-",
+            out: checkOut ? formatTimeToLocal(checkOut) : "-",
+            inDate: checkIn ? checkIn.toISOString() : "-",
+            outDate: checkOut ? checkOut.toISOString() : "-",
+            attendanceId: entry.id,
+          };
+        });
+
+        // Sum durations of all valid entries
+        const totalDuration = entries.reduce((acc, entry) => {
+          const checkIn = entry.checkIn ? new Date(entry.checkIn) : null;
+          const checkOut = entry.checkOut ? new Date(entry.checkOut) : null;
+
+          if (
+            checkIn &&
+            checkOut &&
+            !isNaN(checkIn.getTime()) &&
+            !isNaN(checkOut.getTime())
+          ) {
+            // Make sure check-out is on the same date as check-in:
+            const isSameDate =
+              checkIn.getFullYear() === checkOut.getFullYear() &&
+              checkIn.getMonth() === checkOut.getMonth() &&
+              checkIn.getDate() === checkOut.getDate();
+
+            // if (!isSameDate) {
+            //   console.warn(
+            //     `⚠️ Check-in and check-out are on different dates for entry ID ${entry.id}. Ignoring this duration.`
+            //   );
+            //   return acc; // skip this invalid duration
+            // }
+
+            return acc + (checkOut.getTime() - checkIn.getTime());
+          }
+          return acc;
+        }, 0);
+
+        const formattedDate = formatDateToJalali(date);
+
         return {
-          in: checkIn ? formatTimeToLocal(checkIn) : "-",
-          out: checkOut ? formatTimeToLocal(checkOut) : "-",
-          inDate: checkIn ? checkIn.toISOString() : "-",
-          outDate: checkOut ? checkOut.toISOString() : "-",
-          attendanceId: entry.id,
+          date: formattedDate,
+          duration: totalDuration,
+          times,
         };
-      });
-
-      const totalDuration = entries.reduce((sum: number, entry) => {
-        const checkIn = new Date(entry.checkIn);
-        const checkOut = new Date(entry.checkOut);
-        return sum + (checkOut.getTime() - checkIn.getTime());
-      }, 0);
-
-      const formattedDate = formatDateToJalali(date);
-
-      return {
-        date: formattedDate,
-        duration: totalDuration,
-        times,
-      };
-    });
+      })
+      .filter((entry) => entry !== null) as OutputData[];
   };
 
   const getUserAttendanceReport = async () => {
@@ -142,7 +174,6 @@ const UserAttendace = () => {
       const res = await Get(
         `attendance/admin/filter?userId=${id}&startDate=${startDate}&endDate=${endDate}`
       );
-      console.log(res);
       if (res.status === 200) {
         const reports = groupByDate(res.data);
 
@@ -182,7 +213,15 @@ const UserAttendace = () => {
 
     if (isNaN(baseDate.getTime())) {
       console.error("⚠️ Invalid base date:", originalDateObj);
-      return;
+      // If the original date is "-", set the base date to the current date
+      if (originalDateObj === "-") {
+        const currentDate = new Date();
+        baseDate.setFullYear(currentDate.getFullYear());
+        baseDate.setMonth(currentDate.getMonth());
+        baseDate.setDate(currentDate.getDate());
+      } else {
+        return;
+      }
     }
 
     baseDate.setHours(selectedTime.getHours());
@@ -230,7 +269,6 @@ const UserAttendace = () => {
 
   const hanldeEditHours = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(timePickersState);
     try {
       const res = await Patch(`attendance/admin`, timePickersState);
       if (res.status === 200 || res.status === 201) {
@@ -268,7 +306,7 @@ const UserAttendace = () => {
               const isEditing = editRowId === el.attendanceId;
               return (
                 <div
-                  key={idx}
+                  key={el.attendanceId}
                   className="flex justify-between items-center gap-4"
                 >
                   {isEditing ? (
@@ -285,7 +323,7 @@ const UserAttendace = () => {
                             style={{ width: "100px" }}
                             disableDayPicker
                             format="hh:mm:ss A"
-                            plugins={[<TimePicker />]}
+                            plugins={[<TimePicker key={"1"} />]}
                             onChange={(value) => {
                               handleEntryDate(
                                 el.attendanceId,
@@ -307,10 +345,10 @@ const UserAttendace = () => {
                               handleExiteDate(
                                 el.attendanceId,
                                 value,
-                                el.outDate
+                                el.inDate
                               );
                             }}
-                            plugins={[<TimePicker />]}
+                            plugins={[<TimePicker key={"2"} />]}
                           />
                         </div>
                       </div>
