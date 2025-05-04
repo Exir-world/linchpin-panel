@@ -53,6 +53,7 @@
         "approved": "تایید شده",
         "rejected": "رد شده",
         "Cancelled": "لغو شده",
+        "cancelled": "لغو شده",
         "all": "همه"
       },
       "id": "شناسه",
