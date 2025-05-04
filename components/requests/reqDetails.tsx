@@ -140,7 +140,21 @@ const ReqDetails = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p>{t("status")}</p>
-            <p>{requestItem.status}</p>
+            <span
+              className={`${
+                requestItem.status === "PENDING"
+                  ? "bg-yellow-100 text-yellow-800"
+                  : requestItem.status === "APPROVED"
+                  ? "bg-green-100 text-green-800"
+                  : requestItem.status === "REJECTED"
+                  ? "bg-red-100 text-red-800"
+                  : requestItem.status === "CANCELLED"
+                  ? "bg-gray-100 text-gray-800 "
+                  : ""
+              } px-2 py-1  text-sm font-semibold rounded-full w-fit text-center`}
+            >
+              {t(`filter.${requestItem.status?.toLowerCase() || ""}`)}
+            </span>
           </div>
           <div className="flex flex-col gap-2">
             <p>{t("reviewedById")}</p>
