@@ -82,7 +82,6 @@ const UserAttendace = () => {
     if (isNaN(duration) || duration < 0) {
       return "00:00"; // در صورتی که ورودی نادرست باشد، زمان 00:00 را باز می‌گردانیم
     }
-    console.log(duration);
 
     const hours = Math.floor(duration / (1000 * 60 * 60));
     const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
@@ -131,7 +130,6 @@ const UserAttendace = () => {
         const totalDuration = entries.reduce((acc, entry) => {
           const checkIn = entry.checkIn ? new Date(entry.checkIn) : null;
           const checkOut = entry.checkOut ? new Date(entry.checkOut) : null;
-          console.log(checkIn?.toISOString(), checkOut?.toISOString(), "hey");
 
           if (
             checkIn &&
@@ -271,7 +269,6 @@ const UserAttendace = () => {
 
   const hanldeEditHours = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(timePickersState);
     try {
       const res = await Patch(`attendance/admin`, timePickersState);
       if (res.status === 200 || res.status === 201) {
