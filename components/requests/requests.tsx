@@ -142,7 +142,7 @@ const RequestsList = () => {
                 : ""
             )}
           >
-            {record.status}
+            {t(`filter.${status?.toLowerCase() || ""}`)}
           </span>
         );
       },
@@ -207,7 +207,6 @@ const RequestsList = () => {
   ];
 
   const handleChange = (val: string) => {
-    console.log(val);
     if (val === t("All")) {
       setStatus("");
     }
