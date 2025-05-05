@@ -114,12 +114,13 @@ const PropertyCategory = () => {
     if (!catId) return;
     try {
       const res = await Del(`property-categories/${catId}`);
-      console.log(res);
       if (res.status === 200 || res.status === 201) {
         addToast({
           title: t("global.alert.success"),
           color: "success",
         });
+        setOpen(false);
+        getCategories();
       } else {
         addToast({
           title: t("global.alert.error"),
@@ -127,6 +128,10 @@ const PropertyCategory = () => {
         });
       }
     } catch (error) {
+      addToast({
+        title: t("global.alert.error"),
+        color: "danger",
+      });
       throw new Error("failed to delete");
     }
   };

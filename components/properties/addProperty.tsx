@@ -48,7 +48,7 @@ type FormValues = {
   }>;
 };
 
-const AddProperty = () => {
+const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [departmentList, setDepartmentList] = useState<any[]>([]);
   const [orgList, setOrgList] = useState<OrgListTypes[]>([]);
@@ -61,13 +61,19 @@ const AddProperty = () => {
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("global.properties");
   const locale = useLocale();
-  
-  const { handleSubmit, register, control, setValue, formState: { errors } } = useForm<FormValues>({
+
+  const {
+    handleSubmit,
+    register,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
       organizationId: "3",
       categoryId: "1",
       status: PropertyStatusEnum.GOOD,
-    }
+    },
   });
 
   const getOranizationList = async () => {
@@ -93,7 +99,6 @@ const AddProperty = () => {
       });
     }
   };
-
 
   const getCategories = async () => {
     try {
@@ -163,7 +168,7 @@ const AddProperty = () => {
       const numericOrgId = parseInt(data.organizationId);
       const departmentId = parseInt(data.departmentId);
       const categoryId = parseInt(data.categoryId);
-      const imageUrl = uploadSuccessRes.length > 0 ? uploadSuccessRes[0].url : "";
+      const imageUrl = uploadSuccessRes?.[0]?.url || null;
 
       const res = await Post(`properties`, {
         ...data,
@@ -178,6 +183,7 @@ const AddProperty = () => {
           title: t("success"),
           color: "success",
         });
+        onAddProperty() // refresh the property list
         onClose();
       } else {
         addToast({
@@ -278,7 +284,8 @@ const AddProperty = () => {
                                 setOrgId(numericVal);
                               }}
                               selectedValue={
-                                orgList.find((el: any) => el.key === orgId)?.label
+                                orgList.find((el: any) => el.key === orgId)
+                                  ?.label
                               }
                             />
                           )}
@@ -316,14 +323,17 @@ const AddProperty = () => {
                               dropdownItems={categoryList}
                               onChange={(val) => {
                                 field.onChange(val);
-                                const categoryId = typeof val === "string" ? parseInt(val) : val;
+                                const categoryId =
+                                  typeof val === "string" ? parseInt(val) : val;
                                 const category = categoryResponse.find(
                                   (el) => el.id === categoryId
                                 );
                                 setFeatures(category?.features || []);
                               }}
                               selectedValue={
-                                categoryList.find((el: any) => el.key === field.value)?.label
+                                categoryList.find(
+                                  (el: any) => el.key === field.value
+                                )?.label
                               }
                             />
                           )}
@@ -351,7 +361,10 @@ const AddProperty = () => {
                     </div>
                     <div className="w-full py-2 flex items-center gap-4 ">
                       <div className="">
-                        <FileUploader autoUpload onUploadSuccess={(data) => handleUploadSuccess(data)}></FileUploader>
+                        <FileUploader
+                          autoUpload
+                          onUploadSuccess={(data) => handleUploadSuccess(data)}
+                        ></FileUploader>
                       </div>
                       <div className="grow">
                         <Textarea
