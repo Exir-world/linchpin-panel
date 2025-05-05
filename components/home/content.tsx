@@ -1,14 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import { TableWrapper } from "../table/table";
-import { CardBalance1 } from "./card-balance1";
-import { CardBalance2 } from "./card-balance2";
-import { CardBalance3 } from "./card-balance3";
-import { CardAgents } from "./card-agents";
-import { CardTransactions } from "./card-transactions";
-import { Link } from "@nextui-org/react";
-import NextLink from "next/link";
+
 import { useTranslations } from "next-intl";
 
 const Chart = dynamic(
@@ -26,13 +19,13 @@ export const Content = () => {
         <div className="mt-6 gap-6 flex flex-col w-full">
           {/* Card Section Top */}
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-semibold">Available Balance</h3>
+            {/* <h3 className="text-xl font-semibold">Available Balance</h3> */}
             {t("global.title")}
-            <div className="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full">
+            {/* <div className="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full">
               <CardBalance1 />
               <CardBalance2 />
               <CardBalance3 />
-            </div>
+            </div> */}
           </div>
 
           {/* Chart */}

@@ -44,17 +44,17 @@ const CollapseItems: React.FC<Props> = ({
       <button
         onClick={toggleCollapse}
         className={clsx(
-          "flex items-center w-full px-4 py-2 text-start  transition-colors",
+          "flex items-center w-full px-4 py-2 text-start  transition-colors rounded-lg",
           "hover:bg-gray-100 dark:hover:bg-gray-800",
-          isOpen && "bg-gray-50 dark:bg-gray-900"
+          isOpen && "bg-blue-100"
         )}
         role="button"
         aria-expanded={isOpen}
         aria-controls={`collapse-${title}`}
         disabled={collapsed} // Disable toggle when sidebar is collapsed
       >
-        <span className="mr-2">{icon}</span>
-        <span className="flex-1 text-sm font-medium">{title}</span>
+        <span className="">{icon}</span>
+        <span className="flex-1 px-2">{title}</span>
         <ChevronDownIcon
           className={clsx(
             "w-4 h-4 transition-transform duration-200",
