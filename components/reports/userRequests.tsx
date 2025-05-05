@@ -185,7 +185,7 @@ export const UserRequests = () => {
             <p
               className={`font-medium text-white rounded-full px-2 py-1 w-fit text-xs flex items-center text-center ${colorClass}`}
             >
-              {record.status}
+              {t(`filter.${record.status.toLowerCase()}`)}
             </p>
           </div>
         );

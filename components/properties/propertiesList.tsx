@@ -173,9 +173,8 @@ const PropertiesList = () => {
             {t("addnewPropery")}
             <Icon name="file-plus-2"></Icon>
           </Button> */}
-          <AddProperty></AddProperty>
+          <AddProperty onAddProperty={() => getPropertyList()}></AddProperty>
         </div>
-
       </div>
       <div>
         {isLoading ? (
@@ -195,4 +194,3 @@ const PropertiesList = () => {
 };
 
 export default PropertiesList;
-
