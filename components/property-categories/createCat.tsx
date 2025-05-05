@@ -76,7 +76,7 @@ const CreateCategory = ({ onCreate }: { onCreate: () => void }) => {
             <ModalHeader>{t("global.category.createCat")}</ModalHeader>
             <ModalBody>
               <Input
-                {...register("title", { required: "Title is required" })}
+                {...register("title", { required: true })}
                 label={t("global.category.title")}
                 fullWidth
               />
@@ -114,8 +114,10 @@ const CreateCategory = ({ onCreate }: { onCreate: () => void }) => {
               {/* <Spacer y={1} /> */}
             </ModalBody>
             <ModalFooter>
-              <Button type="submit">{t("global.category.create")}</Button>
-              <Button variant="light" color="danger" onPress={() => onClose()}>
+              <Button type="submit" color="primary">
+                {t("global.category.create")}
+              </Button>
+              <Button variant="flat" color="danger" onPress={() => onClose()}>
                 {t("global.category.close")}
               </Button>
             </ModalFooter>
