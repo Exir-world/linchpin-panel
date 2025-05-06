@@ -10,9 +10,9 @@ import { addToast } from "@heroui/toast";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";
 
 type DropdownTypes = {
-  key: string
-  label: string
-}
+  key: string;
+  label: string;
+};
 const EmployeeDetails = () => {
   const params = useSearchParams();
   const [isEditing, setIsEditing] = useState(false);
@@ -224,28 +224,11 @@ const EmployeeDetails = () => {
                     color={isEditing ? "primary" : "default"}
                     label={t("global.employee.firstname")}
                     disabled={!isEditing}
-                  // helperText={errors.firstname ? errors.firstname.message : ""}
-                  // helperColor={errors.firstname ? "error" : undefined}
+                    // helperText={errors.firstname ? errors.firstname.message : ""}
+                    // helperColor={errors.firstname ? "error" : undefined}
                   />
                 )}
-              // rules={{ required: "First name is required" }}
-              />
-            </div>
-            <div>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    color={isEditing ? "primary" : "default"}
-                    label={t("global.employee.nickname")}
-                    disabled={!isEditing}
-                  // helperText={errors.name ? errors.name.message : ""}
-                  // helperColor={errors.name ? "error" : undefined}
-                  />
-                )}
-              // rules={{ required: "Name is required" }}
+                // rules={{ required: "First name is required" }}
               />
             </div>
             <div>
@@ -258,11 +241,28 @@ const EmployeeDetails = () => {
                     {...field}
                     label={t("global.employee.create.lastname")}
                     disabled={!isEditing}
-                  // helperText={errors.lastname ? errors.lastname.message : ""}
-                  // helperColor={errors.lastname ? "error" : undefined}
+                    // helperText={errors.lastname ? errors.lastname.message : ""}
+                    // helperColor={errors.lastname ? "error" : undefined}
                   />
                 )}
-              // rules={{ required: "Last name is required" }}
+                // rules={{ required: "Last name is required" }}
+              />
+            </div>
+            <div>
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    color={isEditing ? "primary" : "default"}
+                    label={t("global.employee.nickname")}
+                    disabled={!isEditing}
+                    // helperText={errors.name ? errors.name.message : ""}
+                    // helperColor={errors.name ? "error" : undefined}
+                  />
+                )}
+                // rules={{ required: "Name is required" }}
               />
             </div>
           </div>
@@ -277,19 +277,19 @@ const EmployeeDetails = () => {
                     color={isEditing ? "primary" : "default"}
                     label={t("global.employee.phoneNumber")}
                     disabled={!isEditing}
-                  // helperText={
-                  //   errors.phoneNumber ? errors.phoneNumber.message : ""
-                  // }
-                  // helperColor={errors.phoneNumber ? "error" : undefined}
+                    // helperText={
+                    //   errors.phoneNumber ? errors.phoneNumber.message : ""
+                    // }
+                    // helperColor={errors.phoneNumber ? "error" : undefined}
                   />
                 )}
-              // rules={{
-              //   required: "Phone number is required",
-              //   pattern: {
-              //     value: /^\d{10}$/,
-              //     message: "Phone number must be 10 digits",
-              //   },
-              // }}
+                // rules={{
+                //   required: "Phone number is required",
+                //   pattern: {
+                //     value: /^\d{10}$/,
+                //     message: "Phone number must be 10 digits",
+                //   },
+                // }}
               />
             </div>
             <div>
@@ -303,17 +303,17 @@ const EmployeeDetails = () => {
                     label={t("global.employee.password")}
                     type="password"
                     disabled={!isEditing}
-                  // helperText={errors.password ? errors.password.message : ""}
-                  // helperColor={errors.password ? "error" : undefined}
+                    // helperText={errors.password ? errors.password.message : ""}
+                    // helperColor={errors.password ? "error" : undefined}
                   />
                 )}
-              // rules={{
-              //   required: "Password is required",
-              //   minLength: {
-              //     value: 6,
-              //     message: "Password must be at least 6 characters",
-              //   },
-              // }}
+                // rules={{
+                //   required: "Password is required",
+                //   minLength: {
+                //     value: 6,
+                //     message: "Password must be at least 6 characters",
+                //   },
+                // }}
               />
             </div>
             <div>
@@ -326,18 +326,18 @@ const EmployeeDetails = () => {
                     color={isEditing ? "primary" : "default"}
                     label={t("global.employee.nationalCode")}
                     disabled={!isEditing}
-                  // helperText={
-                  //   errors.nationalCode ? errors.nationalCode.message : ""
-                  // }
-                  // helperColor={errors.nationalCode ? "error" : undefined}
+                    // helperText={
+                    //   errors.nationalCode ? errors.nationalCode.message : ""
+                    // }
+                    // helperColor={errors.nationalCode ? "error" : undefined}
                   />
                 )}
-              // rules={{
-              //   pattern: {
-              //     value: /^\d{10}$/,
-              //     message: "National code must be 10 digits",
-              //   },
-              // }}
+                // rules={{
+                //   pattern: {
+                //     value: /^\d{10}$/,
+                //     message: "National code must be 10 digits",
+                //   },
+                // }}
               />
             </div>
           </div>
@@ -356,19 +356,19 @@ const EmployeeDetails = () => {
                       color={isEditing ? "primary" : "default"}
                       label={t("global.employee.personnelCode")}
                       disabled={!isEditing}
-                    // helperText={
-                    //   errors.personnelCode ? errors.personnelCode.message : ""
-                    // }
-                    // helperColor={errors.personnelCode ? "error" : undefined}
+                      // helperText={
+                      //   errors.personnelCode ? errors.personnelCode.message : ""
+                      // }
+                      // helperColor={errors.personnelCode ? "error" : undefined}
                     />
                   );
                 }}
-              // rules={{
-              //   pattern: {
-              //     value: /^\d{6}$/,
-              //     message: "Personnel code must be 6 digits",
-              //   },
-              // }}
+                // rules={{
+                //   pattern: {
+                //     value: /^\d{6}$/,
+                //     message: "Personnel code must be 6 digits",
+                //   },
+                // }}
               />
             </div>
             <div>
@@ -381,19 +381,19 @@ const EmployeeDetails = () => {
                     color={isEditing ? "primary" : "default"}
                     label={t("global.employee.create.settings.salary")}
                     disabled={!isEditing}
-                  // helperText={
-                  //   errors.phoneNumber ? errors.phoneNumber.message : ""
-                  // }
-                  // helperColor={errors.phoneNumber ? "error" : undefined}
+                    // helperText={
+                    //   errors.phoneNumber ? errors.phoneNumber.message : ""
+                    // }
+                    // helperColor={errors.phoneNumber ? "error" : undefined}
                   />
                 )}
-              // rules={{
-              //   required: "Phone number is required",
-              //   pattern: {
-              //     value: /^\d{10}$/,
-              //     message: "Phone number must be 10 digits",
-              //   },
-              // }}
+                // rules={{
+                //   required: "Phone number is required",
+                //   pattern: {
+                //     value: /^\d{10}$/,
+                //     message: "Phone number must be 10 digits",
+                //   },
+                // }}
               />
             </div>
             <div className="flex flex-col items-center gap-0.5">
@@ -407,7 +407,9 @@ const EmployeeDetails = () => {
                   <CustomDropdown
                     dropdownItems={roleList}
                     onChange={field.onChange}
-                    selectedValue={roleList.find((el: any) => el.key === field.value)?.label}
+                    selectedValue={
+                      roleList.find((el: any) => el.key === field.value)?.label
+                    }
                   />
                 )}
               />
@@ -482,7 +484,7 @@ const EmployeeDetails = () => {
                   <CustomDropdown
                     dropdownItems={teamList}
                     onChange={field.onChange}
-                  // selectedValue={field.value}
+                    // selectedValue={field.value}
                   />
                 )}
               />

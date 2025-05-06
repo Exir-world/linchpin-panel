@@ -17,7 +17,8 @@ const ReportDetails = () => {
   const [userList, setUserList] = useState([]);
   const t = useTranslations();
   const router = useRouter();
-  const [selected, setSelected] = useState("");
+  const params = useSearchParams();
+  const [selected, setSelected] = useState("details");
   const getUsersList = async () => {
     try {
       const res = await Get(`/users`);
@@ -89,6 +90,20 @@ const ReportDetails = () => {
       console.log("No date selected");
     }
   };
+
+  useEffect(() => {
+    const savedTab = params.get("tab");
+    if (savedTab) {
+      setSelected(savedTab);
+    }
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("tab", selected);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [selected]);
 
   return (
     <div className="py-2 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">

@@ -33,8 +33,9 @@
       "broken": "خراب",
       "category": "دسته‌بندی",
       "status": "وضعیت",
-      "reportAndDetail": "جزئیات گزارش ملک",
-      "reportCode": "کد گزارش"
+      "reportAndDetail": "جزئیات گزارش اموال",
+      "reportCode": "کد گزارش",
+      "all": "همه"
     },
     "attendance": {
       "date": "تاریخ",
@@ -45,7 +46,8 @@
       "save": "ذخیره",
       "entry": "ورود",
       "exit": "خروج",
-      "cancel": "انصراف"
+      "cancel": "انصراف",
+      "editHours": "ویرایش ساعت‌ها"
     },
     "requests": {
       "filter": {
@@ -161,19 +163,19 @@
       "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
       "update": "ویرایش",
       "delete": "حذف",
-      "addnewPropery": "افزودن ملک جدید",
+      "addnewPropery": "افزودن اموال جدید",
       "userId": "شناسه کاربر",
-      "propertyId": "شناسه ملک",
+      "propertyId": "شناسه اموال",
       "deliveredAt": "تحویل داده شده در",
-      "property": "ملک",
+      "property": "اموال",
       "imageUrl": "آدرس تصویر",
-      "assignProperty": "اختصاص ملک",
-      "noPropertytoAssign": "ملکی برای اختصاص وجود ندارد",
+      "assignProperty": "اختصاص اموال",
+      "noPropertytoAssign": "اموالی برای اختصاص وجود ندارد",
       "close": "بستن",
       "assign": "اختصاص",
       "actions": "عملیات",
       "unAssign": "لغو اختصاص",
-      "addPropety": "افزودن ملک",
+      "addPropety": "افزودن اموال",
       "brand": "برند",
       "model": "مدل",
       "adminComment": "نظر مدیر",
@@ -190,19 +192,19 @@
       "save": "ذخیره",
       "categoryIdRequired": "لطفاً یک دسته‌بندی انتخاب کنید",
       "featureValue": "مقدار ویژگی",
-      "deleteConfirmation": "تایید حذف ملک",
-      "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این ملک را حذف کنید؟",
+      "deleteConfirmation": "تایید حذف اموال",
+      "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این مال را حذف کنید؟",
       "cancel": "انصراف",
       "confirm": "تایید"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",
-      "propertyId": "شناسه ملک",
+      "propertyId": "شناسه اموال",
       "report": "گزارش",
       "status": "وضعیت",
       "createdAt": "تاریخ ایجاد",
       "actions": "عملیات",
-      "propertyCode": "کد ملک",
+      "propertyCode": "کد اموال",
       "changeStatus": "تغییر وضعیت",
       "newStatus": "وضعیت جدید",
       "updateStatus": "بروزرسانی وضعیت",
@@ -249,7 +251,8 @@
       "success": "تغییرات شما ذخیره شد!",
       "error": "مشکلی پیش آمد. لطفاً دوباره تلاش کنید.",
       "Warning": "لطفاً در انجام این عملیات احتیاط کنید.",
-      "noData": "داده‌ای وجود ندارد"
+      "noData": "داده‌ای وجود ندارد",
+      "fieldRequired": "پر کردن فیلد ها الزامی است"
     }
   }
 }
