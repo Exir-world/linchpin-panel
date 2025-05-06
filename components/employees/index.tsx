@@ -429,7 +429,11 @@ const EmployeesList = () => {
                               disabled={orgList.length === 0}
                               dropdownItems={teamList}
                               onChange={field.onChange}
-                              selectedValue={field.value}
+                              selectedValue={
+                                teamList.find(
+                                  (el: any) => el.key == field.value
+                                )?.label
+                              }
                             />
                           )}
                         />
@@ -450,7 +454,10 @@ const EmployeesList = () => {
                             <CustomDropdown
                               dropdownItems={roleList}
                               onChange={field.onChange}
-                              selectedValue={field.value}
+                              selectedValue={
+                                roleList.find((el) => el.key == field.value)
+                                  ?.label
+                              }
                             />
                           )}
                         />
