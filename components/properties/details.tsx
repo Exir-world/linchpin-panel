@@ -1,7 +1,17 @@
 "use client";
 import { PropertyDetail, CategoryFeature } from "@/helpers/types";
 import { Del, Get, Put } from "@/lib/axios";
-import { Button, Input, Textarea, useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Textarea,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@nextui-org/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -16,11 +26,11 @@ enum PropertyStatusEnum {
   BROKEN = "broken",
 }
 type DropdownTypes = {
-  label: string
-  key: string
-}
+  label: string;
+  key: string;
+};
 const PropertyDetails = () => {
-  const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure()
+  const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
   const [propertyDetail, setPropertyDetail] = useState({} as PropertyDetail);
   const [editMode, setEditMode] = useState(false);
   const [orgList, setOrgList] = useState<DropdownTypes[]>([]);
@@ -263,7 +273,11 @@ const PropertyDetails = () => {
     <div className="w-full p-4">
       <div className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-6">
         <div>
-          <Button onPress={() => setEditMode(!editMode)}>
+          <Button
+            onPress={() => {
+              setEditMode(!editMode);
+            }}
+          >
             {editMode ? t("show") : t("edit")}
           </Button>
         </div>
@@ -369,7 +383,9 @@ const PropertyDetails = () => {
                     field.onChange(Number(val));
                     setCategoryId(Number(val));
                   }}
-                  selectedValue={categoryList.find((el) => el.key === field.value)?.label}
+                  selectedValue={
+                    categoryList.find((el) => el.key === field.value)?.label
+                  }
                 />
               )}
             />
@@ -390,7 +406,9 @@ const PropertyDetails = () => {
                     setOrgId(numericVal);
                     field.onChange(numericVal);
                   }}
-                  selectedValue={orgList.find((el: any) => el.key === field.value)?.label}
+                  selectedValue={
+                    orgList.find((el: any) => el.key === field.value)?.label
+                  }
                 />
               )}
             />
@@ -449,7 +467,7 @@ const PropertyDetails = () => {
         <div className="mt-8">
           <div className="flex justify-between items-center mb-4">
             <label className="text-sm font-medium text-gray-700">
-              {t("features")}
+              {features.length > 0 && t("features")}
             </label>
             {editMode && categoryFeatures.length > 0 && (
               <Button
