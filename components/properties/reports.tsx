@@ -35,7 +35,7 @@ const PropertyReports = () => {
   const [reportItem, setReportItem] = useState<PropertyReport | null>(null);
   const [reportCode, setReportCode] = useState<string | null>(null);
   const [catid, setCatid] = useState<null | number>(null);
-  const [status, setStatus] = useState<null | number |string>(null);
+  const [status, setStatus] = useState<null | number | string>(null);
   const [changedStatus, setChangedStatus] = useState<null | string>(null);
 
   const [categoryIds, setCategoryIds] = useState<Category[]>([]);
@@ -66,11 +66,12 @@ const PropertyReports = () => {
   ];
   const getAllReports = async () => {
     let url;
-    if (reportCode === null && catid === null && status == 'all') {
+    if (reportCode === null && catid === null && status == "all") {
       url = `property-reports/all`;
     } else {
-      url = `property-reports/all?code=${reportCode || ""}&categoryId=${catid || ""
-        }&status=${status || ""}`;
+      url = `property-reports/all?code=${reportCode || ""}&categoryId=${
+        catid || ""
+      }&status=${status || ""}`;
     }
     try {
       setIsLoading(true);
@@ -171,7 +172,7 @@ const PropertyReports = () => {
         color: "success",
       });
       onClose();
-      getAllReports() // refresh the data 
+      getAllReports(); // refresh the data
     } else {
       addToast({
         title: t("global.alert.error"),
@@ -201,11 +202,17 @@ const PropertyReports = () => {
       name: t("global.porperty-reports.status"),
       uid: "status",
       render: (record: PropertyReport) => (
-        <span className={`px-2 py-1 rounded-full text-sm ${record.status === "pending" ? "bg-yellow-100 text-yellow-800" :
-          record.status === "repairing" ? "bg-blue-100 text-blue-800" :
-            record.status === "repaired" ? "bg-green-100 text-green-800" :
-              "bg-red-100 text-red-800"
-          }`}>
+        <span
+          className={`px-2 py-1 rounded-full text-sm ${
+            record.status === "pending"
+              ? "bg-yellow-100 text-yellow-800"
+              : record.status === "repairing"
+              ? "bg-blue-100 text-blue-800"
+              : record.status === "repaired"
+              ? "bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
+          }`}
+        >
           {t(`global.reports.${record.status}`)}
         </span>
       ),
@@ -250,7 +257,10 @@ const PropertyReports = () => {
             </p>
             <CustomDropdown
               dropdownItems={categoryIds}
-              selectedValue={categoryIds.find((el: Category) => parseInt(el.key) === catid)?.label}
+              selectedValue={
+                categoryIds.find((el: Category) => parseInt(el.key) == catid)
+                  ?.label
+              }
               onChange={(val) => handleCatId(val)}
             />
           </div>
@@ -260,7 +270,9 @@ const PropertyReports = () => {
             </p>
             <CustomDropdown
               dropdownItems={statusOptions}
-              selectedValue={statusOptions.find((el: any) => el.key === status)?.label}
+              selectedValue={
+                statusOptions.find((el: any) => el.key == status)?.label
+              }
               onChange={(val) => handleStatus(val)}
             />
           </div>
@@ -271,7 +283,7 @@ const PropertyReports = () => {
               placeholder={t("global.palceholder")}
               classNames={{
                 label: "text-sm font-medium",
-                input: "text-sm"
+                input: "text-sm",
               }}
             />
           </div>
@@ -287,10 +299,7 @@ const PropertyReports = () => {
           {t("global.porperty-reports.noReports")}
         </div>
       ) : (
-        <ReusableTable
-          columns={tableCols}
-          tableData={reportList}
-        />
+        <ReusableTable columns={tableCols} tableData={reportList} />
       )}
 
       <Modal
@@ -334,7 +343,11 @@ const PropertyReports = () => {
                       </h4>
                       <CustomDropdown
                         dropdownItems={statusOptions}
-                        selectedValue={statusOptions.find((el: any) => el.key === changedStatus)?.label}
+                        selectedValue={
+                          statusOptions.find(
+                            (el: any) => el.key === changedStatus
+                          )?.label
+                        }
                         onChange={(val) => setChangedStatus(val)}
                       />
                     </div>

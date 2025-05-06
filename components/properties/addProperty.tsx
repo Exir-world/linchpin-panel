@@ -17,6 +17,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
+import useDir from "@/hooks/useDirection";
 
 enum PropertyStatusEnum {
   GOOD = "good",
@@ -61,6 +62,7 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("global.properties");
   const locale = useLocale();
+  const dir = useDir();
 
   const {
     handleSubmit,
@@ -183,7 +185,7 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
           title: t("success"),
           color: "success",
         });
-        onAddProperty() // refresh the property list
+        onAddProperty(); // refresh the property list
         onClose();
       } else {
         addToast({
@@ -212,7 +214,7 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
         <Icon name="file-plus-2"></Icon>
       </Button>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl" dir={dir}>
         <ModalContent>
           {(onClose) => (
             <>

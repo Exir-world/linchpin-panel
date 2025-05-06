@@ -22,6 +22,7 @@ import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";
 import { addToast } from "@heroui/toast";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";
+import useDir from "@/hooks/useDirection";
 
 type Role = {
   name: string;
@@ -56,7 +57,7 @@ const EmployeesList = () => {
   const [shiftList, setShiftList] = useState([]);
   const [shiftId, setShiftId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const dir = useDir();
   const locale = useLocale();
   const [currentLocale, setCurrentLocale] = useState<string>();
   const router = useRouter();
@@ -280,6 +281,7 @@ const EmployeesList = () => {
           onOpenChange={onOpenChange}
           className="w-full"
           size="4xl"
+          dir={dir}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             <ModalContent>
