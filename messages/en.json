@@ -34,7 +34,8 @@
       "category": "Category",
       "status": "Status",
       "reportAndDetail": " Property Report Details",
-      "reportCode": "Report Code"
+      "reportCode": "Report Code",
+      "all": "All"
     },
     "attendance": {
       "date": "Date",
@@ -45,7 +46,8 @@
       "save": "Save",
       "entry": "Entry",
       "exit": "Exit",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "editHours": "Edit hours"
     },
     "requests": {
       "filter": {
@@ -249,7 +251,8 @@
       "success": "Your changes have been saved!",
       "error": " Something went wrong. Please try again.",
       "Warning": "Please be cautious with this action.",
-      "noData": "No data exists"
+      "noData": "No data exists",
+      "fieldRequired": "This field is required"
     }
   }
 }

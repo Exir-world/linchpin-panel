@@ -8,11 +8,22 @@ import { Get, Patch } from "@/lib/axios";
 import { useSearchParams } from "next/navigation";
 import ReusableTable from "../reusabelTable/table";
 import { format as formatJalali, parseISO, toDate } from "date-fns-jalali";
-import { format } from "date-fns";
-import { Button, Spinner, Tooltip } from "@nextui-org/react";
+import { format, setDate } from "date-fns";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Spinner,
+  Tooltip,
+  useDisclosure,
+} from "@nextui-org/react";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import Icon from "../icon";
 import { addToast } from "@heroui/toast";
+import { TimeInput } from "@heroui/date-input";
 
 interface InputData {
   stops: any[];
@@ -45,16 +56,28 @@ const UserAttendace = () => {
   const [endDate, setEndDate] = useState<Date | any>("");
   const [reportData, setReportData] = useState([] as OutputData[]);
   const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, onClose, onOpenChange, onOpen } = useDisclosure();
+  const [editedEntry, setEditedEntry] = useState<any>(null);
+  const [editedExit, setEditedExit] = useState<any>(null);
+  // const [editRowInfo, setEditingRowInfo] = useState({
+  //   attendanceId: null,
+  //   inDate: "",
+  //   outDate: "",
+  // } as any);
   //
   const [editRowId, setEditRowId] = useState<number | null>(null);
   const [timePickersState, setTimePickersState] = useState<{
     attendanceId: number | null;
-    checkIn: string;
-    checkOut: string;
+    inDate: string;
+    outDate: string;
+    in: string;
+    out: string;
   }>({
     attendanceId: null,
-    checkIn: "",
-    checkOut: "",
+    inDate: "",
+    outDate: "",
+    in: "",
+    out: "",
   });
 
   //
@@ -167,7 +190,8 @@ const UserAttendace = () => {
   };
 
   const getUserAttendanceReport = async () => {
-    if (!id) return;
+    // اگر هیچ کدام از فیلدها پر نشده باشد، تابع را متوقف کن
+    if (!id || !startDate || !endDate) return;
     try {
       setIsLoading(true);
 
@@ -267,12 +291,25 @@ const UserAttendace = () => {
     }));
   };
 
-  const hanldeEditHours = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const hanldeEditHours = async () => {
+    // e.preventDefault();
+    if (!editedEntry || !editedExit || !timePickersState.attendanceId) {
+      addToast({
+        color: "warning",
+        title: t("global.alert.fieldRequired"),
+      });
+      return;
+    }
+    const params = {
+      attendanceId: timePickersState.attendanceId,
+      checkIn: editedEntry,
+      checkOut: editedExit,
+    };
+
     try {
-      const res = await Patch(`attendance/admin`, timePickersState);
+      const res = await Patch(`attendance/admin`, params);
       if (res.status === 200 || res.status === 201) {
-        setEditRowId(null);
+        onClose();
         getUserAttendanceReport();
         addToast({
           color: "success",
@@ -285,6 +322,34 @@ const UserAttendace = () => {
         title: t("global.alert.error"),
       });
     }
+  };
+
+  const convertTimeObjectToISOString = (timeObj: any, baseDate: any) => {
+    const date = new Date(baseDate);
+    date.setHours(timeObj.hour);
+    date.setMinutes(timeObj.minute);
+    date.setSeconds(timeObj.second);
+    date.setMilliseconds(timeObj.millisecond);
+
+    return date.toISOString();
+  };
+
+  const handleEntryEdit = (val: any) => {
+    //  تبدیل به فرمت ISO
+    const entryTime = convertTimeObjectToISOString(
+      val,
+      timePickersState.inDate
+    );
+    setEditedEntry(entryTime);
+  };
+
+  const handleExitEdit = (val: any) => {
+    // محاسبه زمان خروج و تبدیل به فرمت ISO
+    const exitTime = convertTimeObjectToISOString(
+      val,
+      timePickersState.outDate
+    );
+    setEditedExit(exitTime);
   };
 
   const tableCols = [
@@ -304,70 +369,13 @@ const UserAttendace = () => {
           <div className="flex flex-col gap-1">
             {record.times.map((el, idx) => {
               const isEditing = editRowId === el.attendanceId;
+
               return (
                 <div
                   key={el.attendanceId}
                   className="flex justify-between items-center gap-4"
                 >
-                  {isEditing ? (
-                    <form
-                      className="flex gap-3  items-end "
-                      onSubmit={(e) => hanldeEditHours(e)}
-                    >
-                      <div className="flex gap-2 items-center">
-                        <div className="flex flex-col gap-2 w-32">
-                          <p className="text-xs text-default-500">
-                            {t("global.attendance.entry")}
-                          </p>
-                          <DatePicker
-                            style={{ width: "100px" }}
-                            disableDayPicker
-                            format="hh:mm:ss A"
-                            plugins={[<TimePicker key={"1"} />]}
-                            onChange={(value) => {
-                              handleEntryDate(
-                                el.attendanceId,
-                                value,
-                                el.inDate
-                              );
-                            }}
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1 w-32">
-                          <p className="text-xs">
-                            {t("global.attendance.exit")}
-                          </p>
-                          <DatePicker
-                            style={{ width: "100px" }}
-                            disableDayPicker
-                            format="hh:mm:ss A"
-                            onChange={(value) => {
-                              handleExiteDate(
-                                el.attendanceId,
-                                value,
-                                el.inDate
-                              );
-                            }}
-                            plugins={[<TimePicker key={"2"} />]}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex gap-2 items-center">
-                        <Button type="submit" size="sm" color="success">
-                          {t("global.attendance.save")}
-                        </Button>
-                        <Button
-                          size="sm"
-                          type="button"
-                          color="danger"
-                          onClick={() => setEditRowId(null)}
-                        >
-                          {t("global.attendance.cancel")}
-                        </Button>
-                      </div>
-                    </form>
-                  ) : (
+                  <div className="flex gap-5 items-center w-40 justify-between  p-1 ">
                     <div className="flex gap-5 items-center">
                       <Tooltip
                         content={t("global.attendance.entry")}
@@ -381,27 +389,23 @@ const UserAttendace = () => {
                       >
                         <span>{el.out}</span>
                       </Tooltip>
-                      <Button
-                        type="button"
-                        size="sm"
-                        isIconOnly
-                        color="primary"
-                        variant="flat"
-                        onClick={() => {
-                          setEditRowId(el.attendanceId);
-                          // clear the state before setting the new one
-                          setTimePickersState({
-                            attendanceId: el.attendanceId,
-                            checkIn: "",
-                            checkOut: "",
-                          });
-                        }}
-                      >
-                        <Icon name="square-pen"></Icon>
-                        {/* {t("global.attendance.edit")} */}
-                      </Button>
                     </div>
-                  )}
+                    <Button
+                      type="button"
+                      size="sm"
+                      isIconOnly
+                      color="primary"
+                      variant="flat"
+                      onClick={() => {
+                        console.log(el);
+                        onOpen();
+                        setTimePickersState(el);
+                      }}
+                    >
+                      <Icon name="square-pen"></Icon>
+                      {/* {t("global.attendance.edit")} */}
+                    </Button>
+                  </div>
                 </div>
               );
             })}
@@ -417,6 +421,43 @@ const UserAttendace = () => {
 
   return (
     <div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {t("global.attendance.editHours")}
+              </ModalHeader>
+              <ModalBody>
+                <TimeInput
+                  aria-label="Time-input"
+                  label={t("global.attendance.entry")}
+                  isRequired
+                  onChange={(val) => {
+                    handleEntryEdit(val);
+                  }}
+                ></TimeInput>
+                <TimeInput
+                  isRequired
+                  label={t("global.attendance.exit")}
+                  aria-label="Time-input"
+                  onChange={(val) => {
+                    handleExitEdit(val);
+                  }}
+                ></TimeInput>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={hanldeEditHours}>
+                  تایید
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <div className="flex items-center gap-3 pb-3">
         <div className="flex flex-col gap-1">
           <span className="text-sm">{t("global.reports.startDate")}</span>

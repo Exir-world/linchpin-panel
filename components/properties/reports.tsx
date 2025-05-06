@@ -35,7 +35,7 @@ const PropertyReports = () => {
   const [reportItem, setReportItem] = useState<PropertyReport | null>(null);
   const [reportCode, setReportCode] = useState<string | null>(null);
   const [catid, setCatid] = useState<null | number>(null);
-  const [status, setStatus] = useState<null | number>(null);
+  const [status, setStatus] = useState<null | number |string>(null);
   const [changedStatus, setChangedStatus] = useState<null | string>(null);
 
   const [categoryIds, setCategoryIds] = useState<Category[]>([]);
@@ -43,6 +43,10 @@ const PropertyReports = () => {
   const t = useTranslations();
 
   const statusOptions = [
+    {
+      key: "all",
+      label: t("global.reports.all"),
+    },
     {
       key: "pending",
       label: t("global.reports.pending"),
@@ -62,7 +66,7 @@ const PropertyReports = () => {
   ];
   const getAllReports = async () => {
     let url;
-    if (reportCode === null && catid === null && status === null) {
+    if (reportCode === null && catid === null && status == 'all') {
       url = `property-reports/all`;
     } else {
       url = `property-reports/all?code=${reportCode || ""}&categoryId=${catid || ""
