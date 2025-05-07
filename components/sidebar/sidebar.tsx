@@ -22,7 +22,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Icon from "../icon";
 import CollapseItems from "./collapse-items";
-
+import Exir from "@/public/Exir.png";
+import Image from "next/image";
+import Link from "next/link";
 export const SidebarWrapper = () => {
   const pathname = usePathname().split("/")[2];
   const { collapsed, setCollapsed } = useSidebarContext();
@@ -38,7 +40,19 @@ export const SidebarWrapper = () => {
           collapsed: collapsed,
         })}
       >
-        <div className={Sidebar.Header()}>{/* <CompaniesDropdown /> */}</div>
+        <div className={Sidebar.Header()}>
+          {/* <CompaniesDropdown /> */}
+          <div className="flex items-center gap-2">
+            <div>
+              <Link href={"/"}>
+                <Image src={Exir} width={50} height={50} alt="pic"></Image>
+              </Link>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-primary">Exir</h1>
+            </div>
+          </div>
+        </div>
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
             <SidebarItem
