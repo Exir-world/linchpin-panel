@@ -99,11 +99,12 @@ const UserProperties = () => {
 
   const handleUnassignProperty = async (property: PropertyItem) => {
     const userId = parseInt(params.get("id") as string);
-
+    if (!userId || !property.propertyId) return; // check if userId and propertyId are valid
     const apiParams = {
       userId,
-      propertyId: property.id,
+      propertyId: property.propertyId,
     };
+
     const res = await Post(`property-user/unassign`, apiParams);
     if (res.status === 200 || res.status === 201) {
       addToast({
