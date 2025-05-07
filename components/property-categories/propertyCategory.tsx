@@ -33,8 +33,8 @@ type FormValues = {
   title: string;
   id: string | number;
   features: {
-    id: number;
-    title: string;
+    id?: number;
+    title?: string;
   }[];
 };
 
@@ -50,7 +50,7 @@ const PropertyCategory = () => {
   const { control, register, handleSubmit, reset } = useForm<FormValues>({
     defaultValues: { title: "", features: [] },
   });
-  const { fields, replace, remove } = useFieldArray({
+  const { fields, replace, remove, append } = useFieldArray({
     control,
     name: "features",
     keyName: "fieldId",
@@ -92,17 +92,21 @@ const PropertyCategory = () => {
     reset(); // پاک کردن فرم
   };
 
+  const handleAddFeature = () => {
+    append({ title: "" });
+  };
+
   const onSubmit = async (data: FormValues) => {
     // payload شامل عنوان دسته و آرایه فیچرها
     const payload = {
       // id: selectedCat?.id,
       title: data.title,
-      features: data.features.map(({ id, title }) => ({ id, title })),
+      features: data.features.map(({ id, title }) => id ? ({ id, title }) : { title }), //  اگه id نداشته باشه یعنی فیچر جدید هست
     };
     const catId = selectedCat?.id;
     const res = await Patch(`property-categories/${catId}`, payload);
-    console.log(res);
     if (res.status === 200 || res.status === 201) {
+      getCategories();
       addToast({
         title: t("global.alert.success"),
       });
@@ -180,7 +184,7 @@ const PropertyCategory = () => {
         dir={dir}
       >
         <ModalContent>
-          <ModalHeader>{t("global.category.modalTitle")} </ModalHeader>
+          <ModalHeader>{t("global.category.modalTitle")}</ModalHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <ModalBody className="overflow-y-auto max-h-[60vh] space-y-4">
               {/* 1. ویرایش عنوان دسته */}
@@ -195,7 +199,12 @@ const PropertyCategory = () => {
                   fullWidth
                 />
               </div>
-
+              <div>
+                <Button size="sm" color="primary" onPress={handleAddFeature}>
+                  {t("global.category.addFeature")}
+                  <Icon name="badge-plus" />
+                </Button>
+              </div>
               {/* 2. جدول ویرایش فیچرها */}
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">

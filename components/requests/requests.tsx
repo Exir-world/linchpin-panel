@@ -130,11 +130,11 @@ const RequestsList = () => {
         return (
           <span
             className={clsx(
-              "py-1 px-2 rounded-full text-white text-xs font-semibold",
+              "py-1 px-2 rounded-full text-white text-xs font-semibold whitespace-nowrap",
               status === "CANCELLED"
                 ? "bg-cancelled"
                 : status === "PENDING"
-                ? "bg-pending"
+                ? "bg-yellow-500"
                 : status === "APPROVED"
                 ? "bg-approved"
                 : status === "REJECTED"

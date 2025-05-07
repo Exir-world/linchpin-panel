@@ -99,18 +99,19 @@ const UserProperties = () => {
 
   const handleUnassignProperty = async (property: PropertyItem) => {
     const userId = parseInt(params.get("id") as string);
-
+    if (!userId || !property.propertyId) return; // check if userId and propertyId are valid
     const apiParams = {
       userId,
-      propertyId: property.id,
+      propertyId: property.propertyId,
     };
+
     const res = await Post(`property-user/unassign`, apiParams);
     if (res.status === 200 || res.status === 201) {
       addToast({
         title: t("success"),
         color: "success",
       });
-      getUserProperties()
+      getUserProperties();
     }
   };
 
@@ -196,8 +197,9 @@ const UserProperties = () => {
     };
 
     const res = await Post(`property-user/assign`, apiParams);
-    if (res.status === 201) {
+    if (res.status === 201 || res.status === 200) {
       onClose();
+      getUserProperties();
       addToast({
         title: t("success"),
         color: "success",
@@ -234,10 +236,11 @@ const UserProperties = () => {
                             className={`
                             flex items-center w-full rounded-xl border border-gray-200 cursor-pointer
                             p-2 gap-2 hover:bg-gray-100 transition-all duration-200
-                            ${selectedProperties.includes(item.id)
+                            ${
+                              selectedProperties.includes(item.id)
                                 ? "bg-gray-100"
                                 : ""
-                              }
+                            }
                           `}
                             key={item.id}
                             onClick={() => toggle(item.id)}
@@ -252,12 +255,16 @@ const UserProperties = () => {
                                   onChange={() => toggle(item.id)}
                                 ></Checkbox>
                               </div>
-                              {item.imageUrl ? <Image
-                                alt="pic"
-                                src={item.imageUrl as string}
-                                width={60}
-                                height={60}
-                              ></Image> : ""}
+                              {item.imageUrl ? (
+                                <Image
+                                  alt="pic"
+                                  src={item.imageUrl as string}
+                                  width={60}
+                                  height={60}
+                                ></Image>
+                              ) : (
+                                ""
+                              )}
                             </div>
                             <div className="flex items-start grow  justify-evenly ">
                               <div className="text-start  items-start flex">

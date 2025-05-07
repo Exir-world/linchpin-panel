@@ -135,7 +135,7 @@ export const UserRequests = () => {
       );
       if (res.status === 201 || res.status === 200) {
         onClose();
-        getUsersRequests()
+        getUsersRequests();
       }
     } catch (error) {
       console.log(error);
@@ -174,16 +174,16 @@ export const UserRequests = () => {
           record.status === "CANCELLED"
             ? "bg-[#6C757D]"
             : record.status === "PENDING"
-              ? "bg-[#FFC107] "
-              : record.status === "APPROVED"
-                ? "bg-[#28A745]"
-                : record.status === "REJECTED"
-                  ? "bg-[#DC3545]"
-                  : "bg-black";
+            ? "bg-[#FFC107] "
+            : record.status === "APPROVED"
+            ? "bg-[#28A745]"
+            : record.status === "REJECTED"
+            ? "bg-[#DC3545]"
+            : "bg-black";
         return (
           <div>
             <p
-              className={`font-medium text-white rounded-full px-2 py-1 w-fit text-xs flex items-center text-center ${colorClass}`}
+              className={`font-medium text-white rounded-full px-2 py-1 w-fit text-xs flex items-center text-center whitespace-nowrap ${colorClass}`}
             >
               {t(`filter.${record.status.toLowerCase()}`)}
             </p>
@@ -191,7 +191,13 @@ export const UserRequests = () => {
         );
       },
     },
-    { name: t("description"), uid: "description" },
+    {
+      name: t("description"),
+      uid: "description",
+      render: (record: Request) => {
+        return <div className="min-w-20">{record.description}</div>;
+      },
+    },
     {
       name: t("phoneNumber"),
       uid: "user.phoneNumber",
