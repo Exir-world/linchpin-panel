@@ -215,20 +215,15 @@ const UserProperties = () => {
         </Button>
       </div>
       <div>
-        <Modal
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          className="min-h-[40vh]"
-          size="2xl"
-        >
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
           <ModalContent>
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
                   {t("assignProperty")}
                 </ModalHeader>
-                <ModalBody>
-                  <div className="max-h-full w-full flex flex-col gap-2 overflow-y-auto items-center p-2 justify-center grow ">
+                <ModalBody className="max-h-[50vh] overflow-y-auto">
+                  <div className="max-h-full w-full flex flex-col gap-2 overflow-y-auto items-center  justify-center grow ">
                     {propertyList.length > 0 ? (
                       propertyList.map((item: Property) => {
                         return (
@@ -257,13 +252,17 @@ const UserProperties = () => {
                               </div>
                               {item.imageUrl ? (
                                 <Image
-                                  alt="pic"
+                                  alt="property image"
                                   src={item.imageUrl as string}
                                   width={60}
                                   height={60}
-                                ></Image>
+                                  className="rounded-xl border border-gray-200"
+                                  unoptimized
+                                />
                               ) : (
-                                ""
+                                <div className="w-[60px] h-[60px] bg-gray-200 rounded-xl flex items-center justify-center">
+                                  <Icon name="image-off"></Icon>
+                                </div>
                               )}
                             </div>
                             <div className="flex items-start grow  justify-evenly ">
@@ -284,7 +283,13 @@ const UserProperties = () => {
                 <ModalFooter>
                   {propertyList.length > 0 ? (
                     <>
-                      <Button color="danger" variant="light" onPress={onClose}>
+                      <Button
+                        color="danger"
+                        variant="light"
+                        onPress={() => {
+                          onClose();
+                        }}
+                      >
                         {t("close")}
                       </Button>
                       <Button color="primary" onPress={assignPropertyToUser}>
@@ -292,7 +297,12 @@ const UserProperties = () => {
                       </Button>
                     </>
                   ) : (
-                    <Button onPress={onClose} color="danger">
+                    <Button
+                      onPress={() => {
+                        onClose();
+                      }}
+                      color="danger"
+                    >
                       {t("close")}
                     </Button>
                   )}
