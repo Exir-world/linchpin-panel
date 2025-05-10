@@ -449,10 +449,10 @@ const UserAttendace = () => {
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  {t("global.attendance.close")}
                 </Button>
                 <Button color="primary" onPress={hanldeEditHours}>
-                  تایید
+                  {t("global.attendance.confirm")}
                 </Button>
               </ModalFooter>
             </>
