@@ -45,7 +45,10 @@
       "save": "حفظ",
       "entry": "دخول",
       "exit": "خروج",
-      "cancel": "إلغاء"
+      "cancel": "إلغاء",
+      "editHours": "تعديل الساعات",
+      "close": "إغلاق",
+      "confirm": "تأكيد"
     },
     "requests": {
       "filter": {

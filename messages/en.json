@@ -47,7 +47,9 @@
       "entry": "Entry",
       "exit": "Exit",
       "cancel": "Cancel",
-      "editHours": "Edit hours"
+      "editHours": "Edit hours",
+      "close": "Close",
+      "confirm": "Confirm"
     },
     "requests": {
       "filter": {

@@ -228,7 +228,7 @@ const EmployeeDetails = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 rtl:text-right ">
               <div>
                 <label className="block text-sm font-medium mb-1">
                   {t("global.employee.create.role")}

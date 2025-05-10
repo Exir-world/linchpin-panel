@@ -47,7 +47,9 @@
       "entry": "ورود",
       "exit": "خروج",
       "cancel": "انصراف",
-      "editHours": "ویرایش ساعت‌ها"
+      "editHours": "ویرایش ساعت‌ها",
+      "close": "بستن",
+      "confirm": "تایید"
     },
     "requests": {
       "filter": {
