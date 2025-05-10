@@ -20,7 +20,7 @@ const EmployeeDetails = () => {
   const [roleList, setRoleList] = useState<DropdownTypes[]>([]);
   const [orgId, setOrgId] = useState(null);
   const [shiftList, setShiftList] = useState([]);
-  const [teamList, setTeamList] = useState([]);
+  const [teamList, setTeamList] = useState<any>([]);
   const t = useTranslations();
   const locale = useLocale();
 
@@ -241,7 +241,7 @@ const EmployeeDetails = () => {
                       dropdownItems={roleList}
                       onChange={field.onChange}
                       selectedValue={
-                        roleList.find((el) => el.key === field.value)?.label
+                        roleList.find((el) => el.key == field.value)?.label
                       }
                     />
                   )}
@@ -299,6 +299,9 @@ const EmployeeDetails = () => {
                     <CustomDropdown
                       dropdownItems={teamList}
                       onChange={field.onChange}
+                      selectedValue={
+                        teamList.find((el: any) => el.key == field.value)?.label
+                      }
                     />
                   )}
                 />

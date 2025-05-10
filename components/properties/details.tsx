@@ -20,6 +20,7 @@ import CustomDropdown from "../dropdown/dropdown";
 import formatDate from "@/helpers/dateConverter";
 import { addToast } from "@heroui/toast";
 import FileUploader from "../imageuploader/uploader";
+import Icon from "../icon";
 
 enum PropertyStatusEnum {
   GOOD = "good",
@@ -274,10 +275,13 @@ const PropertyDetails = () => {
       <div className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-6">
         <div>
           <Button
+            color="secondary"
+            variant={editMode ? "bordered" : "solid"}
             onPress={() => {
               setEditMode(!editMode);
             }}
           >
+            <Icon name="file-cog"></Icon>
             {editMode ? t("show") : t("edit")}
           </Button>
         </div>
