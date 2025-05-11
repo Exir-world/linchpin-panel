@@ -247,6 +247,19 @@
       "formError": {
         "required": "This field is required",
         "invalid": "Invalid field value"
+      },
+      "layout": {
+        "title": "Linchpin Admin",
+        "welcome": "Welcome to your command center",
+        "description": "Manage your organization, monitor performance, and make data-driven decisions with our powerful admin dashboard.",
+        "analytics": {
+          "title": "Analytics",
+          "description": "Real-time insights and metrics"
+        },
+        "management": {
+          "title": "Management",
+          "description": "Efficient team coordination"
+        }
       }
     },
     "alert": {
