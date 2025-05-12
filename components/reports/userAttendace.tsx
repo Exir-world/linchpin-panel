@@ -60,6 +60,7 @@ const UserAttendace = () => {
   const { isOpen, onClose, onOpenChange, onOpen } = useDisclosure();
   const [editedEntry, setEditedEntry] = useState<any>(null);
   const [editedExit, setEditedExit] = useState<any>(null);
+  const [eachDayDate, setEachDayDate] = useState<any | Date>(null);
   // const [editRowInfo, setEditingRowInfo] = useState({
   //   attendanceId: null,
   //   inDate: "",
@@ -326,7 +327,7 @@ const UserAttendace = () => {
   };
 
   const convertTimeObjectToISOString = (timeObj: any, baseDate: any) => {
-    const date = new Date(baseDate);
+    const date = new Date(eachDayDate);
     date.setHours(timeObj.hour);
     date.setMinutes(timeObj.minute);
     date.setSeconds(timeObj.second);
@@ -337,19 +338,19 @@ const UserAttendace = () => {
 
   const handleEntryEdit = (val: any) => {
     //  تبدیل به فرمت ISO
-    const entryTime = convertTimeObjectToISOString(
-      val,
-      timePickersState.inDate
-    );
+    const entryTimefallBack = timePickersState.inDate || eachDayDate;
+    // make sure there is a valid date
+    const entryTime = convertTimeObjectToISOString(val, entryTimefallBack);
     setEditedEntry(entryTime);
   };
 
   const handleExitEdit = (val: any) => {
+    const exitTimefallBack =
+      timePickersState.outDate || eachDayDate || timePickersState.inDate;
+
     // محاسبه زمان خروج و تبدیل به فرمت ISO
-    const exitTime = convertTimeObjectToISOString(
-      val,
-      timePickersState.outDate
-    );
+    const exitTime = convertTimeObjectToISOString(val, exitTimefallBack);
+
     setEditedExit(exitTime);
   };
 
@@ -398,7 +399,8 @@ const UserAttendace = () => {
                       color="primary"
                       variant="flat"
                       onClick={() => {
-                        console.log(el);
+                        setEachDayDate(el.inDate); // make sure there is atleast a valid date
+
                         onOpen();
                         setTimePickersState(el);
                       }}
