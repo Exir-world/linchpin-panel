@@ -196,7 +196,8 @@
       "deleteConfirmation": "تأكيد حذف الملكية",
       "deleteConfirmationMessage": "هل أنت متأكد أنك تريد حذف هذه الملكية؟",
       "cancel": "إلغاء",
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "pleaseSelect":"يرجى الاختيار"
     },
     "porperty-reports": {
       "userId": "معرف المستخدم",

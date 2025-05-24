@@ -197,7 +197,8 @@
       "deleteConfirmation": "Delete Property Confirmation",
       "deleteConfirmationMessage": "Are you sure you want to delete this property?",
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "pleaseSelect":"Please select"
     },
     "porperty-reports": {
       "userId": "User Id",

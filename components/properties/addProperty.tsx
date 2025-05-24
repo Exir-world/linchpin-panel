@@ -110,10 +110,14 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
         },
       });
       if (res.status === 200) {
-        const list = res.data.map((el: any) => ({
-          key: String(el.id),
-          label: el.title,
-        }));
+        const list = [
+          { key: "", label: t("pleaseSelect") },
+          ...res.data.map((el: any) => ({
+            key: String(el.id),
+            label: el.title,
+          })),
+        ];
+
         setCategoryList(list);
         setCategoryResponse(res.data);
       }
@@ -300,6 +304,7 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
                           control={control}
                           render={({ field }) => (
                             <CustomDropdown
+                              disabled={orgId == null}
                               dropdownItems={departmentList}
                               onChange={(val) => {
                                 field.onChange(val);
@@ -319,7 +324,6 @@ const AddProperty = ({ onAddProperty }: { onAddProperty: () => void }) => {
                         <Controller
                           name="categoryId"
                           control={control}
-                          defaultValue="1"
                           render={({ field }) => (
                             <CustomDropdown
                               dropdownItems={categoryList}
