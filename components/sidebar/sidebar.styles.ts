@@ -1,4 +1,4 @@
-import { tv } from "@nextui-org/react";
+import { tv, type VariantProps } from "@nextui-org/react";
 
 export const SidebarWrapper = tv({
   base: [
@@ -23,6 +23,10 @@ export const SidebarWrapper = tv({
           false: "translate-x-0"
         }
       }
+    },
+    collapsed: {
+      true: "",
+      false: ""
     }
   },
   compoundVariants: [
@@ -42,6 +46,8 @@ export const SidebarWrapper = tv({
     collapsed: true
   }
 });
+
+export type SidebarVariants = VariantProps<typeof SidebarWrapper>;
 
 export const Overlay = tv({
   base: [
