@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "./sidebar.styles";
 import { Avatar, Tooltip } from "@nextui-org/react";
 import { CompaniesDropdown } from "./companies-dropdown";
@@ -25,27 +25,55 @@ import CollapseItems from "./collapse-items";
 import Exir from "@/public/Exir.png";
 import Image from "next/image";
 import Link from "next/link";
+
 export const SidebarWrapper = () => {
   const pathname = usePathname().split("/")[2];
   const { collapsed, setCollapsed } = useSidebarContext();
   const t = useTranslations();
+  const locale = useLocale();
+  const isRTL = locale === "fa" || locale === "ar";
+
+  // اضافه کردن event listener برای بستن سایدبار در موبایل با کلیک خارج از آن
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const sidebar = document.getElementById("sidebar");
+      const toggleButton = document.getElementById("sidebar-toggle");
+      
+      if (
+        sidebar &&
+        !sidebar.contains(event.target as Node) &&
+        toggleButton &&
+        !toggleButton.contains(event.target as Node) &&
+        !collapsed &&
+        window.innerWidth < 768 // فقط در موبایل
+      ) {
+        setCollapsed();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [collapsed, setCollapsed]);
 
   return (
-    <aside className="h-screen z-[20] sticky top-0">
-      {collapsed ? (
-        <div className={Sidebar.Overlay()} onClick={setCollapsed} />
-      ) : null}
+    <>
       <div
+        className={Sidebar.Overlay({ collapsed })}
+        onClick={setCollapsed}
+      />
+      <div
+        id="sidebar"
         className={Sidebar({
-          collapsed: collapsed,
+          isRTL,
+          collapsed,
         })}
       >
         <div className={Sidebar.Header()}>
           {/* <CompaniesDropdown /> */}
           <div className="flex items-center gap-2">
             <div>
-              <Link href={"/"}>
-                <Image src={Exir} width={50} height={50} alt="pic"></Image>
+              <Link href={"."}>
+                <Image src={Exir} width={50} height={50} alt="Exir Logo" />
               </Link>
             </div>
             <div>
@@ -168,6 +196,6 @@ export const SidebarWrapper = () => {
           </div>
         </div>
       </div>
-    </aside>
+    </>
   );
 };
