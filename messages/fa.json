@@ -197,7 +197,8 @@
       "deleteConfirmation": "تایید حذف اموال",
       "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این مال را حذف کنید؟",
       "cancel": "انصراف",
-      "confirm": "تایید"
+      "confirm": "تایید",
+      "pleaseSelect":"لطفاً انتخاب کنید"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",
