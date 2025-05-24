@@ -1,33 +1,69 @@
-import { tv } from "@nextui-org/react";
+import { tv, type VariantProps } from "@nextui-org/react";
 
 export const SidebarWrapper = tv({
-  base: "bg-background transition-transform h-full fixed -translate-x-full w-64 shrink-0 z-[202] overflow-y-auto border-r border-divider flex-col py-6 px-3 md:ml-0 md:flex md:static md:h-screen md:translate-x-0 ",
+  base: [
+    "bg-background h-full fixed w-64 shrink-0 z-[202]",
+    "flex-col py-6 px-3",
+    "transition-all duration-300 ease-in-out",
+    "md:flex md:static md:h-full md:translate-x-0 md:z-auto",
+  ],
+  variants: {
+    isRTL: {
+      true: {
+        base: "right-0 border-l border-divider",
+        collapsed: {
+          true: "translate-x-full",
+          false: "translate-x-0"
+        }
+      },
+      false: {
+        base: "left-0 border-r border-divider",
+        collapsed: {
+          true: "-translate-x-full",
+          false: "translate-x-0"
+        }
+      }
+    },
+    collapsed: {
+      true: "",
+      false: ""
+    }
+  },
+  compoundVariants: [
+    {
+      isRTL: true,
+      collapsed: true,
+      class: "translate-x-full"
+    },
+    {
+      isRTL: false,
+      collapsed: true,
+      class: "-translate-x-full"
+    }
+  ],
+  defaultVariants: {
+    isRTL: false,
+    collapsed: true
+  }
+});
 
+export type SidebarVariants = VariantProps<typeof SidebarWrapper>;
+
+export const Overlay = tv({
+  base: [
+    "fixed inset-0 z-[201] bg-black/50",
+    "transition-opacity duration-300",
+    "md:hidden"
+  ],
   variants: {
     collapsed: {
-      true: "translate-x-0 ml-0 pt-20 [display:inherit]",
-    },
+      true: "opacity-0 pointer-events-none",
+      false: "opacity-100 pointer-events-auto"
+    }
   },
-  // ""
-  //   "@md": {
-  //     marginLeft: "0",
-  //     display: "flex",
-  //     position: "static",
-  //     height: "100vh",
-  //     transform: "translateX(0)",
-  //   },
-  //   variants: {
-  //     collapsed: {
-  //       true: {
-  //         display: "inherit",
-  //         marginLeft: "0 ",
-  //         transform: "translateX(0)",
-  //       },
-  //     },
-  //   },
-});
-export const Overlay = tv({
-  base: "bg-[rgb(15_23_42/0.3)] fixed inset-0 z-[201] opacity-80 transition-opacity md:hidden md:z-auto md:opacity-100",
+  defaultVariants: {
+    collapsed: true
+  }
 });
 
 export const Header = tv({
