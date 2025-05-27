@@ -2,7 +2,7 @@
 import { RequestItem } from "@/helpers/types";
 import { Get } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
 import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
 import CustomDropdown from "../dropdown/dropdown";

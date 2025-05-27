@@ -2,6 +2,7 @@ import NextLink from "next/link";
 import React from "react";
 import { useSidebarContext } from "../layout/layout-context";
 import clsx from "clsx";
+import { createNavigation } from "next-intl/navigation";
 
 interface Props {
   title: string;
@@ -18,8 +19,9 @@ export const SidebarItem = ({ icon, title, isActive, href = "" }: Props) => {
       setCollapsed();
     }
   };
+  const { Link } = createNavigation();
   return (
-    <NextLink
+    <Link
       href={href}
       className="text-default-900 active:bg-none max-w-full"
     >
@@ -35,6 +37,6 @@ export const SidebarItem = ({ icon, title, isActive, href = "" }: Props) => {
         {icon}
         <span className="text-default-900">{title}</span>
       </div>
-    </NextLink>
+    </Link>
   );
 };

@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import React, { useCallback } from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
 import { deleteAuthCookie } from "@/actions/auth.action";
 
 export const UserDropdown = () => {

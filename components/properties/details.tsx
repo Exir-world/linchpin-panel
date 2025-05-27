@@ -13,7 +13,8 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CustomDropdown from "../dropdown/dropdown";

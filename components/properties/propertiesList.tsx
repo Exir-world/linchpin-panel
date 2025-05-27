@@ -6,7 +6,7 @@ import CustomDropdown from "../dropdown/dropdown";
 import ReusableTable from "../reusabelTable/table";
 import formatDate from "@/helpers/dateConverter";
 import { Button, Spinner } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
 import Icon from "../icon";
 import AddProperty from "./addProperty";
 import Organizationdropdown from "../organizationDropdown/organization-dropdown";
