@@ -6,7 +6,7 @@ import { RegisterFormType } from "@/helpers/types";
 import { Button, Input } from "@nextui-org/react";
 import { Formik } from "formik";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
 import { useCallback } from "react";
 
 export const Register = () => {

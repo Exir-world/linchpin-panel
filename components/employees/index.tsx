@@ -3,7 +3,7 @@ import { Get, Post } from "@/lib/axios";
 import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import ReusableTable from "../reusabelTable/table";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/src/i18n/navigation";
 import {
   Button,
   Input,

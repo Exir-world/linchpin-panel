@@ -5,7 +5,7 @@ import { Post } from "@/lib/axios";
 import { Button, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/src/i18n/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { getCookie, setCookie } from "cookies-next";
 import PhoneInput from "react-phone-number-input";

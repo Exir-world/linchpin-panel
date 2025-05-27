@@ -18,7 +18,7 @@ import { SidebarMenu } from "./sidebar-menu";
 import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/src/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Icon from "../icon";
 import CollapseItems from "./collapse-items";
