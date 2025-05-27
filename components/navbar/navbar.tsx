@@ -1,4 +1,16 @@
-import { Input, Link, Navbar, NavbarContent } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Link,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Navbar,
+  NavbarContent,
+  useDisclosure,
+} from "@nextui-org/react";
 import React from "react";
 import { FeedbackIcon } from "../icons/navbar/feedback-icon";
 import { GithubIcon } from "../icons/navbar/github-icon";
@@ -8,12 +20,23 @@ import { BurguerButton } from "./burguer-button";
 import { NotificationsDropdown } from "./notifications-dropdown";
 import { UserDropdown } from "./user-dropdown";
 import LangSwitcher from "../langSwitcher";
+import Icon from "../icon";
+import { useTranslations } from "next-intl";
+import { deleteCookie } from "cookies-next";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const NavbarWrapper = ({ children }: Props) => {
+  const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
+  const t = useTranslations();
+  const handleLogout = () => {
+    deleteCookie("linchpin-admin");
+    window.location.href = "/login";
+    onClose();
+  };
+
   return (
     <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
       <Navbar
@@ -42,11 +65,28 @@ export const NavbarWrapper = ({ children }: Props) => {
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
         >
-          {/* <div className="flex items-center gap-2 max-md:hidden">
-            <FeedbackIcon />
-            <span>Feedback?</span>
-          </div> */}
           <LangSwitcher></LangSwitcher>
+          <div className="flex items-center gap-2 max-md:hidden">
+            <>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalContent>
+                  <ModalHeader>{t("global.logout")}</ModalHeader>
+                  <ModalBody>{t("global.logoutConfirmation")}</ModalBody>
+                  <ModalFooter>
+                    <Button variant="light" onPress={onClose}>
+                      {t("global.cancel")}
+                    </Button>
+                    <Button color="danger" onPress={handleLogout}>
+                      {t("global.logout")}
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+              <Button onPress={onOpen} isIconOnly variant="light">
+                <Icon name="log-out" />
+              </Button>
+            </>
+          </div>
 
           {/* <NotificationsDropdown />
 

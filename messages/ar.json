@@ -3,6 +3,9 @@
     "home": "الرئيسية",
     "title": "مرحبا",
     "select": "اختر",
+    "logout": "تسجيل الخروج",
+    "logoutConfirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "cancel": "إلغاء",
     "pleaseSelect": "يرجى الاختيار",
     "main-menu": {
       "organizations": "المنظمات",
@@ -197,7 +200,7 @@
       "deleteConfirmationMessage": "هل أنت متأكد أنك تريد حذف هذه الملكية؟",
       "cancel": "إلغاء",
       "confirm": "تأكيد",
-      "pleaseSelect":"يرجى الاختيار"
+      "pleaseSelect": "يرجى الاختيار"
     },
     "porperty-reports": {
       "userId": "معرف المستخدم",
