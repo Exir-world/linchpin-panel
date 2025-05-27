@@ -3,6 +3,9 @@
     "home": "Home",
     "title": "Hello",
     "select": "select",
+    "logout": "Logout",
+    "logoutConfirmation": "Are you sure you want to logout?",
+    "cancel": "Cancel",
     "pleaseSelect": "Please select",
     "main-menu": {
       "organizations": "Organizations",
@@ -198,7 +201,7 @@
       "deleteConfirmationMessage": "Are you sure you want to delete this property?",
       "cancel": "Cancel",
       "confirm": "Confirm",
-      "pleaseSelect":"Please select"
+      "pleaseSelect": "Please select"
     },
     "porperty-reports": {
       "userId": "User Id",

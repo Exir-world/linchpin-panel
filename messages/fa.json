@@ -3,6 +3,9 @@
     "home": "خانه",
     "title": "سلام",
     "select": "انتخاب",
+    "logout": "خروج",
+    "logoutConfirmation": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
+    "cancel": "انصراف",
     "pleaseSelect": "لطفاً انتخاب کنید",
     "main-menu": {
       "organizations": "سازمان‌ها",
@@ -198,7 +201,7 @@
       "deleteConfirmationMessage": "آیا مطمئن هستید که می‌خواهید این مال را حذف کنید؟",
       "cancel": "انصراف",
       "confirm": "تایید",
-      "pleaseSelect":"لطفاً انتخاب کنید"
+      "pleaseSelect": "لطفاً انتخاب کنید"
     },
     "porperty-reports": {
       "userId": "شناسه کاربر",
