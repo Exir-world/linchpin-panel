@@ -14,6 +14,7 @@ import {
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
+import { format } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -121,11 +122,15 @@ const ReqDetails = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p>{t("startTime")}</p>
-            <p>{formatDate(requestItem.startTime as any, locale, cal)}</p>
+            {requestItem?.startTime
+              ? format(new Date(requestItem.startTime), "HH:mm")
+              : "-"}
           </div>
           <div className="flex flex-col gap-2">
             <p>{t("endTime")}</p>
-            <p>{formatDate(requestItem.endTime as any, locale, cal)}</p>
+            {requestItem?.endTime
+              ? format(new Date(requestItem.endTime), "HH:mm")
+              : "-"}
           </div>
         </div>
         <div className="grid md:grid-cols-3 justify-center items-center w-full gap-4 p-3 border rounded-md shadow-sm">
