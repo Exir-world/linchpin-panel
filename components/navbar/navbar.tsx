@@ -1,7 +1,5 @@
 import {
   Button,
-  Input,
-  Link,
   Modal,
   ModalBody,
   ModalContent,
@@ -12,17 +10,12 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import React from "react";
-import { FeedbackIcon } from "../icons/navbar/feedback-icon";
-import { GithubIcon } from "../icons/navbar/github-icon";
-import { SupportIcon } from "../icons/navbar/support-icon";
-import { SearchIcon } from "../icons/searchicon";
 import { BurguerButton } from "./burguer-button";
-import { NotificationsDropdown } from "./notifications-dropdown";
-import { UserDropdown } from "./user-dropdown";
 import LangSwitcher from "../langSwitcher";
 import Icon from "../icon";
 import { useTranslations } from "next-intl";
 import { deleteCookie } from "cookies-next";
+import useDir from "@/hooks/useDirection";
 
 interface Props {
   children: React.ReactNode;
@@ -36,6 +29,7 @@ export const NavbarWrapper = ({ children }: Props) => {
     window.location.href = "/login";
     onClose();
   };
+  const dir = useDir();
 
   return (
     <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -66,9 +60,9 @@ export const NavbarWrapper = ({ children }: Props) => {
           className="w-fit data-[justify=end]:flex-grow-0"
         >
           <LangSwitcher></LangSwitcher>
-          <div className="flex items-center gap-2 max-md:hidden">
+          <div className="flex items-center gap-2">
             <>
-              <Modal isOpen={isOpen} onClose={onClose}>
+              <Modal isOpen={isOpen} onClose={onClose} dir={dir}>
                 <ModalContent>
                   <ModalHeader>{t("global.logout")}</ModalHeader>
                   <ModalBody>{t("global.logoutConfirmation")}</ModalBody>
