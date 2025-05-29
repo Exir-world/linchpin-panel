@@ -3,18 +3,20 @@
 import { LoginFormData } from "@/helpers/types";
 import { Post } from "@/lib/axios";
 import { Button, Input } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "@/src/i18n/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { getCookie, setCookie } from "cookies-next";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { addToast } from "@heroui/toast";
+import { AxiosError } from "axios";
 
 export const Login = () => {
   const router = useRouter();
   const t = useTranslations();
-
+  const locale = useLocale();
   const {
     control,
     handleSubmit,
@@ -31,14 +33,21 @@ export const Login = () => {
 
   const handleLogin = async (data: LoginFormData) => {
     try {
-      const res = await Post("/auth/login/admin", data);
+      const res = await Post("/auth/login/admin", data, {
+        headers: {
+          "Accept-Language": locale || "fa",
+        },
+      });
       const token = res.data?.accessToken;
       setCookie("linchpin-admin", token);
       if (getCookie("linchpin-admin")) {
         router.replace("/");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: AxiosError | any) {
+      addToast({
+        title: err.response?.data.message,
+        color: "danger",
+      });
     }
   };
 
@@ -74,7 +83,7 @@ export const Login = () => {
                   value={field.value}
                   defaultCountry="IR"
                   onChange={field.onChange}
-                  className="border bg-gray-50 h-10 rounded-lg focus:outline-0 p-1  focus:ring-0"
+                  className="bg-gray-50 h-10 rounded-lg p-1 !outline-white !ring-white  dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 />
                 {error && <p style={{ color: "red" }}>{error.message}</p>}
               </>
