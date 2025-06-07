@@ -240,6 +240,11 @@
       "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
       "showDetails": "نمایش جزئیات"
     },
+    "notifications": {
+      "noNotification": "همه چیز مرتب است",
+      "notificationButton": "رفتن به اعلان‌ها",
+      "notifications": "اعلان‌ها"
+    },
     "loading": "در حال بارگذاری",
     "categoryId": "شناسه دسته‌بندی",
     "palceholder": "اینجا تایپ کنید",

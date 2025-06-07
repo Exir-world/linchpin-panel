@@ -16,6 +16,7 @@ import Icon from "../icon";
 import { useTranslations } from "next-intl";
 import { deleteCookie } from "cookies-next";
 import useDir from "@/hooks/useDirection";
+import NotificationBell from "../notificationBell/notificationBell";
 
 interface Props {
   children: React.ReactNode;
@@ -59,6 +60,8 @@ export const NavbarWrapper = ({ children }: Props) => {
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
         >
+          <NotificationBell></NotificationBell>
+
           <LangSwitcher></LangSwitcher>
           <div className="flex items-center gap-2">
             <>

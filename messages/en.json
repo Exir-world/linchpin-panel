@@ -240,6 +240,11 @@
       "modalTitle": "Edit Category & Features",
       "showDetails": "Show Details"
     },
+    "notifications": {
+      "noNotification": "You're all caught up!",
+      "notificationButton": "Go to notifications",
+      "notifications": "Notifications"
+    },
     "loading": "Loading",
     "categoryId": "Category id",
     "palceholder": "Type here",

@@ -107,7 +107,7 @@ const ReportDetails = () => {
   }, [selected]);
 
   return (
-    <div className="py-2 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
+    <div className="py-2 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4 h-screen">
       <Tabs
         aria-label="Options"
         selectedKey={selected}

@@ -14,6 +14,7 @@ api.interceptors.request.use(
     // Example: Add auth token from localStorage or cookies
     const token = getCookie("linchpin-admin"); // Adjust based on your auth method
     if (token) {
+      console.log(token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
