@@ -51,7 +51,9 @@
       "cancel": "إلغاء",
       "editHours": "تعديل الساعات",
       "close": "إغلاق",
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "employeeName": "اسم الموظف",
+      "emptyDateError": "تعبئة حقل التاريخ إلزامية"
     },
     "requests": {
       "filter": {

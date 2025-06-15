@@ -38,7 +38,9 @@
       "status": "Status",
       "reportAndDetail": " Property Report Details",
       "reportCode": "Report Code",
-      "all": "All"
+      "all": "All",
+      "checkPoints": "Check points",
+      "confirm": "Confirm"
     },
     "attendance": {
       "date": "Date",
@@ -52,7 +54,9 @@
       "cancel": "Cancel",
       "editHours": "Edit hours",
       "close": "Close",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "employeeName": "Employee Name",
+      "emptyDateError": "Filling in the date field is required"
     },
     "requests": {
       "filter": {

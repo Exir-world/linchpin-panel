@@ -9,6 +9,20 @@ const api: AxiosInstance = axios.create({
   },
 });
 
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach(prom => {
+    if (token) {
+      prom.resolve(token);
+    } else {
+      prom.reject(error);
+    }
+  });
+  failedQueue = [];
+};
+
 api.interceptors.request.use(
   (config) => {
     // Example: Add auth token from localStorage or cookies
@@ -31,27 +45,56 @@ api.interceptors.response.use(
     // Return successful response data directly
     return response;
   },
-  (error: AxiosError) => {
-    // Handle specific status codes
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          window.location.href = "/login";
-          console.error("Unauthorized - Redirecting to login...");
-          break;
-        case 403:
-          console.error("Forbidden - Insufficient permissions");
-          break;
-        case 500:
-          console.error("Server Error - Please try again later");
-          break;
-        default:
-          console.error(`Error ${error.response.status}: ${error.message}`);
+  async (error: AxiosError) => {
+    const originalRequest: any = error.config;
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise(function(resolve, reject) {
+          failedQueue.push({ resolve, reject });
+        }).then((token) => {
+          originalRequest.headers['Authorization'] = 'Bearer ' + token;
+          return api(originalRequest);
+        }).catch(err => {
+          return Promise.reject(err);
+        });
       }
-    } else if (error.request) {
-      console.error("No response received:", error.request);
-    } else {
-      console.error("Error setting up request:", error.message);
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+      try {
+        // Attempt to refresh the token
+        const refreshToken = getCookie('userAuth');
+        if (!refreshToken) {
+          window.location.href = "/login";
+          return Promise.reject(error);
+        }
+        const { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh`,
+          {},
+          {
+            headers: { 'Authorization': `Bearer ${refreshToken}` }
+          }
+        );
+        const newAccessToken = data?.accessToken;
+        if (newAccessToken) {
+          // Save new access token in cookie
+          // You may want to use setCookie from 'cookies-next' if available
+          document.cookie = `linchpin-admin=${newAccessToken}; path=/`;
+          api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+          processQueue(null, newAccessToken);
+          return api(originalRequest);
+        } else {
+          processQueue(error, null);
+          window.location.href = "/login";
+          return Promise.reject(error);
+        }
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+        window.location.href = "/login";
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
     }
     return Promise.reject(error);
   }

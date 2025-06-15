@@ -38,7 +38,9 @@
       "status": "وضعیت",
       "reportAndDetail": "جزئیات گزارش اموال",
       "reportCode": "کد گزارش",
-      "all": "همه"
+      "all": "همه",
+      "checkPoints": "چک پوینت‌ها",
+      "confirm": "تایید و ثبت"
     },
     "attendance": {
       "date": "تاریخ",
@@ -52,7 +54,9 @@
       "cancel": "انصراف",
       "editHours": "ویرایش ساعت‌ها",
       "close": "بستن",
-      "confirm": "تایید"
+      "confirm": "تایید",
+      "employeeName": "نام کارمند",
+      "emptyDateError": "پر کردن فیلد تاریخ الزامی است"
     },
     "requests": {
       "filter": {

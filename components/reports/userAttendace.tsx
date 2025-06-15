@@ -4,7 +4,7 @@ import { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { useLocale, useTranslations } from "next-intl";
-import { Get, Patch } from "@/lib/axios";
+import { Get, Patch, Post } from "@/lib/axios";
 import { useSearchParams } from "next/navigation";
 import ReusableTable from "../reusabelTable/table";
 import { format as formatJalali, parseISO, toDate } from "date-fns-jalali";
@@ -50,6 +50,27 @@ interface OutputData {
   times: TimeEntry[];
 }
 
+interface Role {
+  id: number;
+  name: string;
+  permissions: any[]; // You can replace `any` with a more specific permission type if known
+}
+
+interface UserInfo {
+  organizationId: number;
+  firstname: string;
+  name: string;
+  profileImage: string | null;
+  lastname: string;
+  phoneNumber: string;
+  password: string;
+  role: Role;
+  nationalCode: string | null;
+  personnelCode: string | null;
+  isDeleted: boolean;
+  id: number;
+}
+
 const UserAttendace = () => {
   const t = useTranslations();
   const params = useSearchParams();
@@ -61,6 +82,8 @@ const UserAttendace = () => {
   const [editedEntry, setEditedEntry] = useState<any>(null);
   const [editedExit, setEditedExit] = useState<any>(null);
   const [eachDayDate, setEachDayDate] = useState<any | Date>(null);
+  const [useInfo, setUserInfo] = useState({} as UserInfo);
+  const [excelLoading, setExcelLoading] = useState(false);
   // const [editRowInfo, setEditingRowInfo] = useState({
   //   attendanceId: null,
   //   inDate: "",
@@ -418,12 +441,83 @@ const UserAttendace = () => {
     },
   ];
 
+  const getUserById = async () => {
+    try {
+      if (!id) {
+        return;
+      }
+      const res = await Get(`users/${id}`);
+      if (res.status === 200 || res.status === 201) {
+        console.log(res.data, "**");
+        setUserInfo(res.data);
+      }
+    } catch (error) {
+      addToast({
+        title: t("global.alert.error"),
+        color: "danger",
+      });
+    }
+  };
+
+  const getExcelExport = async () => {
+    const params = {
+      startDate,
+      endDate,
+      holidaysDayCount: 0, // always 0
+    };
+    if (!startDate || !endDate) {
+      addToast({
+        title: t("global.attendance.emptyDateError"),
+        color: "warning",
+      });
+      return;
+    }
+    try {
+      setExcelLoading(true);
+      const res = await Post(`attendance/admin/report`, params, {
+        responseType: "blob",
+      });
+      if (res.status === 200) {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "attendance_report.xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode?.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        setExcelLoading(false);
+      }
+    } catch (error) {
+      setExcelLoading(false);
+
+      addToast({
+        title: t("global.alert.error"),
+        color: "danger",
+      });
+    } finally {
+      setExcelLoading(false);
+    }
+  };
+
   useEffect(() => {
     getUserAttendanceReport();
   }, [startDate, endDate]);
 
+  useEffect(() => {
+    getUserById();
+  }, [id]);
+
   return (
     <div>
+      <div className="py-5 gap-1">
+        <p className="text-xs text-gray-500">
+          {t("global.attendance.employeeName")}
+        </p>
+        <p className="font-semibold ">
+          {`${useInfo.firstname} ${useInfo.lastname}`}
+        </p>
+      </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
@@ -461,7 +555,7 @@ const UserAttendace = () => {
           )}
         </ModalContent>
       </Modal>
-      <div className="flex items-center gap-3 pb-3">
+      <div className="flex items-end gap-3 pb-3">
         <div className="flex flex-col gap-1">
           <span className="text-sm">{t("global.reports.startDate")}</span>
           <DatePicker
@@ -497,6 +591,20 @@ const UserAttendace = () => {
               border: "1px solid #ccc",
             }}
           />
+        </div>
+        <div>
+          <Button className="text-white bg-green-700 " onPress={getExcelExport}>
+            {excelLoading ? (
+              <span className="animate-spin">
+                <Icon name="loader-circle" />
+              </span>
+            ) : (
+              <div className="flex items-center gap-1">
+                Excel
+                <Icon name="sheet"></Icon>
+              </div>
+            )}
+          </Button>
         </div>
       </div>
       {isLoading && (
