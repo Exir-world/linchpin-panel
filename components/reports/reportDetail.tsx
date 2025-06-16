@@ -12,6 +12,7 @@ import EmployeeDetails from "../employees/employeeDetails";
 import UserProperties from "./userProperties";
 import UserAttendace from "./userAttendace";
 import { UserRequests } from "./userRequests";
+import PointSelectorMap from "../pointSelectorMap/PointSelectorMap";
 
 const ReportDetails = () => {
   const [value, setValue] = useState<any>();
@@ -107,7 +108,7 @@ const ReportDetails = () => {
   }, [selected]);
 
   return (
-    <div className="py-2 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
+    <div className="py-2 px-4 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4 h-screen">
       <Tabs
         aria-label="Options"
         selectedKey={selected}
@@ -126,8 +127,10 @@ const ReportDetails = () => {
         <Tab key="properties" title={t("global.reports.properties")}>
           <UserProperties></UserProperties>
         </Tab>
+        <Tab key="checkpoits" title={t("global.reports.checkPoints")}>
+          <PointSelectorMap></PointSelectorMap>
+        </Tab>
       </Tabs>
-
       <div className="max-w-[95rem] mx-auto w-full">
         {/* <TableWrapper /> */}
       </div>

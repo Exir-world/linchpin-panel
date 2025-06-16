@@ -38,7 +38,9 @@
       "status": "وضعیت",
       "reportAndDetail": "جزئیات گزارش اموال",
       "reportCode": "کد گزارش",
-      "all": "همه"
+      "all": "همه",
+      "checkPoints": "چک پوینت‌ها",
+      "confirm": "تایید و ثبت"
     },
     "attendance": {
       "date": "تاریخ",
@@ -52,7 +54,9 @@
       "cancel": "انصراف",
       "editHours": "ویرایش ساعت‌ها",
       "close": "بستن",
-      "confirm": "تایید"
+      "confirm": "تایید",
+      "employeeName": "نام کارمند",
+      "emptyDateError": "پر کردن فیلد تاریخ الزامی است"
     },
     "requests": {
       "filter": {
@@ -239,6 +243,11 @@
       "categoryTitle": "عنوان دسته‌بندی",
       "modalTitle": "ویرایش دسته‌بندی و ویژگی‌ها",
       "showDetails": "نمایش جزئیات"
+    },
+    "notifications": {
+      "noNotification": "همه چیز مرتب است",
+      "notificationButton": "رفتن به اعلان‌ها",
+      "notifications": "اعلان‌ها"
     },
     "loading": "در حال بارگذاری",
     "categoryId": "شناسه دسته‌بندی",

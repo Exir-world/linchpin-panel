@@ -147,7 +147,7 @@ const EmployeesList = () => {
       name: t("global.employee.fullName"),
       uid: "firstname",
       render: (record: User) => {
-        return <div>{`${record.firstname}${record.lastname}`}</div>;
+        return <div className="whitespace-nowrap ">{`${record.firstname} ${record.lastname}`}</div>;
       },
     },
     { name: t("global.employee.phoneNumber"), uid: "phoneNumber" },
