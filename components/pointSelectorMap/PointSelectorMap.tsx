@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import Icon from "../icon";
 
 // Fix marker icon issue in Next.js
-delete L.Icon.Default.prototype._getIconUrl;
+delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -60,7 +60,7 @@ export default function PointSelectorMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationClicker onAddPoint={addPoint} />
-        {points.map((pos, idx) => (
+        {points.map((pos: any, idx: number) => (
           <Marker
             key={idx}
             position={pos}
